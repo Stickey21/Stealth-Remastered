@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D3D\D3DHook.cpp">
+      <Filter>D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SAMP\SAMP.cpp">
+      <Filter>SAMP</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Memory.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Cheat\MathStuff.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\KeyHook.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="SAMP\RakNet\BitStream.cpp">
+      <Filter>SAMP\RakNet</Filter>
+    </ClCompile>
+    <ClCompile Include="SAMP\RakNet\RakClient.cpp">
+      <Filter>SAMP\RakNet</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Config.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_render.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Cheat.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Utils.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Textures.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Rainbow.cpp">
+      <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Aimbot.cpp">
+      <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Visuals.cpp">
+      <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Combat.cpp">
+      <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_custom.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Player.cpp">
+      <Filter>Features</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheat\Secure.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h" />
+    <ClInclude Include="D3D\D3DHook.h">
+      <Filter>D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SAMP\SAMP.h">
+      <Filter>SAMP</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Memory.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\MathStuff.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\KeyHook.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="SAMP\RakNet\BitStream.h">
+      <Filter>SAMP\RakNet</Filter>
+    </ClInclude>
+    <ClInclude Include="SAMP\RakNet\RakClient.h">
+      <Filter>SAMP\RakNet</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Config.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx9.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_render.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Cheat.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Utils.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\GTAstructs.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Textures.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Rainbow.h">
+      <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Aimbot.h">
+      <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Visuals.h">
+      <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Combat.h">
+      <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_custom.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Player.h">
+      <Filter>Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Secure.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="D3D">
+      <UniqueIdentifier>{a3c0b8c5-c24c-4430-886a-ed34e664f89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SAMP">
+      <UniqueIdentifier>{fce98612-a99e-4f81-823f-71565198a70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cheat">
+      <UniqueIdentifier>{feff8107-88b0-4541-948c-426be661f2e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SAMP\RakNet">
+      <UniqueIdentifier>{63156440-5dc5-4830-86ee-9c8f5ad59e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{d797ecbb-fa65-452b-9a82-ebea995a003a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{ce98b6cf-9fef-4986-96d6-08cb2fc3931b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Features">
+      <UniqueIdentifier>{d6894349-3482-4e79-9cbe-6a2529851ba1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
