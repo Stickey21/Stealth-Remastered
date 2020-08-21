@@ -8,3 +8,8 @@
 * **DK22Pac** - [Plugin SDK](https://github.com/DK22Pac/plugin-sdk)
 * **ocornut** - [ImGui](https://github.com/ocornut/imgui)
 * *and others...*
+
+## Requirements
+* **Microsoft Visual Studio 2019**
+* **DirectX Software Development Kit**
+* **Plugin SDK**
