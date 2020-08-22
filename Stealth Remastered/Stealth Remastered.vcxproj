@@ -102,7 +102,6 @@
     <ClCompile Include="Cheat\Cheat.cpp" />
     <ClCompile Include="Cheat\Config.cpp" />
     <ClCompile Include="Cheat\KeyHook.cpp" />
-    <ClCompile Include="Cheat\MathStuff.cpp" />
     <ClCompile Include="Cheat\Memory.cpp" />
     <ClCompile Include="Cheat\Secure.cpp" />
     <ClCompile Include="Cheat\Textures.cpp" />

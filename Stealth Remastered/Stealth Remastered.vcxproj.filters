@@ -11,9 +11,6 @@
       <Filter>Cheat</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Cheat\MathStuff.cpp">
-      <Filter>Cheat</Filter>
-    </ClCompile>
     <ClCompile Include="Cheat\KeyHook.cpp">
       <Filter>Cheat</Filter>
     </ClCompile>

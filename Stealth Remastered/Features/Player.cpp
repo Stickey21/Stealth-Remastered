@@ -159,14 +159,11 @@ void Player::NoFall()
 void Player::ChangeSkin()
 {
 	int iSkin = g_Config.g_Player.iSkinID;
-	if (g_Config.g_Player.bChangeSkin && iSkin >= 0 && iSkin <= 311 && iSkin != 74) 
+	if (g_Config.g_Player.bChangeSkin && iSkin >= 0 && iSkin <= 311 && iSkin != 74 && pPedSelf->m_nModelIndex != iSkin)
 	{
-		if (pPedSelf->m_nModelIndex != iSkin) 
-		{
-			CStreaming::RequestModel(iSkin, 0);
-			CStreaming::LoadAllRequestedModels(false);
-			pPedSelf->SetModelIndex(iSkin);
-		}
+		CStreaming::RequestModel(iSkin, 0);
+		CStreaming::LoadAllRequestedModels(false);
+		pPedSelf->SetModelIndex(iSkin);
 	}
 }
 

@@ -1,5 +1,4 @@
 ﻿#include "main.h"
-#include "CBmx.h"
 
 void Cheat::Render()
 {
@@ -52,6 +51,5 @@ void Cheat::Unload()
 	delete pAimbot;
 	delete pVisuals;
 
-	if (HANDLE thread = CreateThread(NULL, NULL, LPTHREAD_START_ROUTINE(UnloadThread), g_hModule, NULL, NULL))
-		CloseHandle(thread);
+	CreateThread(NULL, NULL, LPTHREAD_START_ROUTINE(UnloadThread), g_hModule, NULL, NULL);
 }

@@ -3,7 +3,8 @@
 class CSecure
 {
 public:
-	int isAddressPresent(DWORD dwAddress);
+	void Add(DWORD dwAddress, BYTE byteSize);
+	int isAddressSecured(DWORD dwAddress);
 	void SDetourAttach(PVOID* ppPointer, PVOID pDetour);
 	void memcpy_safe(void* _dest, const void* _src, uint32_t len);
 	void HookInstallCall(DWORD dwInstallAddress, DWORD dwHookFunction);
@@ -12,16 +13,7 @@ public:
 	template<class T>
 	void Write(DWORD dwAddress, T Value)
 	{
-		for (size_t i = 0; i < sizeof(Value); i++)
-		{
-			if (isAddressPresent(dwAddress + i) == -1)
-			{
-				g_Memory.dwAddress = dwAddress + i;
-				g_Memory.origByte = *(uint8_t*)(dwAddress + i);
-				vecMemory.push_back(g_Memory);
-			}
-		}
-
+		Add(dwAddress, sizeof(Value));
 		*(T*)dwAddress = (T)Value;
 	}
 

@@ -154,7 +154,7 @@ int CSAMP::getNearestPlayer(bool bTeamProtect)
 		if (bTeamProtect && getPlayerColor(i) == getPlayerColor(g_Players->sLocalPlayerID))
 			continue;
 
-		float fDistance = vect3_dist(&g_Players->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], &g_Players->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
+		float fDistance = Math::vect3_dist(&g_Players->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], &g_Players->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
 		if (fNearestDistance == -1.0f || fDistance < fNearestDistance)
 		{
 			iPlayerID = i;
@@ -178,7 +178,7 @@ int CSAMP::getNearestVehicle()
 		if (g_Vehicles->pSAMP_Vehicle[i]->pGTA_Vehicle == NULL)
 			continue;
 
-		float fDistance = vect3_dist(&g_Players->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], &g_Vehicles->pSAMP_Vehicle[i]->pGTA_Vehicle->base.matrix[12]);
+		float fDistance = Math::vect3_dist(&g_Players->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], &g_Vehicles->pSAMP_Vehicle[i]->pGTA_Vehicle->base.matrix[12]);
 		if (fNearestDistance == -1.0f || fDistance < fNearestDistance)
 		{
 			fNearestDistance = fDistance;

@@ -100,15 +100,7 @@ struct Color
 class CRainbow
 {
 public:
-	CRainbow()
-	{
-
-	};
-
 	void Update();
-
-	Color colLogo;
-
 private:
 };
 

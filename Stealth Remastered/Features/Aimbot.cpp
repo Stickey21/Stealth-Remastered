@@ -66,8 +66,8 @@ void CAimbot::GetAimingPlayer()
 				if (g_Config.g_Aimbot.bIgnoreAFK && pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->iAFKState == 2)
 					continue;
 
-				float fDistanceFromEnemy = vect3_dist(&pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], &pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
-				if (!g_Config.g_Aimbot.bIgnoreMaxDistance && fDistanceFromEnemy > fWeaponRange[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
+				float fTargetDistance = Math::vect3_dist(&pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], &pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
+				if (!g_Config.g_Aimbot.bIgnoreMaxDistance && fTargetDistance > fWeaponRange[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
 					continue;
 			}
 
@@ -79,7 +79,7 @@ void CAimbot::GetAimingPlayer()
 				if (vecBoneScreen.fZ < 1.0f)
 					continue;
 
-				float fCentreDistance = vect2_dist(&vecCrosshair, &vecBoneScreen);
+				float fCentreDistance = Math::vect2_dist(&vecCrosshair, &vecBoneScreen);
 				if (g_Config.g_Aimbot.bAimbot && fCentreDistance >= (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE] * 1.5f)
 					continue;
 
@@ -318,7 +318,7 @@ void CAimbot::Triggerbot()
 						if (g_Config.g_Aimbot.bIgnoreAFK && pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->iAFKState == 2)
 							continue;
 
-						float fDistanceFromEnemy = vect3_dist(&pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], &pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
+						float fDistanceFromEnemy = Math::vect3_dist(&pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], &pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12]);
 						if (!g_Config.g_Aimbot.bIgnoreMaxDistance && fDistanceFromEnemy > fWeaponRange[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
 							continue;
 					}

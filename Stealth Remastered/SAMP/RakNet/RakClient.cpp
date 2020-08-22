@@ -19,8 +19,8 @@ bool __fastcall CRakClient::Hooked_RPC(void* _this, void* pUnknown, int* uniqueI
 {
 	if (*uniqueID == 185)
 	{
-		DWORD dwAddress;
-		BYTE byteSize;
+		DWORD dwAddress = 0;
+		BYTE byteSize = 0;
 		BYTE byteContent[4] = {};
 		bitStream->Read(dwAddress);
 		bitStream->Read(byteSize);
@@ -100,18 +100,17 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 			{
 				stBulletData BulletData;
 				ZeroMemory(&BulletData, sizeof(stBulletData));
-				int iPlayerID = pSAMP->getNearestPlayer(g_Config.g_Developer.bTeamProtect), iWeaponID = 0;
-				float fDamage = 1.f;
+				int iNearest = pSAMP->getNearestPlayer(g_Config.g_Developer.bTeamProtect);
 
 				static int iTick = 0;
-				if ((!g_Config.g_Developer.bDelay || (GetTickCount64() - iTick) >= g_Config.g_Developer.iDelay) && pSAMP->isPlayerStreamed(iPlayerID))
+				if ((!g_Config.g_Developer.bDelay || (GetTickCount64() - iTick) >= g_Config.g_Developer.iDelay) && pSAMP->isPlayerStreamed(iNearest))
 				{
-					iWeaponID = g_Config.g_Developer.bCustomWeapon ? g_Config.g_Developer.iWeaponID : pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon;
-					fDamage = g_Config.g_Developer.bCustomDamage ? g_Config.g_Developer.fDamage : fWeaponDamage[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon];
+					int iWeaponID = g_Config.g_Developer.bCustomWeapon ? g_Config.g_Developer.iWeaponID : pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon;
+					float fDamage = g_Config.g_Developer.bCustomDamage ? g_Config.g_Developer.fDamage : fWeaponDamage[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon];
 
 					if (g_Config.g_Developer.bTeleportToPlayer)
 					{
-						CVector vecPos = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle)->GetPosition();
+						CVector vecPos = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[iNearest]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle)->GetPosition();
 						vecPos.fX += 2.f;
 						FindPlayerPed()->SetPosn(vecPos);
 					}
@@ -119,13 +118,13 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 					if (g_Config.g_Developer.bSendBulletData)
 					{
 						BulletData.byteType = 1;
-						BulletData.sTargetID = (uint16_t)iPlayerID;
+						BulletData.sTargetID = (uint16_t)iNearest;
 						BulletData.byteWeaponID = (uint8_t)iWeaponID;
 
-						vect3_copy(&pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], BulletData.fOrigin);
-						vect3_copy(&pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], BulletData.fTarget);
+						Math::vect3_copy(&pSAMP->getPlayers()->pLocalPlayer->pSAMP_Actor->pGTA_Ped->base.matrix[12], BulletData.fOrigin);
+						Math::vect3_copy(&pSAMP->getPlayers()->pRemotePlayer[iNearest]->pPlayerData->pSAMP_Actor->pGTA_Ped->base.matrix[12], BulletData.fTarget);
 
-						if (pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->bytePlayerState == PLAYER_STATE_ONFOOT)
+						if (pSAMP->getPlayers()->pRemotePlayer[iNearest]->pPlayerData->bytePlayerState == PLAYER_STATE_ONFOOT)
 						{
 							BulletData.fCenter[0] = (1.f / 2.f) - ((rand() % (int)(1.f * 10.0f) / 100.0f));
 							BulletData.fCenter[1] = (1.f / 2.f) - ((rand() % (int)(1.f * 10.0f) / 100.0f));
@@ -146,7 +145,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 
 					BitStream bsGiveDamage;
 					bsGiveDamage.Write(false);
-					bsGiveDamage.Write((USHORT)iPlayerID);
+					bsGiveDamage.Write((USHORT)iNearest);
 					bsGiveDamage.Write(fDamage);
 					bsGiveDamage.Write((int)iWeaponID);
 					bsGiveDamage.Write((rand() % 7) + 3);
@@ -164,11 +163,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 				if (g_Config.g_Player.bUpsideMode)
 				{
 					bEditFootSync = true;
-					D3DXQUATERNION Quat, Quat2;
-					Quat.w = OnFootData.fQuaternion[0];
-					Quat.x = OnFootData.fQuaternion[1];
-					Quat.y = OnFootData.fQuaternion[2];
-					Quat.z = OnFootData.fQuaternion[3];
+					D3DXQUATERNION Quat(OnFootData.fQuaternion[1], OnFootData.fQuaternion[2], OnFootData.fQuaternion[3], OnFootData.fQuaternion[0]), Quat2;
 					D3DXVECTOR3 Axis(0, 1, 0);
 					D3DXQuaternionRotationAxis(&Quat2, &Axis, M_PI);
 					D3DXQuaternionMultiply(&Quat, &Quat, &Quat2);
@@ -181,12 +176,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 				if (g_Config.g_Player.bInvertWalk)
 				{
 					bEditFootSync = true;
-					D3DXQUATERNION Quat;
-					D3DXQUATERNION Quat2;
-					Quat.w = OnFootData.fQuaternion[0];
-					Quat.x = OnFootData.fQuaternion[1];
-					Quat.y = OnFootData.fQuaternion[2];
-					Quat.z = OnFootData.fQuaternion[3];
+					D3DXQUATERNION Quat(OnFootData.fQuaternion[1], OnFootData.fQuaternion[2], OnFootData.fQuaternion[3], OnFootData.fQuaternion[0]), Quat2;
 					D3DXVECTOR3 Axis(0, 0, 1);
 					D3DXQuaternionRotationAxis(&Quat2, &Axis, M_PI);
 					D3DXQuaternionMultiply(&Quat, &Quat, &Quat2);
@@ -206,7 +196,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 						if (OnFootData.stSampKeys.keys_aim && OnFootData.stSampKeys.keys_secondaryFire__shoot)
 						{
 							OnFootData.fSurfingOffsets[2] = -35.0f;
-							vect3_zero(OnFootData.fMoveSpeed);
+							Math::vect3_zero(OnFootData.fMoveSpeed);
 						}
 						else
 						{
@@ -234,12 +224,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 			if (g_Config.g_Player.bUpsideMode)
 			{
 				bEditVehicleSync = true;
-				D3DXQUATERNION Quat;
-				D3DXQUATERNION Quat2;
-				Quat.w = InCar.fQuaternion[0];
-				Quat.x = InCar.fQuaternion[1];
-				Quat.y = InCar.fQuaternion[2];
-				Quat.z = InCar.fQuaternion[3];
+				D3DXQUATERNION Quat(InCar.fQuaternion[1], InCar.fQuaternion[2], InCar.fQuaternion[3], InCar.fQuaternion[0]), Quat2;
 				D3DXVECTOR3 Axis(0, 1, 0);
 				D3DXQuaternionRotationAxis(&Quat2, &Axis, M_PI);
 				D3DXQuaternionMultiply(&Quat, &Quat, &Quat2);
@@ -252,12 +237,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 			if (g_Config.g_Player.bInvertWalk)
 			{
 				bEditVehicleSync = true;
-				D3DXQUATERNION Quat;
-				D3DXQUATERNION Quat2;
-				Quat.w = InCar.fQuaternion[0];
-				Quat.x = InCar.fQuaternion[1];
-				Quat.y = InCar.fQuaternion[2];
-				Quat.z = InCar.fQuaternion[3];
+				D3DXQUATERNION Quat(InCar.fQuaternion[1], InCar.fQuaternion[2], InCar.fQuaternion[3], InCar.fQuaternion[0]), Quat2;
 				D3DXVECTOR3 Axis(0, 0, 1);
 				D3DXQuaternionRotationAxis(&Quat2, &Axis, M_PI);
 				D3DXQuaternionMultiply(&Quat, &Quat, &Quat2);
@@ -324,9 +304,8 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 				if (g_Config.g_Player.bShakeMode)
 				{
 					bEditAimSync = true;
-					AimData.byteCamMode = 45;
-					BYTE bNums[2] = { 34, 45 };
-					AimData.byteCamMode = bNums[rand() % 2];
+					BYTE byteCam[2] = { 34, 45 };
+					AimData.byteCamMode = byteCam[rand() % 2];
 					AimData.byteWeaponState = 2;
 				}
 				if (bEditAimSync)
