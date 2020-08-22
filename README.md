@@ -1,5 +1,5 @@
 # Stealth
-<h4>Pasted SA:MP Cheat</h4>	 SA:MP
+<h4>Pasted SA:MP Cheat</h4>
 
 ## Credits	
 * ***[versace bankeru](https://www.youtube.com/user/gabriel200212)***	
