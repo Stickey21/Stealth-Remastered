@@ -1,4 +1,4 @@
-# Stealth	# Stealth
+# Stealth
 <h4>Pasted SA:MP Cheat</h4>	 SA:MP
 
 ## Credits	
