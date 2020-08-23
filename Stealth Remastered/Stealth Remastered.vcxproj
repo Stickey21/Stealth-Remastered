@@ -114,7 +114,6 @@
     <ClCompile Include="Features\Visuals.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_custom.cpp" />
-    <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="ImGui\imgui_impl_dx9.cpp" />
     <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
@@ -132,7 +131,7 @@
   <ItemGroup>
     <ClInclude Include="Cheat\Cheat.h" />
     <ClInclude Include="Cheat\Config\Config.h" />
-    <ClInclude Include="Cheat\GTAstructs.h" />
+    <ClInclude Include="Cheat\Structs.h" />
     <ClInclude Include="Cheat\json\json.hpp" />
     <ClInclude Include="Cheat\KeyHook.h" />
     <ClInclude Include="Cheat\MathStuff.h" />

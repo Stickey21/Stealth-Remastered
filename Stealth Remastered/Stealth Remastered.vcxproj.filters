@@ -74,9 +74,6 @@
     <ClCompile Include="Cheat\Config\Config.cpp">
       <Filter>Cheat\Config</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
@@ -131,13 +128,7 @@
     <ClInclude Include="Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Cheat\Cheat.h">
-      <Filter>Cheat</Filter>
-    </ClInclude>
     <ClInclude Include="Cheat\Utils.h">
-      <Filter>Cheat</Filter>
-    </ClInclude>
-    <ClInclude Include="Cheat\GTAstructs.h">
       <Filter>Cheat</Filter>
     </ClInclude>
     <ClInclude Include="Cheat\Textures.h">
@@ -169,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="Cheat\Config\Config.h">
       <Filter>Cheat\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Cheat.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Structs.h">
+      <Filter>Cheat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

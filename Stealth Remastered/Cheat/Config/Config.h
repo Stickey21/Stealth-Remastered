@@ -39,13 +39,11 @@ struct stConfig
 	struct stCombat
 	{
 		bool bNoReload = false;
-
 		bool bAllowCBug = false;
 		bool bCBugFreeze = false;
 		bool bCBugAnim = false;
 		bool bCBugText = false;
 		bool bCBugWeapon = false;
-
 		bool bRapidFire = false;
 		float fRapidFire = 1.f;
 
@@ -53,7 +51,6 @@ struct stConfig
 		bool bNoRecoil = false;
 		bool bWeaponSwitcher = false;
 		bool bFastSwitch = false;
-
 	} g_Combat;
 
 	struct stPlayer
@@ -85,7 +82,6 @@ struct stConfig
 		int iStopOnExitVehicle = 500;
 		bool bAutoBikeSpam = false;
 		bool bMotorBikeSpam = false;
-
 	} g_Player;
 
 	struct stVisuals
@@ -133,7 +129,6 @@ struct stConfig
 		int iWeather = 0;
 		bool bTimeChanger = false;
 		int iTime = 0;
-
 	} g_Visuals;
 
 	struct stStyle
@@ -160,7 +155,6 @@ struct stConfig
 		int iWeaponID = 0;
 		float fDamage = 1.f;
 		bool bCustomDamage = false;
-
 	} g_Developer;
 };
 

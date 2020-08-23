@@ -168,9 +168,7 @@ void CMenu::Render()
 		ImGui::Dummy({ 0, 2 });
 		ImGui::Image(pTextures->tLogo, { 109, 21 }, { 0, 0 }, { 1, 1 }, ImGui::GetStyle().Colors[ImGuiCol_Logo]);
 		ImGui::EndGroup();
-
 		ImGui::GetWindowDrawList()->AddRectFilled({ vecWindow.x + 142, vecWindow.y + 16 }, { vecWindow.x + 143, vecWindow.y + 41 }, ImColor(48, 54, 64, 255));
-
 		ImGui::SameLine(160);
 
 		if (iCurrentTab == 0) ActiveTab(); else NormalTab();
@@ -203,7 +201,6 @@ void CMenu::Render()
 		ImGui::PopStyleColor(5);
 
 		ImGui::PopStyleVar(5);
-
 		ImGui::Dummy({ 0, 7 });
 
 		switch (iCurrentTab)
@@ -295,7 +292,6 @@ void CMenu::Render()
 				}
 				ImGui::EndChild();
 			}
-
 			ImGui::BeginChild("##Filters", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot Filters"), ImGui::EndMenuBar();
@@ -307,39 +303,35 @@ void CMenu::Render()
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
-
 			ImGui::SameLine();
-
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Config", { 280, 101 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text(szCategory[pMenu->iCurrentCategory].c_str()), ImGui::EndMenuBar();
-
-				for (int i = 0; i < _countof(g_Weapons); i++)
+				if (ImGui::BeginMenuBar()) ImGui::Text(szCategory[pMenu->iCurrentCategory]), ImGui::EndMenuBar();
+				for (auto i : mapWeapons)
 				{
-					if (g_Weapons[i].iCategory != pMenu->iCurrentCategory)
+					if (i.second.iCategory != pMenu->iCurrentCategory)
 						continue;
 
-					ImGui::Checkbox(g_Weapons[i].szName.c_str(), &g_Config.g_Aimbot.bAimbotEnabled[i + 22]); ImGui::SameLine(200);
-					ImGui::Button(std::string("Config##" + std::to_string(i)).c_str(), { 70, 0 });
+					ImGui::Checkbox(i.second.szName.c_str(), &g_Config.g_Aimbot.bAimbotEnabled[i.first]); ImGui::SameLine(200);
+					ImGui::Button(("Config##" + std::to_string(i.first)).c_str(), { 70, 0 });
 					if (ImGui::BeginPopupContextItem(0, 0))
 					{
-						if (ImGui::BeginMenuBar()) ImGui::Text("%s (%d) Configuration", g_Weapons[i].szName.c_str(), i + 22), ImGui::EndMenuBar();
+						if (ImGui::BeginMenuBar()) ImGui::Text("%s (%d) Configuration", i.second.szName.c_str(), i.first), ImGui::EndMenuBar();
 						g_Config.g_Aimbot.bAimbot ? ImGui::Text("Range") : ImGui::TextDisabled("Range"); ImGui::SameLine(120);
-						ImGui::SliderInt("##Range", &g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE], 1, 200, "%d px");
+						ImGui::SliderInt("##Range", &g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE], 1, 200, "%d px");
 						if (ImGui::IsItemActive())
-							g_Config.g_Aimbot.iRangeStyle ? ImGui::GetOverlayDrawList()->AddCircle({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64, g_Config.g_Aimbot.fOutlineThickness) :
-							ImGui::GetOverlayDrawList()->AddCircleFilled({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64);
+							g_Config.g_Aimbot.iRangeStyle ? ImGui::GetOverlayDrawList()->AddCircle({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64, g_Config.g_Aimbot.fOutlineThickness) :
+							ImGui::GetOverlayDrawList()->AddCircleFilled({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64);
 						g_Config.g_Aimbot.bSilent ? ImGui::Text("Hitchance") : ImGui::TextDisabled("Hitchance"); ImGui::SameLine(120);
-						ImGui::SliderInt("##Silent", &g_Config.g_Aimbot.iAimbotConfig[i + 22][SILENT], 1, 100, "%d%%");
+						ImGui::SliderInt("##Silent", &g_Config.g_Aimbot.iAimbotConfig[i.first][SILENT], 1, 100, "%d%%");
 						g_Config.g_Aimbot.bSmooth ? ImGui::Text("Smoothness") : ImGui::TextDisabled("Smoothness"); ImGui::SameLine(120);
-						ImGui::SliderInt("##Smooth", &g_Config.g_Aimbot.iAimbotConfig[i + 22][SMOOTH], 1, 100, "%d%%");
+						ImGui::SliderInt("##Smooth", &g_Config.g_Aimbot.iAimbotConfig[i.first][SMOOTH], 1, 100, "%d%%");
 						ImGui::EndPopup();
 					}
 				}
 				ImGui::EndChild();
 			}
-
 			ImGui::BeginChild("##Combat", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Combat Assistance"), ImGui::EndMenuBar();
@@ -362,20 +354,18 @@ void CMenu::Render()
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Weapon Switcher Settings"), ImGui::EndMenuBar();
 					static int iComboWeapon = 0;
-					const char* szWeaponType[] = { szCategory[0].c_str(), szCategory[1].c_str(), szCategory[2].c_str(), szCategory[3].c_str(), szCategory[4].c_str(), szCategory[5].c_str() };
-					ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szWeaponType, 5); ImGui::PopItemWidth(); ImGui::SameLine();
+					ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szCategory, 5); ImGui::PopItemWidth(); ImGui::SameLine();
 					ImGui::PushItemWidth(100); ImGui::Hotkey("##WeaponHotkey", &g_Config.g_Hotkeys.iWeaponSwitch[iComboWeapon]); ImGui::PopItemWidth();
 					ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
 					ImGui::EndPopup();
 				}
-
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
-
 			break;
 		}
-		case 1: {
+		case 1:
+		{
 			ImGui::Spacing();
 			ImGui::BeginChild("##Player", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
@@ -424,7 +414,8 @@ void CMenu::Render()
 			}
 			break;
 		}
-		case 2: {
+		case 2:
+		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##PlayerESP", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
@@ -518,13 +509,13 @@ void CMenu::Render()
 			ImGui::EndGroup();
 			break;
 		}
-		case 3: {
+		case 3:
+		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Theme", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Theme"), ImGui::EndMenuBar();
-
 				if (ImGui::Button("Set Default Theme", { 259, 23 }))
 					pMenu->Theme();
 
@@ -551,7 +542,8 @@ void CMenu::Render()
 			}
 			break;
 		}
-		case 4: {
+		case 4:
+		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Reconnect", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
@@ -614,7 +606,7 @@ void CMenu::Render()
 
 					if (ImGui::BeginPopup("Config to reset"))
 					{
-						static constexpr const char* szConfigs[]{ "Whole", "Aimbot", "Combat", "Player", "Visuals", "Style", "Hotkeys" };
+						static const char* szConfigs[]{ "Whole", "Aimbot", "Combat", "Player", "Visuals", "Style", "Hotkeys" };
 						for (int i = 0; i < IM_ARRAYSIZE(szConfigs); i++)
 						{
 							if (i == 1) ImGui::Separator();
@@ -657,7 +649,8 @@ void CMenu::Render()
 			}
 			break;
 		}
-		case 5: {
+		case 5:
+		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Damager", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
@@ -665,18 +658,14 @@ void CMenu::Render()
 				if (ImGui::BeginMenuBar()) ImGui::Text("Damager"), ImGui::EndMenuBar();
 				ImGui::PushItemWidth(70.f);
 				ImGui::Checkbox("Damager", &g_Config.g_Developer.bDamager);
-				ImGui::Checkbox("Delay", &g_Config.g_Developer.bDelay); ImGui::SameLine(202);
-				ImGui::InputInt("##Delay", &g_Config.g_Developer.iDelay);
+				ImGui::Checkbox("Delay", &g_Config.g_Developer.bDelay); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##Delay", &g_Config.g_Developer.iDelay); ImGui::PopStyleVar();
 				ImGui::Checkbox("Team Protect", &g_Config.g_Developer.bTeamProtect);
 				ImGui::Checkbox("Send Bullet Data", &g_Config.g_Developer.bSendBulletData);
 				ImGui::Checkbox("Teleport To Player", &g_Config.g_Developer.bTeleportToPlayer);
-				ImGui::Checkbox("Custom Weapon", &g_Config.g_Developer.bCustomWeapon); ImGui::SameLine(202);
-				ImGui::InputInt("##WeaponID", &g_Config.g_Developer.iWeaponID);
-				ImGui::Checkbox("Custom Damage", &g_Config.g_Developer.bCustomDamage); ImGui::SameLine(202);
-				ImGui::InputFloat("##Damage", &g_Config.g_Developer.fDamage);
+				ImGui::Checkbox("Custom Weapon", &g_Config.g_Developer.bCustomWeapon); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##WeaponID", &g_Config.g_Developer.iWeaponID); ImGui::PopStyleVar();
+				ImGui::Checkbox("Custom Damage", &g_Config.g_Developer.bCustomDamage); ImGui::SameLine(202); ImGui::InputFloat("##Damage", &g_Config.g_Developer.fDamage);
 				ImGui::PopItemWidth();
 				ImGui::EndChild();
-
 			}
 			ImGui::BeginChild("##SAMPCAC", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
 			{
@@ -685,9 +674,7 @@ void CMenu::Render()
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
-
 			ImGui::SameLine();
-
 			ImGui::BeginChild("##Developer", { 280, 358 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Developer"), ImGui::EndMenuBar();
@@ -697,7 +684,6 @@ void CMenu::Render()
 			break;
 		}
 		}
-
 		ImGui::End();
 	}
 }

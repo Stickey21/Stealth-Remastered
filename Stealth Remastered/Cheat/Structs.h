@@ -610,27 +610,27 @@ struct vehicle_state
 
 #pragma pack(pop)
 
-static int iBoneList[18]
+static int iBoneList[]
 {
-	BONE_PELVIS1,
-	BONE_PELVIS,
-	BONE_SPINE1,
-	BONE_UPPERTORSO,
-	BONE_NECK,
-	BONE_HEAD2,
-	BONE_HEAD1,
-	BONE_HEAD,
-	BONE_RIGHTUPPERTORSO,
-	BONE_RIGHTSHOULDER,
-	BONE_RIGHTELBOW,
-	BONE_LEFTUPPERTORSO,
-	BONE_LEFTSHOULDER,
-	BONE_LEFTELBOW,
-	BONE_LEFTHIP,
-	BONE_LEFTKNEE,
-	BONE_RIGHTHIP,
-	BONE_RIGHTKNEE,
+	BONE_PELVIS1, BONE_PELVIS, BONE_SPINE1, BONE_UPPERTORSO, BONE_NECK, 
+	BONE_HEAD2, BONE_HEAD1, BONE_HEAD, BONE_RIGHTUPPERTORSO, BONE_RIGHTSHOULDER,
+	BONE_RIGHTELBOW, BONE_LEFTUPPERTORSO, BONE_LEFTSHOULDER, BONE_LEFTELBOW, 
+	BONE_LEFTHIP, BONE_LEFTKNEE, BONE_RIGHTHIP, BONE_RIGHTKNEE,
 };
+
+struct Weapon
+{
+	std::string szName;
+	int iCategory;
+};
+
+static std::map<int, Weapon> mapWeapons = {
+	{22, {"Colt 45", 0}}, {23, {"Silenced Pistol", 0}}, {24, {"Deagle", 0}},
+	{25, {"Shotgun", 2}}, {26, {"Sawed-off", 2}}, {27, {"Combat Shotgun", 2}},
+	{28, {"Micro-Uzi", 1}}, {29, {"MP5", 1}}, {30, {"AK-47", 3}}, {31, {"M4", 3}},
+	{32, {"Tec-9", 1}}, {33, {"Rifle", 4}}, {34, {"Sniper Rifle", 4}} };
+
+static const char* szCategory[5] = { "Handguns", "Sub-Machine Guns", "Shotguns", "Assault Rifles", "Rifles" };
 
 static const char* szVehicleNames[] = 
 {
@@ -667,3 +667,8 @@ static const char* szVehicleNames[] =
 	"Phoenix", "Damaged Glendale", "Damaged Sadler", "Baggage Trailer 1", "Baggage Trailer 2", "Tug Staircase", "Black Boxville",
 	"Farm Trailer", "Street Sweeper Trailer"
 };
+
+#define RANGE 0
+#define SILENT 1
+#define SMOOTH 2
+#define PROAIM 3

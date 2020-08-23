@@ -40,6 +40,7 @@ void Combat::AllowCBUG()
 		Memory::memcpy_safe((void*)(pSAMP->g_dwSAMP_Addr + 0x016FA0), "\x55\x8B", 2);
 		Memory::memcpy_safe((void*)(pSAMP->g_dwSAMP_Addr + 0x015530), "\xE9\x18", 2);
 		Memory::memcpy_safe((void*)(pSAMP->g_dwSAMP_Addr + 0x015F40), "\xE9\x2C", 2);
+		bAllowCBug = false;
 	}
 }
 
@@ -100,7 +101,7 @@ void Combat::NoRecoil()
 void Combat::WeaponSwitcher()
 {
 	if (g_Config.g_Combat.bWeaponSwitcher && !FindPlayerVehicle(-1, false))
-		for (int i = 0; i < g_Config.g_Hotkeys.iWeaponSwitch.size(); i++)
+		for (size_t i = 0; i < g_Config.g_Hotkeys.iWeaponSwitch.size(); i++)
 			if (isKeyPressed(g_Config.g_Hotkeys.iWeaponSwitch[i]))
 				g_Config.g_Combat.bFastSwitch ? FindPlayerPed()->SetCurrentWeapon(i + 2) : *(DWORD*)0xB7CDBC = i + 2;
 }

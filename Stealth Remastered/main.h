@@ -10,6 +10,7 @@
 #include <Psapi.h>
 #include <ShlObj.h>
 #include <filesystem>
+#include <map>
 
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
@@ -42,7 +43,7 @@
 #include "Cheat/Config/Config.h"
 #include "Cheat/Secure.h"
 
-#include "Cheat/GTAstructs.h"
+#include "Cheat/Structs.h"
 #include "Cheat/Memory.h"
 #include "Cheat/Textures.h"
 #include "Cheat/Icons.h"
