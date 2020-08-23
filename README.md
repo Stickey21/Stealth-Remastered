@@ -7,6 +7,7 @@
 * **CentiuS** - ASI Framework	
 * **DK22Pac** - [Plugin SDK](https://github.com/DK22Pac/plugin-sdk)	
 * **ocornut** - [ImGui](https://github.com/ocornut/imgui)	
+* **danielkrupinski** - [Osiris](https://github.com/danielkrupinski/Osiris)
 * *and others...*	
 
 ## Requirements	
