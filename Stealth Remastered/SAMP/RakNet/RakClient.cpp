@@ -33,7 +33,7 @@ bool __fastcall CRakClient::Hooked_RPC(void* _this, void* pUnknown, int* uniqueI
 
 		for (int i = 0; i < byteSize; i++)
 		{
-			int iAddress = pSecure->isAddressPresent(dwAddress + i);
+			int iAddress = pSecure->isAddressSecured(dwAddress + i);
 			if (iAddress != -1)
 				bitStream->Write<uint8_t>(pSecure->vecMemory[iAddress].origByte);
 			else bitStream->Write<uint8_t>(*(uint8_t*)(dwAddress + i));
@@ -102,8 +102,8 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 				ZeroMemory(&BulletData, sizeof(stBulletData));
 				int iNearest = pSAMP->getNearestPlayer(g_Config.g_Developer.bTeamProtect);
 
-				static int iTick = 0;
-				if ((!g_Config.g_Developer.bDelay || (GetTickCount64() - iTick) >= g_Config.g_Developer.iDelay) && pSAMP->isPlayerStreamed(iNearest))
+				static ULONGLONG ulTick = 0;
+				if ((!g_Config.g_Developer.bDelay || (GetTickCount64() - ulTick) >= g_Config.g_Developer.iDelay) && pSAMP->isPlayerStreamed(iNearest))
 				{
 					int iWeaponID = g_Config.g_Developer.bCustomWeapon ? g_Config.g_Developer.iWeaponID : pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon;
 					float fDamage = g_Config.g_Developer.bCustomDamage ? g_Config.g_Developer.fDamage : fWeaponDamage[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon];
@@ -150,7 +150,7 @@ bool __fastcall CRakClient::Hooked_Send(void* _this, void* Unknown, BitStream* b
 					bsGiveDamage.Write((int)iWeaponID);
 					bsGiveDamage.Write((rand() % 7) + 3);
 					pRakClient->RPC(RPC_GiveTakeDamage, &bsGiveDamage, HIGH_PRIORITY, RELIABLE_SEQUENCED, NULL, false);
-					iTick = GetTickCount64();
+					ulTick = GetTickCount64();
 				}
 			}
 			if (g_Config.g_Player.bUpsideMode || g_Config.g_Player.bInvertWalk || g_Config.g_Player.bInvisible)

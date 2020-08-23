@@ -4,6 +4,7 @@ HMODULE g_hModule = NULL;
 
 void mainThread()
 {
+	pConfig = new CConfig("Stealth");
 	pSAMP = new CSAMP();
 
 	while (!pSAMP->tryInit())

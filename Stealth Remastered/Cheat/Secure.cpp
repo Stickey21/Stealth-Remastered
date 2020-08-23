@@ -45,6 +45,6 @@ void CSecure::HookInstallCall(DWORD dwInstallAddress, DWORD dwHookFunction)
 
 void CSecure::CreateJump(BYTE* pAddress, DWORD dwJumpTo, DWORD dwLen)
 {
-	Add((DWORD)pAddress, dwLen);
+	Add((DWORD)pAddress, (BYTE)dwLen);
 	Memory::CreateJump(pAddress, dwJumpTo, dwLen);
 }

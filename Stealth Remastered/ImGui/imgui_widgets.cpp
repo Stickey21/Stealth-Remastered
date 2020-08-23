@@ -6028,7 +6028,7 @@ bool ImGui::ListBoxHeader(const char* label, int items_count, int height_in_item
     if (height_in_items < 0)
         height_in_items = ImMin(items_count, 7);
     const ImGuiStyle& style = GetStyle();
-    float height_in_items_f = (height_in_items < items_count) ? (height_in_items + 0.25f) : (height_in_items + 0.00f);
+    float height_in_items_f = height_in_items;
 
     // We include ItemSpacing.y so that a list sized for the exact number of items doesn't make a scrollbar appears. We could also enforce that by passing a flag to BeginChild().
     ImVec2 size;

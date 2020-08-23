@@ -100,7 +100,7 @@ void Combat::NoRecoil()
 void Combat::WeaponSwitcher()
 {
 	if (g_Config.g_Combat.bWeaponSwitcher && !FindPlayerVehicle(-1, false))
-		for (int i = 0; i < _countof(g_Config.g_Hotkeys.iWeaponSwitch); i++)
+		for (int i = 0; i < g_Config.g_Hotkeys.iWeaponSwitch.size(); i++)
 			if (isKeyPressed(g_Config.g_Hotkeys.iWeaponSwitch[i]))
 				g_Config.g_Combat.bFastSwitch ? FindPlayerPed()->SetCurrentWeapon(i + 2) : *(DWORD*)0xB7CDBC = i + 2;
 }

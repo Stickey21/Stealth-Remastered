@@ -143,11 +143,10 @@ struct stConfig
 
 	struct stHotkeys
 	{
-		int iWeaponSwitch[5] = { 0, 0, 0, 0, 0 };
+		std::array<int, 5> iWeaponSwitch = { 0, 0, 0, 0, 0 };
 		int iAutoBikeSpam = 0;
 		int iMotorBikeSpam = 0;
 	} g_Hotkeys;
-
 
 	struct stDeveloper
 	{
@@ -168,8 +167,22 @@ struct stConfig
 class CConfig
 {
 public:
-	CConfig();
+	CConfig(const char* szName);
+	void Load(size_t index);
+	void Save(size_t index);
+	void Add(const char* szName);
+	void Remove(size_t index);
+	void Rename(size_t item, const char* szName);
+	void Reset();
+	void listConfigs();
+
+	constexpr auto& getConfigs()
+	{
+		return Configs;
+	}
 private:
+	std::filesystem::path Path;
+	std::vector<std::string> Configs;
 };
 
 extern CConfig* pConfig;

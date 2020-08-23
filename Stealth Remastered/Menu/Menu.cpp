@@ -29,26 +29,26 @@ void CMenu::Theme()
 	ImGuiStyle& style = ImGui::GetStyle();
 
 	style.Alpha = 1.0f;
-	style.WindowPadding = ImVec2(8, 8);
-	style.WindowMinSize = ImVec2(32, 32);
+	style.WindowPadding = { 8, 8 };
+	style.WindowMinSize = { 32, 32 };
 	style.WindowRounding = 3.0f;
 	style.PopupRounding = 3.0f;
-	style.WindowTitleAlign = ImVec2(0.5f, 0.5f);
+	style.WindowTitleAlign = { 0.5f, 0.5f };
 
-	style.FramePadding = ImVec2(4, 3);
+	style.FramePadding = { 4, 3 };
 	style.FrameRounding = 3.3f;
 	style.ChildRounding = 5.0f;
-	style.ItemSpacing = ImVec2(8, 4);
-	style.TouchExtraPadding = ImVec2(0, 0);
+	style.ItemSpacing = { 8, 4 };
+	style.TouchExtraPadding = { 0, 0 };
 	style.IndentSpacing = 21.0f;
 	style.ColumnsMinSpacing = 0.0f;
 	style.ScrollbarSize = 6.0f;
 	style.ScrollbarRounding = 0.0f;
 	style.GrabMinSize = 5.0f;
 	style.GrabRounding = 3.3f;
-	style.ButtonTextAlign = ImVec2(0.5f, 0.5f);
-	style.DisplayWindowPadding = ImVec2(22, 22);
-	style.DisplaySafeAreaPadding = ImVec2(4, 4);
+	style.ButtonTextAlign = { 0.5f, 0.5f };
+	style.DisplayWindowPadding = { 22, 22 };
+	style.DisplaySafeAreaPadding = { 4, 4 };
 	style.AntiAliasedLines = true;
 	style.AntiAliasedFill = true;
 	style.CurveTessellationTol = 1.f;
@@ -151,94 +151,93 @@ void CMenu::Tooltip(const char* szText)
 	}
 }
 
-
 void CMenu::Render()
 {
-	ImGui::SetNextWindowSize(ImVec2(600, 424));
-	ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f), ImGuiCond_Once, ImVec2(0.5f, 0.5f));
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(16, 16));
-	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(1, 0));
+	ImGui::SetNextWindowSize({ 600, 424 });
+	ImGui::SetNextWindowPos({ ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f }, ImGuiCond_Once, { 0.5f, 0.5f });
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 16, 16 });
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 1, 0 });
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 3.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
-	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(14, -10));
+	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 14, -10 });
 
 	if (ImGui::Begin("STEALTH", &bOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar))
 	{
 		ImVec2 vecWindow = ImGui::GetWindowPos();
 		ImGui::BeginGroup();
-		ImGui::Dummy(ImVec2(0, 2));
-		ImGui::Image(pTextures->tLogo, ImVec2(109, 21), ImVec2(0, 0), ImVec2(1, 1), ImGui::GetStyle().Colors[ImGuiCol_Logo]);
+		ImGui::Dummy({ 0, 2 });
+		ImGui::Image(pTextures->tLogo, { 109, 21 }, { 0, 0 }, { 1, 1 }, ImGui::GetStyle().Colors[ImGuiCol_Logo]);
 		ImGui::EndGroup();
 
-		ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(vecWindow.x + 142, vecWindow.y + 16), ImVec2(vecWindow.x + 143, vecWindow.y + 41), ImColor(48, 54, 64, 255));
+		ImGui::GetWindowDrawList()->AddRectFilled({ vecWindow.x + 142, vecWindow.y + 16 }, { vecWindow.x + 143, vecWindow.y + 41 }, ImColor(48, 54, 64, 255));
 
 		ImGui::SameLine(160);
 
 		if (iCurrentTab == 0) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Weapon", ImVec2(0, 25))) iCurrentTab = 0;
+		if (ImGui::Button("Weapon", { 0, 25 })) iCurrentTab = 0;
 		ImGui::PopStyleColor(5);
 		ImGui::SameLine();
 
 		if (iCurrentTab == 1) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Player", ImVec2(0, 25))) iCurrentTab = 1;
+		if (ImGui::Button("Player", { 0, 25 })) iCurrentTab = 1;
 		ImGui::PopStyleColor(5);
 		ImGui::SameLine();
 
 		if (iCurrentTab == 2) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Visual", ImVec2(0, 25))) iCurrentTab = 2;
+		if (ImGui::Button("Visual", { 0, 25 })) iCurrentTab = 2;
 		ImGui::PopStyleColor(5);
 		ImGui::SameLine();
 
 		if (iCurrentTab == 3) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Style", ImVec2(0, 25))) iCurrentTab = 3;
+		if (ImGui::Button("Style", { 0, 25 })) iCurrentTab = 3;
 		ImGui::PopStyleColor(5);
 		ImGui::SameLine();
 
 		if (iCurrentTab == 4) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Extra", ImVec2(0, 25))) iCurrentTab = 4;
+		if (ImGui::Button("Extra", { 0, 25 })) iCurrentTab = 4;
 		ImGui::PopStyleColor(5);
 		ImGui::SameLine();
 
 		if (iCurrentTab == 5) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Developer", ImVec2(0, 25))) iCurrentTab = 5;
+		if (ImGui::Button("Developer", { 0, 25 })) iCurrentTab = 5;
 		ImGui::PopStyleColor(5);
 
 		ImGui::PopStyleVar(5);
 
-		ImGui::Dummy(ImVec2(0, 7));
+		ImGui::Dummy({ 0, 7 });
 
 		switch (iCurrentTab)
 		{
 		case 0:
 		{
 			ImGui::Spacing();
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(16, 6));
-			ImGui::BeginChild("##Weapons", ImVec2(0, 50), true);
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 16, 6 });
+			ImGui::BeginChild("##Weapons", { 0, 50 }, true);
 			{
 				ImGui::PushFont(pIcons);
 
 				if (iCurrentCategory == 0) ActiveButton(); else NormalButton();
-				if (ImGui::Button("A", ImVec2(0, 32))) iCurrentCategory = 0;
+				if (ImGui::Button("A", { 0, 32 })) iCurrentCategory = 0;
 				ImGui::PopStyleColor(4);
 				ImGui::SameLine(105);
 
 				if (iCurrentCategory == 1) ActiveButton(); else NormalButton();
-				if (ImGui::Button("H", ImVec2(0, 32))) iCurrentCategory = 1;
+				if (ImGui::Button("H", { 0, 32 })) iCurrentCategory = 1;
 				ImGui::PopStyleColor(4);
 				ImGui::SameLine(200);
 
 				if (iCurrentCategory == 2) ActiveButton(); else NormalButton();
-				if (ImGui::Button("c", ImVec2(0, 32))) iCurrentCategory = 2;
+				if (ImGui::Button("c", { 0, 32 })) iCurrentCategory = 2;
 				ImGui::PopStyleColor(4);
 				ImGui::SameLine(325);
 
 				if (iCurrentCategory == 3) ActiveButton(); else NormalButton();
-				if (ImGui::Button("T", ImVec2(0, 32))) iCurrentCategory = 3;
+				if (ImGui::Button("T", { 0, 32 })) iCurrentCategory = 3;
 				ImGui::PopStyleColor(4);
 				ImGui::SameLine(445);
 
 				if (iCurrentCategory == 4) ActiveButton(); else NormalButton();
-				if (ImGui::Button("Z", ImVec2(0, 32))) iCurrentCategory = 4;
+				if (ImGui::Button("Z", { 0, 32 })) iCurrentCategory = 4;
 				ImGui::PopStyleColor(4);
 
 				ImGui::PopFont();
@@ -247,10 +246,10 @@ void CMenu::Render()
 			}
 
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Aimbot", ImVec2(280, 147), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Aimbot", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot"), ImGui::EndMenuBar();
-				ImGui::Checkbox("Aimbot Range", &g_Config.g_Aimbot.bAimbot); ImGui::SameLine(202); ImGui::Button("Settings##Range", ImVec2(70, 0));
+				ImGui::Checkbox("Aimbot Range", &g_Config.g_Aimbot.bAimbot); ImGui::SameLine(202); ImGui::Button("Settings##Range", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot Range Settings"), ImGui::EndMenuBar();
@@ -264,7 +263,7 @@ void CMenu::Render()
 				}
 				ImGui::Checkbox("Silent Aimbot", &g_Config.g_Aimbot.bSilent); ImGui::SameLine(202); ImGui::PushItemWidth(70.f);
 				ImGui::SliderFloat("##Accuracy", &g_Config.g_Aimbot.fSilentAccuracy, 20.f, 100.f, "%.0f%%"); Tooltip("Silent Recoil"); ImGui::PopItemWidth();
-				ImGui::Checkbox("Smooth Aimbot", &g_Config.g_Aimbot.bSmooth); ImGui::SameLine(202); ImGui::Button("Settings##Smooth", ImVec2(70, 0));
+				ImGui::Checkbox("Smooth Aimbot", &g_Config.g_Aimbot.bSmooth); ImGui::SameLine(202); ImGui::Button("Settings##Smooth", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Smooth Aimbot Settings"), ImGui::EndMenuBar();
@@ -274,7 +273,7 @@ void CMenu::Render()
 					ImGui::EndPopup();
 				}
 				ImGui::Checkbox("Pro Aimbot", &g_Config.g_Aimbot.bProAim);
-				ImGui::Checkbox("Triggerbot", &g_Config.g_Aimbot.bTriggerbot); ImGui::SameLine(202); ImGui::Button("Settings##Trigger", ImVec2(70, 0));
+				ImGui::Checkbox("Triggerbot", &g_Config.g_Aimbot.bTriggerbot); ImGui::SameLine(202); ImGui::Button("Settings##Trigger", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Triggerbot Settings"), ImGui::EndMenuBar();
@@ -297,7 +296,7 @@ void CMenu::Render()
 				ImGui::EndChild();
 			}
 
-			ImGui::BeginChild("##Filters", ImVec2(280, 147), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Filters", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot Filters"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Team Protect", &g_Config.g_Aimbot.bTeamProtect);
@@ -312,9 +311,9 @@ void CMenu::Render()
 			ImGui::SameLine();
 
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Config", ImVec2(280, 101), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Config", { 280, 101 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text(szCategory[pMenu->iCurrentCategory]), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::Text(szCategory[pMenu->iCurrentCategory].c_str()), ImGui::EndMenuBar();
 
 				for (int i = 0; i < _countof(g_Weapons); i++)
 				{
@@ -322,15 +321,15 @@ void CMenu::Render()
 						continue;
 
 					ImGui::Checkbox(g_Weapons[i].szName.c_str(), &g_Config.g_Aimbot.bAimbotEnabled[i + 22]); ImGui::SameLine(200);
-					ImGui::Button(std::string("Config##" + std::to_string(i)).c_str(), ImVec2(70, 0));
+					ImGui::Button(std::string("Config##" + std::to_string(i)).c_str(), { 70, 0 });
 					if (ImGui::BeginPopupContextItem(0, 0))
 					{
 						if (ImGui::BeginMenuBar()) ImGui::Text("%s (%d) Configuration", g_Weapons[i].szName.c_str(), i + 22), ImGui::EndMenuBar();
 						g_Config.g_Aimbot.bAimbot ? ImGui::Text("Range") : ImGui::TextDisabled("Range"); ImGui::SameLine(120);
 						ImGui::SliderInt("##Range", &g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE], 1, 200, "%d px");
 						if (ImGui::IsItemActive())
-							g_Config.g_Aimbot.iRangeStyle ? ImGui::GetOverlayDrawList()->AddCircle(ImVec2(pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY), g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64, g_Config.g_Aimbot.fOutlineThickness) :
-							ImGui::GetOverlayDrawList()->AddCircleFilled(ImVec2(pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY), g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64);
+							g_Config.g_Aimbot.iRangeStyle ? ImGui::GetOverlayDrawList()->AddCircle({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64, g_Config.g_Aimbot.fOutlineThickness) :
+							ImGui::GetOverlayDrawList()->AddCircleFilled({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i + 22][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64);
 						g_Config.g_Aimbot.bSilent ? ImGui::Text("Hitchance") : ImGui::TextDisabled("Hitchance"); ImGui::SameLine(120);
 						ImGui::SliderInt("##Silent", &g_Config.g_Aimbot.iAimbotConfig[i + 22][SILENT], 1, 100, "%d%%");
 						g_Config.g_Aimbot.bSmooth ? ImGui::Text("Smoothness") : ImGui::TextDisabled("Smoothness"); ImGui::SameLine(120);
@@ -341,11 +340,11 @@ void CMenu::Render()
 				ImGui::EndChild();
 			}
 
-			ImGui::BeginChild("##Combat", ImVec2(280, 193), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Combat", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Combat Assistance"), ImGui::EndMenuBar();
 				ImGui::Checkbox("No Reload", &g_Config.g_Combat.bNoReload);
-				ImGui::Checkbox("Allow C-BUG", &g_Config.g_Combat.bAllowCBug); ImGui::SameLine(202);ImGui::Button("Settings##AllowCBUG", ImVec2(70, 0));
+				ImGui::Checkbox("Allow C-BUG", &g_Config.g_Combat.bAllowCBug); ImGui::SameLine(202);ImGui::Button("Settings##AllowCBUG", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Allow C-BUG Settings"), ImGui::EndMenuBar();
@@ -358,12 +357,13 @@ void CMenu::Render()
 				ImGui::Checkbox("Rapid Fire", &g_Config.g_Combat.bRapidFire); ImGui::SameLine(202);	ImGui::PushItemWidth(70); ImGui::SliderFloat("##RapidFire", &g_Config.g_Combat.fRapidFire, 1.0f, 10.0f, "%0.1f");	ImGui::PopItemWidth();
 				ImGui::Checkbox("No Recoil", &g_Config.g_Combat.bNoRecoil);
 				ImGui::Checkbox("Fast Crosshair", &g_Config.g_Combat.bFastCrosshair);
-				ImGui::Checkbox("Weapon Switcher", &g_Config.g_Combat.bWeaponSwitcher); ImGui::SameLine(202); ImGui::Button("Settings##WeaponSwitcher", ImVec2(70, 0));
+				ImGui::Checkbox("Weapon Switcher", &g_Config.g_Combat.bWeaponSwitcher); ImGui::SameLine(202); ImGui::Button("Settings##WeaponSwitcher", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Weapon Switcher Settings"), ImGui::EndMenuBar();
 					static int iComboWeapon = 0;
-					ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szCategory, 5); ImGui::PopItemWidth(); ImGui::SameLine();
+					
+					//ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, std::array<const char*, 5>(szCategory), 5); ImGui::PopItemWidth(); ImGui::SameLine();
 					ImGui::PushItemWidth(100); ImGui::Hotkey("##WeaponHotkey", &g_Config.g_Hotkeys.iWeaponSwitch[iComboWeapon]); ImGui::PopItemWidth();
 					ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
 					ImGui::EndPopup();
@@ -377,7 +377,7 @@ void CMenu::Render()
 		}
 		case 1: {
 			ImGui::Spacing();
-			ImGui::BeginChild("##Player", ImVec2(280, 352), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Player", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Player Assistance"), ImGui::EndMenuBar();
 				ImGui::PushItemWidth(70);
@@ -395,7 +395,7 @@ void CMenu::Render()
 				ImGui::Checkbox("Fast Respawn", &g_Config.g_Player.bFastRespawn);
 				ImGui::Checkbox("No Fall", &g_Config.g_Player.bNoFall);
 				ImGui::Checkbox("Stop On Exit Veh", &g_Config.g_Player.bStopOnExitVehicle); ImGui::SameLine(202); ImGui::DragInt("##StopOnExit", &g_Config.g_Player.iStopOnExitVehicle, 1, 500, 1500, "%d ms");
-				ImGui::Checkbox("Auto Bike Spam", &g_Config.g_Player.bAutoBikeSpam); ImGui::SameLine(202); ImGui::Button("Settings##AutoBikeSpam", ImVec2(70, 0));
+				ImGui::Checkbox("Auto Bike Spam", &g_Config.g_Player.bAutoBikeSpam); ImGui::SameLine(202); ImGui::Button("Settings##AutoBikeSpam", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Auto Bike Spam Settings"), ImGui::EndMenuBar();
@@ -404,12 +404,12 @@ void CMenu::Render()
 					ImGui::EndPopup();
 				}
 				ImGui::Checkbox("Change Skin", &g_Config.g_Player.bChangeSkin); ImGui::SameLine(202); 
-				ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(1, 0)); ImGui::InputInt("##SkinID", &g_Config.g_Player.iSkinID); ImGui::PopStyleVar();
+				ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##SkinID", &g_Config.g_Player.iSkinID); ImGui::PopStyleVar();
 				ImGui::PopItemWidth();
 				ImGui::EndChild();
 			}
 			ImGui::SameLine();
-			ImGui::BeginChild("##Sync", ImVec2(280, 170), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Sync", { 280, 170 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Sync Modifications"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Upside Mode", &g_Config.g_Player.bUpsideMode);
@@ -427,7 +427,7 @@ void CMenu::Render()
 		case 2: {
 			ImGui::Spacing();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##PlayerESP", ImVec2(280, 193), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##PlayerESP", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Player ESP"), ImGui::EndMenuBar();
 				ImGui::Checkbox("ESP Name", &g_Config.g_Visuals.bNameTagsESP);
@@ -445,7 +445,7 @@ void CMenu::Render()
 				ImGui::Checkbox("ESP Distance", &g_Config.g_Visuals.bDistanceESP);
 				ImGui::EndChild();
 			}
-			ImGui::BeginChild("##ESPSettings", ImVec2(280, 155), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##ESPSettings", { 280, 155 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("ESP Settings"), ImGui::EndMenuBar();
 				ImGui::Text("ESP Thickness"); ImGui::SameLine(202); ImGui::PushItemWidth(70.f);
@@ -462,7 +462,7 @@ void CMenu::Render()
 			ImGui::EndGroup();
 			ImGui::SameLine();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##VehicleESP", ImVec2(280, 147), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##VehicleESP", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Vehicle ESP"), ImGui::EndMenuBar();
 				ImGui::Checkbox("ESP Name ##Vehicle", &g_Config.g_Visuals.bVehicleNameTagsESP);
@@ -472,11 +472,11 @@ void CMenu::Render()
 				ImGui::Checkbox("ESP Distance", &g_Config.g_Visuals.bVehicleDistanceESP);
 				ImGui::EndChild();
 			}
-			ImGui::BeginChild("##Visuals", ImVec2(280, 201), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Visuals", { 280, 201 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Visuals"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Aspect Ratio", &g_Config.g_Visuals.bAspectRatio); ImGui::SameLine(202); ImGui::PushItemWidth(70); ImGui::SliderFloat("##AspectRatio", &g_Config.g_Visuals.fAspectRatio, 0.5f, 2.0f, "%0.1f"); ImGui::PopItemWidth();
-				ImGui::Checkbox("Damage Informer", &g_Config.g_Visuals.bDMGInformer); ImGui::SameLine(202); ImGui::Button("Settings##DMG", ImVec2(70, 0));
+				ImGui::Checkbox("Damage Informer", &g_Config.g_Visuals.bDMGInformer); ImGui::SameLine(202); ImGui::Button("Settings##DMG", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Damage Informer Settings"), ImGui::EndMenuBar();
@@ -490,7 +490,7 @@ void CMenu::Render()
 					ImGui::EndPopup();
 				}
 				ImGui::Checkbox("FPS Funcs", &g_Config.g_Visuals.bFPSFuncs); ImGui::SameLine(202);
-				ImGui::Button("Settings##FPSFuncs", ImVec2(70, 0));
+				ImGui::Button("Settings##FPSFuncs", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("FPS Funcs Settings"), ImGui::EndMenuBar();
@@ -504,7 +504,7 @@ void CMenu::Render()
 					ImGui::PopItemWidth();
 					ImGui::End();
 				}
-				ImGui::Checkbox("Weather Changer", &g_Config.g_Visuals.bWeatherChanger); ImGui::SameLine(202); ImGui::Button("Settings##Weather", ImVec2(70, 0));
+				ImGui::Checkbox("Weather Changer", &g_Config.g_Visuals.bWeatherChanger); ImGui::SameLine(202); ImGui::Button("Settings##Weather", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Weather Changer"), ImGui::EndMenuBar();
@@ -521,11 +521,11 @@ void CMenu::Render()
 		case 3: {
 			ImGui::Spacing();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Theme", ImVec2(280, 352), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Theme", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Theme"), ImGui::EndMenuBar();
 
-				if (ImGui::Button("Set Default Theme", ImVec2(259, 23)))
+				if (ImGui::Button("Set Default Theme", { 259, 23 }))
 					pMenu->Theme();
 
 				for (int i = 0; i < ImGuiCol_COUNT; i++)
@@ -545,7 +545,7 @@ void CMenu::Render()
 				ImGui::EndGroup();
 			}
 			ImGui::SameLine();
-			ImGui::BeginChild("##Sizes", ImVec2(280, 352), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Sizes", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				ImGui::EndChild();
 			}
@@ -554,35 +554,113 @@ void CMenu::Render()
 		case 4: {
 			ImGui::Spacing();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Reconnect", ImVec2(280, 194), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Reconnect", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Reconnect"), ImGui::EndMenuBar();
 
 				ImGui::EndChild();
 
 			}
-			ImGui::BeginChild("##nush1", ImVec2(280, 160), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##nush 1", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("nush1"), ImGui::EndMenuBar();
-
+				
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
 
 			ImGui::SameLine();
 
-			ImGui::BeginChild("##nush2", ImVec2(280, 358), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Configs", { 280, 179 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("nush2"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::Text("Configs"), ImGui::EndMenuBar();
+				ImGui::Columns(2, NULL, false);
+				ImGui::SetColumnOffset(1, 170);
+				ImGui::PushItemWidth(160);
 
-				ImGui::EndChild();
+				if (ImGui::Button("Reload configs", { 160, 25 }))
+					pConfig->listConfigs();
+
+				auto& vecConfigs = pConfig->getConfigs();
+				static int iCurrentConfig = -1;
+
+				if (static_cast<std::size_t>(iCurrentConfig) >= vecConfigs.size())
+					iCurrentConfig = -1;
+
+				static std::string szBuffer;
+
+				if (ImGui::ListBox("", &iCurrentConfig, [](void* data, int idx, const char** out_text) {
+					auto& vector = *static_cast<std::vector<std::string>*>(data);
+					*out_text = vector[idx].c_str();
+					return true;
+					}, &vecConfigs, vecConfigs.size(), 5) && iCurrentConfig != -1)
+					szBuffer = vecConfigs[iCurrentConfig];
+
+					ImGui::PushID(0);
+					if (ImGui::InputTextWithHint("", "Name", szBuffer.data(), szBuffer.capacity() + 1, ImGuiInputTextFlags_EnterReturnsTrue))
+					{
+						if (iCurrentConfig != -1)
+							pConfig->Rename(iCurrentConfig, szBuffer.c_str());
+					}
+					ImGui::PopID();
+					ImGui::NextColumn();
+
+					ImGui::PushItemWidth(100);
+
+					if (ImGui::Button("Create", { 95, 25 }))
+						pConfig->Add(szBuffer.c_str());
+
+					if (ImGui::Button("Reset", { 95, 25 }))
+						ImGui::OpenPopup("Config to reset");
+
+					if (ImGui::BeginPopup("Config to reset"))
+					{
+						static constexpr const char* szConfigs[]{ "Whole", "Aimbot", "Combat", "Player", "Visuals", "Style", "Hotkeys" };
+						for (int i = 0; i < IM_ARRAYSIZE(szConfigs); i++)
+						{
+							if (i == 1) ImGui::Separator();
+							if (ImGui::Selectable(szConfigs[i]))
+							{
+								switch (i)
+								{
+								case 0: pConfig->Reset(); Theme(); break;
+								case 1: g_Config.g_Aimbot = { }; break;
+								case 2: g_Config.g_Combat = { }; break;
+								case 3: g_Config.g_Player = { }; break;
+								case 4: g_Config.g_Visuals = { }; break;
+								case 5: g_Config.g_Style = { }; Theme();  break;
+								case 6: g_Config.g_Hotkeys = { }; break;
+								}
+							}
+						}
+						ImGui::EndPopup();
+					}
+					if (iCurrentConfig != -1)
+					{
+						ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 2);
+						if (ImGui::Button("Load", { 95, 25 }))
+						{
+							pConfig->Load(iCurrentConfig);
+							for (int i = 0; i < ImGuiCol_COUNT; i++)
+								ImGui::GetStyle().Colors[i] = g_Config.g_Style.vecTheme[i];
+						}
+						if (ImGui::Button("Save", { 95, 25 }))
+							pConfig->Save(iCurrentConfig);
+						if (ImGui::Button("Delete", { 95, 25 }))
+						{
+							pConfig->Remove(iCurrentConfig);
+							iCurrentConfig = -1;
+							szBuffer.clear();
+						}
+					}
+					ImGui::Columns(1);
+					ImGui::EndChild();
 			}
 			break;
 		}
 		case 5: {
 			ImGui::Spacing();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Damager", ImVec2(280, 194), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Damager", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Damager"), ImGui::EndMenuBar();
 				ImGui::PushItemWidth(70.f);
@@ -600,7 +678,7 @@ void CMenu::Render()
 				ImGui::EndChild();
 
 			}
-			ImGui::BeginChild("##SAMPCAC", ImVec2(280, 160), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##SAMPCAC", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("SAMPCAC"), ImGui::EndMenuBar();
 
@@ -610,7 +688,7 @@ void CMenu::Render()
 
 			ImGui::SameLine();
 
-			ImGui::BeginChild("##Developer", ImVec2(280, 358), true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Developer", { 280, 358 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::Text("Developer"), ImGui::EndMenuBar();
 

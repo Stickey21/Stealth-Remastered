@@ -20,9 +20,6 @@
     <ClCompile Include="SAMP\RakNet\RakClient.cpp">
       <Filter>SAMP\RakNet</Filter>
     </ClCompile>
-    <ClCompile Include="Cheat\Config.cpp">
-      <Filter>Cheat</Filter>
-    </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
@@ -74,6 +71,12 @@
     <ClCompile Include="Cheat\Secure.cpp">
       <Filter>Cheat</Filter>
     </ClCompile>
+    <ClCompile Include="Cheat\Config\Config.cpp">
+      <Filter>Cheat\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
@@ -97,9 +100,6 @@
     </ClInclude>
     <ClInclude Include="SAMP\RakNet\RakClient.h">
       <Filter>SAMP\RakNet</Filter>
-    </ClInclude>
-    <ClInclude Include="Cheat\Config.h">
-      <Filter>Cheat</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>ImGui</Filter>
@@ -164,6 +164,12 @@
     <ClInclude Include="Cheat\Secure.h">
       <Filter>Cheat</Filter>
     </ClInclude>
+    <ClInclude Include="Cheat\json\json.hpp">
+      <Filter>Cheat\json</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Config\Config.h">
+      <Filter>Cheat\Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="D3D">
@@ -186,6 +192,12 @@
     </Filter>
     <Filter Include="Features">
       <UniqueIdentifier>{d6894349-3482-4e79-9cbe-6a2529851ba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cheat\json">
+      <UniqueIdentifier>{cee60aa4-5550-4c79-af3a-44dea8bfd96f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cheat\Config">
+      <UniqueIdentifier>{8fb5a8f0-d383-4a5c-bf42-1cd9bd578683}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

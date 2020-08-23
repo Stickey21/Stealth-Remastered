@@ -8,6 +8,8 @@
 #include <vector>
 #include <memory>
 #include <Psapi.h>
+#include <ShlObj.h>
+#include <filesystem>
 
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
@@ -29,17 +31,18 @@
 #include "ePedBones.h"
 #include "extensions/ScriptCommands.h"
 
-#include "Cheat/Secure.h"
-
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "ImGui/imgui_render.h"
 #include "ImGui/imgui_custom.h"
 
-#include "Cheat/GTAstructs.h"
 #include "Cheat/Cheat.h"
-#include "Cheat/Config.h"
+#include "Cheat/json/json.hpp"
+#include "Cheat/Config/Config.h"
+#include "Cheat/Secure.h"
+
+#include "Cheat/GTAstructs.h"
 #include "Cheat/Memory.h"
 #include "Cheat/Textures.h"
 #include "Cheat/Icons.h"
