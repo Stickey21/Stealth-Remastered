@@ -362,8 +362,8 @@ void CMenu::Render()
 				{
 					if (ImGui::BeginMenuBar()) ImGui::Text("Weapon Switcher Settings"), ImGui::EndMenuBar();
 					static int iComboWeapon = 0;
-					
-					//ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, std::array<const char*, 5>(szCategory), 5); ImGui::PopItemWidth(); ImGui::SameLine();
+					const char* szWeaponType[] = { szCategory[0].c_str(), szCategory[1].c_str(), szCategory[2].c_str(), szCategory[3].c_str(), szCategory[4].c_str(), szCategory[5].c_str() };
+					ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szWeaponType, 5); ImGui::PopItemWidth(); ImGui::SameLine();
 					ImGui::PushItemWidth(100); ImGui::Hotkey("##WeaponHotkey", &g_Config.g_Hotkeys.iWeaponSwitch[iComboWeapon]); ImGui::PopItemWidth();
 					ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
 					ImGui::EndPopup();
