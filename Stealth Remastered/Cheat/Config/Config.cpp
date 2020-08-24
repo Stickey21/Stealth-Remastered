@@ -56,7 +56,7 @@ static void to_json(json& j, const stConfig::stAimbot& o, const stConfig::stAimb
     {
         WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i][RANGE]);
         WRITE(mapWeapons[i].szName + " Silent", iAimbotConfig[i][SILENT]);
-        WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i][SMOOTH]);
+        WRITE(mapWeapons[i].szName + " Smooth", iAimbotConfig[i][SMOOTH]);
         WRITE(mapWeapons[i].szName + " Enabled", bAimbotEnabled[i]);
     }
 
@@ -263,7 +263,7 @@ static void from_json(const json& j, stConfig::stAimbot& r)
     {
         read(j, (mapWeapons[i].szName + " Range").c_str() , r.iAimbotConfig[i][RANGE]);
         read(j, (mapWeapons[i].szName + " Silent").c_str(), r.iAimbotConfig[i][SILENT]);
-        read(j, (mapWeapons[i].szName + " Range").c_str(), r.iAimbotConfig[i][SMOOTH]);
+        read(j, (mapWeapons[i].szName + " Smooth").c_str(), r.iAimbotConfig[i][SMOOTH]);
         read(j, (mapWeapons[i].szName + " Enabled").c_str(), r.bAimbotEnabled[i]);
     }
 
