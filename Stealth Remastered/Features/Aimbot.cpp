@@ -71,7 +71,7 @@ void CAimbot::GetAimingPlayer()
 					continue;
 			}
 
-			for (int iBone = 0; iBone < _countof(iBoneList); iBone++)
+			for (auto iBone : iBoneList)
 			{
 				CVector vecBone, vecBoneScreen;
 				Utils::getBonePosition(pPed, (ePedBones)iBoneList[iBone], &vecBone);

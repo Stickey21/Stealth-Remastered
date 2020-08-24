@@ -52,12 +52,12 @@ static void to_json(json& j, const stConfig::stAimbot& o, const stConfig::stAimb
     WRITE("bProAim", bProAim);
     WRITE("bTriggerbot", bTriggerbot);
 
-    for (int i = 0; i <= 12; i++)
+    for (int i = 22; i <= 34; i++)
     {
-        WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i + 22][RANGE]);
-        WRITE(mapWeapons[i].szName + " Silent", iAimbotConfig[i + 22][SILENT]);
-        WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i + 22][SMOOTH]);
-        WRITE(mapWeapons[i].szName + " Enabled", bAimbotEnabled[i + 22]);
+        WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i][RANGE]);
+        WRITE(mapWeapons[i].szName + " Silent", iAimbotConfig[i][SILENT]);
+        WRITE(mapWeapons[i].szName + " Range", iAimbotConfig[i][SMOOTH]);
+        WRITE(mapWeapons[i].szName + " Enabled", bAimbotEnabled[i]);
     }
 
     WRITE("fSilentAccuracy", fSilentAccuracy);
@@ -259,12 +259,12 @@ static void from_json(const json& j, stConfig::stAimbot& r)
     read(j, "bProAim", r.bProAim);
     read(j, "bTriggerbot", r.bTriggerbot);
 
-    for (int i = 0; i <= 12; i++)
+    for (int i = 22; i <= 34; i++)
     {
-        read(j, (mapWeapons[i].szName + " Range").c_str() , r.iAimbotConfig[i + 22][RANGE]);
-        read(j, (mapWeapons[i].szName + " Silent").c_str(), r.iAimbotConfig[i + 22][SILENT]);
-        read(j, (mapWeapons[i].szName + " Range").c_str(), r.iAimbotConfig[i + 22][SMOOTH]);
-        read(j, (mapWeapons[i].szName + " Enabled").c_str(), r.bAimbotEnabled[i + 22]);
+        read(j, (mapWeapons[i].szName + " Range").c_str() , r.iAimbotConfig[i][RANGE]);
+        read(j, (mapWeapons[i].szName + " Silent").c_str(), r.iAimbotConfig[i][SILENT]);
+        read(j, (mapWeapons[i].szName + " Range").c_str(), r.iAimbotConfig[i][SMOOTH]);
+        read(j, (mapWeapons[i].szName + " Enabled").c_str(), r.bAimbotEnabled[i]);
     }
 
     read(j, "fSilentAccuracy", r.fSilentAccuracy);

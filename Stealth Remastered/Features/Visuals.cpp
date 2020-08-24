@@ -62,7 +62,7 @@ void CVisuals::Render()
 				sprintf(szDamage, "%0.1f", fWeaponDamage[g_DMGInformer[i].iWeapon]);
 				pRender->DrawString(pRender->pESPFont, szDamage, vecScreen, (float)g_Config.g_Visuals.iFontSize, g_Config.g_Visuals.colorDMG, true);
 			}
-			else g_DMGInformer[i] = {};
+			else g_DMGInformer[i] = { };
 		}
 
 		//ImColor colorHitmarker = ImColor(255, 255, 255, (int)(pVisuals->fHitmarkerAlpha * 255));
