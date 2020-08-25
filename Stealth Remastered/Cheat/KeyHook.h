@@ -7,14 +7,14 @@ public:
 	{
 		memset(bKeyTable, false, sizeof(bKeyTable));
 		memset(gameKeyState, 0, sizeof(gameKeyState));
-		Orginal_WndProc = (Prototype_WndProc)(pSAMP->g_dwSAMP_Addr + 0x5DB40);
-		Orginal_CPad_UpdateGameKey = (Prototype_CPad_UpdateGameKey)0x541C40;
+		oWndProc = (tWndProc)(pSAMP->g_dwSAMP_Addr + 0x5DB40);
+		oCPad_UpdateGameKey = (tCPad_UpdateGameKey)0x541C40;
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		pSecure->SDetourAttach(&(PVOID&)Orginal_WndProc, Hooked_WndProc);
+		pSecure->SDetourAttach(&(PVOID&)oWndProc, hkWndProc);
 		DetourTransactionCommit();
-		pSecure->HookInstallCall((DWORD)0x541E17, (DWORD)Hoooked_CPad_UpdateGameKey);
+		pSecure->HookInstallCall((DWORD)0x541E17, (DWORD)hkCPad_UpdateGameKey);
 	}
 
 	CKeyHook::~CKeyHook()
@@ -24,7 +24,7 @@ public:
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourDetach(&(PVOID&)Orginal_WndProc, Hooked_WndProc);
+		DetourDetach(&(PVOID&)oWndProc, hkWndProc);
 		DetourTransactionCommit();
 		Memory::memcpy_safe((void*)0x541E17, "\xE8\x24\xFE\xFF\xFF", 5);
 	}
@@ -34,14 +34,14 @@ public:
 
 private:
 
-	typedef LRESULT(__stdcall* Prototype_WndProc)(HWND, UINT, WPARAM, LPARAM);
-	typedef BYTE(__thiscall* Prototype_CPad_UpdateGameKey)(CPad*, int);
+	typedef LRESULT(__stdcall* tWndProc)(HWND, UINT, WPARAM, LPARAM);
+	typedef BYTE(__thiscall* tCPad_UpdateGameKey)(CPad*, int);
 
-	static LRESULT __stdcall Hooked_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	static BYTE __stdcall Hoooked_CPad_UpdateGameKey(int iKey);
+	static LRESULT __stdcall hkWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static BYTE __stdcall hkCPad_UpdateGameKey(int iKey);
 
-	Prototype_WndProc Orginal_WndProc;
-	Prototype_CPad_UpdateGameKey Orginal_CPad_UpdateGameKey;
+	tWndProc oWndProc;
+	tCPad_UpdateGameKey oCPad_UpdateGameKey;
 };
 
 extern CKeyHook* pKeyHook;

@@ -2,7 +2,7 @@
 
 CKeyHook* pKeyHook;
 
-BYTE __stdcall CKeyHook::Hoooked_CPad_UpdateGameKey(int iKey)
+BYTE __stdcall CKeyHook::hkCPad_UpdateGameKey(int iKey)
 {
 	int16_t* key_state = (int16_t*)0xB73458;
 	for (int i = 0; i < 0x20; i++)
@@ -13,14 +13,14 @@ BYTE __stdcall CKeyHook::Hoooked_CPad_UpdateGameKey(int iKey)
 			pKeyHook->gameKeyState[i] = 0;
 		}
 	}
-	return pKeyHook->Orginal_CPad_UpdateGameKey((CPad*)0xB7358C, iKey);
+	return pKeyHook->oCPad_UpdateGameKey((CPad*)0xB7358C, iKey);
 }
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND wnd, UINT umsg, WPARAM wparam, LPARAM lparam);
-LRESULT APIENTRY CKeyHook::Hooked_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT APIENTRY CKeyHook::hkWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (Utils::isGTAMenuActive())
-		return pKeyHook->Orginal_WndProc(hWnd, msg, wParam, lParam);
+		return pKeyHook->oWndProc(hWnd, msg, wParam, lParam);
 
 	switch (msg)
 	{
@@ -87,10 +87,10 @@ LRESULT APIENTRY CKeyHook::Hooked_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 
 		if (g_Config.g_Player.bAirBreak || g_Config.g_Player.bMapRun)
 			if (wParam == 'W' || wParam == 'A' || wParam == 'S' || wParam == 'D')
-				return pKeyHook->Orginal_WndProc(hWnd, WM_KEYUP, wParam, lParam);
+				return pKeyHook->oWndProc(hWnd, WM_KEYUP, wParam, lParam);
 	}
 
-	return pKeyHook->Orginal_WndProc(hWnd, msg, wParam, lParam);
+	return pKeyHook->oWndProc(hWnd, msg, wParam, lParam);
 }
 
 bool isKeyDown(uint8_t iKey)

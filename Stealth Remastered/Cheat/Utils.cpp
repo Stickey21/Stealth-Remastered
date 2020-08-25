@@ -138,7 +138,6 @@ void Utils::PerformAnimation(const char* szBlockName, const char* szAnimName, in
 			if (!bFreezeLastFrame) flags |= 0x08;
 
 			CTask* pTask = new CTaskSimpleRunNamedAnim(szAnimName, pBlock->szName, flags, 4.0f, iTime, !bInterruptable, bRunInSequence, bOffsetPed, bHoldLastFrame);
-
 			if (pTask)
 				FindPlayerPed()->m_pIntelligence->m_TaskMgr.SetTask(pTask, TASK_PRIMARY_PRIMARY, false);
 		}
@@ -164,6 +163,7 @@ bool Utils::isPlayingAnimation(CEntity* pEntity, char* szAnimName)
 		add     esp, 8
 		mov     dwReturn, eax
 	}
+
 	if (dwReturn) return true;
 	else return false;
 }

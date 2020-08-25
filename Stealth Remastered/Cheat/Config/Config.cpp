@@ -10,12 +10,12 @@ CConfig::CConfig(const char* szName)
 {
 	memset(g_Config.g_Aimbot.bAimbotEnabled, false, sizeof(g_Config.g_Aimbot.bAimbotEnabled));
 
-	for (int i = 22; i <= 34; i++)
-	{
-		g_Config.g_Aimbot.iAimbotConfig[i][RANGE] = 1;
-		g_Config.g_Aimbot.iAimbotConfig[i][SILENT] = 1;
-		g_Config.g_Aimbot.iAimbotConfig[i][SMOOTH] = 1;
-	}
+    for (int i = 22; i <= 34; i++)
+    {
+        g_Config.g_Aimbot.iAimbotConfig[i][RANGE] = 1;
+        g_Config.g_Aimbot.iAimbotConfig[i][SILENT] = 1;
+        g_Config.g_Aimbot.iAimbotConfig[i][SMOOTH] = 1;
+    }
 
 	if (PWSTR pathToDocuments; SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Documents, 0, nullptr, &pathToDocuments)))
 	{
@@ -261,7 +261,7 @@ static void from_json(const json& j, stConfig::stAimbot& r)
 
     for (int i = 22; i <= 34; i++)
     {
-        read(j, (mapWeapons[i].szName + " Range").c_str() , r.iAimbotConfig[i][RANGE]);
+        read(j, (mapWeapons[i].szName + " Range").c_str(), r.iAimbotConfig[i][RANGE]);
         read(j, (mapWeapons[i].szName + " Silent").c_str(), r.iAimbotConfig[i][SILENT]);
         read(j, (mapWeapons[i].szName + " Smooth").c_str(), r.iAimbotConfig[i][SMOOTH]);
         read(j, (mapWeapons[i].szName + " Enabled").c_str(), r.bAimbotEnabled[i]);
@@ -427,7 +427,8 @@ void CConfig::Save(size_t index)
 
 void CConfig::Add(const char* szName)
 {
-    if (*szName && std::find(Configs.cbegin(), Configs.cend(), szName) == Configs.cend()) {
+    if (*szName && std::find(Configs.cbegin(), Configs.cend(), szName) == Configs.cend()) 
+    {
         Configs.emplace_back(szName);
         Save(Configs.size() - 1);
     }

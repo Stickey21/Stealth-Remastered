@@ -6,11 +6,11 @@ public:
 	CVisuals()
 	{
 		fHitmarkerAlpha = 0.f;
-		Orginal_CalculateAspectRatio = (Prototype_CalculateAspectRatio)0x6FF420;
+		oCalculateAspectRatio = (tCalculateAspectRatio)0x6FF420;
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		pSecure->SDetourAttach(&(PVOID&)Orginal_CalculateAspectRatio, Hooked_CalculateAspectRatio);
+		pSecure->SDetourAttach(&(PVOID&)oCalculateAspectRatio, hkCalculateAspectRatio);
 		DetourTransactionCommit();
 	}
 
@@ -19,7 +19,7 @@ public:
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourDetach(&(PVOID&)Orginal_CalculateAspectRatio, Hooked_CalculateAspectRatio);
+		DetourDetach(&(PVOID&)oCalculateAspectRatio, hkCalculateAspectRatio);
 		DetourTransactionCommit();
 	}
 
@@ -52,9 +52,9 @@ public:
 	float fHitmarkerAlpha;
 
 private:
-	typedef float(__cdecl* Prototype_CalculateAspectRatio)();
-	static float __cdecl Hooked_CalculateAspectRatio();
-	Prototype_CalculateAspectRatio Orginal_CalculateAspectRatio;
+	typedef float(__cdecl* tCalculateAspectRatio)();
+	static float __cdecl hkCalculateAspectRatio();
+	tCalculateAspectRatio oCalculateAspectRatio;
 };
 
 extern CVisuals* pVisuals;

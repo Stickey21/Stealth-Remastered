@@ -6,13 +6,13 @@ public:
 	CD3DHook()
 	{
 		bInit = false;
-		Orginal_Present = (Prototype_Present)GetDeviceAddress(17);
-		Orginal_Reset = (Prototype_Reset)GetDeviceAddress(16);
+		oPresent = (tPresent)GetDeviceAddress(17);
+		oReset = (tReset)GetDeviceAddress(16);
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		pSecure->SDetourAttach(&(PVOID&)Orginal_Present, Hooked_Present);
-		pSecure->SDetourAttach(&(PVOID&)Orginal_Reset, Hooked_Reset);
+		pSecure->SDetourAttach(&(PVOID&)oPresent, hkPresent);
+		pSecure->SDetourAttach(&(PVOID&)oReset, hkReset);
 		DetourTransactionCommit();
 	};
 
@@ -21,8 +21,8 @@ public:
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourDetach(&(PVOID&)Orginal_Present, Hooked_Present);
-		DetourDetach(&(PVOID&)Orginal_Reset, Hooked_Reset);
+		DetourDetach(&(PVOID&)oPresent, hkPresent);
+		DetourDetach(&(PVOID&)oReset, hkReset);
 		DetourTransactionCommit();
 	};
 
@@ -57,14 +57,14 @@ private:
 		return VTable[VTableIndex];
 	};
 
-	typedef HRESULT(__stdcall* Prototype_Present)(IDirect3DDevice9*, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
-	typedef HRESULT(__stdcall* Prototype_Reset)(IDirect3DDevice9*, D3DPRESENT_PARAMETERS*);
+	typedef HRESULT(__stdcall* tPresent)(IDirect3DDevice9*, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
+	typedef HRESULT(__stdcall* tReset)(IDirect3DDevice9*, D3DPRESENT_PARAMETERS*);
 
-	static HRESULT __stdcall Hooked_Present(IDirect3DDevice9* pDevice, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion);
-	static HRESULT __stdcall Hooked_Reset(IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentParams);
+	static HRESULT __stdcall hkPresent(IDirect3DDevice9* pDevice, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion);
+	static HRESULT __stdcall hkReset(IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentParams);
 
-	Prototype_Present Orginal_Present;
-	Prototype_Reset Orginal_Reset;
+	tPresent oPresent;
+	tReset oReset;
 };
 
 extern CD3DHook* pD3DHook;

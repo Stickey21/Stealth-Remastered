@@ -2,10 +2,10 @@
 
 CD3DHook* pD3DHook;
 
-HRESULT __stdcall CD3DHook::Hooked_Present(IDirect3DDevice9 *pDevice, CONST RECT *pSrcRect, CONST RECT *pDestRect, HWND hDestWindow, CONST RGNDATA *pDirtyRegion)
+HRESULT __stdcall CD3DHook::hkPresent(IDirect3DDevice9 *pDevice, CONST RECT *pSrcRect, CONST RECT *pDestRect, HWND hDestWindow, CONST RGNDATA *pDirtyRegion)
 {
 	if (!pDevice)
-		return pD3DHook->Orginal_Present(pDevice, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
+		return pD3DHook->oPresent(pDevice, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 
 	if (pSAMP->isInited)
 	{
@@ -23,16 +23,16 @@ HRESULT __stdcall CD3DHook::Hooked_Present(IDirect3DDevice9 *pDevice, CONST RECT
 		Cheat::Render();	
 	}
 
-	return pD3DHook->Orginal_Present(pDevice, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
+	return pD3DHook->oPresent(pDevice, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 }
 
-HRESULT __stdcall CD3DHook::Hooked_Reset(IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentParams)
+HRESULT __stdcall CD3DHook::hkReset(IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentParams)
 {
 	if (!pDevice)
-		return pD3DHook->Orginal_Reset(pDevice, pPresentParams);
+		return pD3DHook->oReset(pDevice, pPresentParams);
 
 	if (pD3DHook->bInit)
 		ImGui_ImplDX9_InvalidateDeviceObjects();
 
-	return pD3DHook->Orginal_Reset(pDevice, pPresentParams);
+	return pD3DHook->oReset(pDevice, pPresentParams);
 }

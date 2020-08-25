@@ -29,9 +29,8 @@ void CAimbot::Render()
 	if (bCrosshair && g_Config.g_Aimbot.bAimbot && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
 	{
 		if (g_Config.g_Aimbot.bDrawRange)
-			if (!g_Config.g_Aimbot.iRangeStyle)
-				pRender->DrawCircleFilled(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange);
-			else pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness);
+			g_Config.g_Aimbot.iRangeStyle ? pRender->DrawCircleFilled(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange)
+			: pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness);
 
 		if (g_Config.g_Aimbot.bDrawTracer && iTargetPlayer != -1)
 			pRender->DrawLine(vecCrosshair, vecTargetBone, ImColor(0.f, 1.f, 0.f), g_Config.g_Aimbot.fOutlineThickness);
@@ -99,7 +98,7 @@ void CAimbot::GetAimingPlayer()
 	}
 }
 
-bool __stdcall CAimbot::Hooked_FireInstantHit(void* this_, CEntity* pFiringEntity, CVector* pOrigin, CVector* pMuzzle, CEntity* pTargetEntity, CVector* pTarget, CVector* pVec, bool bCrossHairGun, bool bCreateGunFx)
+bool __stdcall CAimbot::hkFireInstantHit(void* this_, CEntity* pFiringEntity, CVector* pOrigin, CVector* pMuzzle, CEntity* pTargetEntity, CVector* pTarget, CVector* pVec, bool bCrossHairGun, bool bCreateGunFx)
 {
 	if (pFiringEntity == (CEntity*)FindPlayerPed() && g_Config.g_Aimbot.bSilent && pAimbot->iTargetPlayer != -1 && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon] && rand() % 100 <= g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][SILENT])
 	{
@@ -125,10 +124,10 @@ bool __stdcall CAimbot::Hooked_FireInstantHit(void* this_, CEntity* pFiringEntit
 		Memory::memcpy_safe((void*)0x740B4E, "\x6A\x01\x6A\x01", 4);
 		*(float*)0x8D6114 = 5.f;
 	}
-	return pAimbot->Orginal_FireInstantHit(this_, pFiringEntity, pOrigin, pMuzzle, pTargetEntity, pTarget, pVec, bCrossHairGun, bCreateGunFx);
+	return pAimbot->oFireInstantHit(this_, pFiringEntity, pOrigin, pMuzzle, pTargetEntity, pTarget, pVec, bCrossHairGun, bCreateGunFx);
 }
 
-bool __cdecl CAimbot::Hooked_AddBullet(CEntity* pCreator, eWeaponType weaponType, CVector vecPosition, CVector vecVelocity)
+bool __cdecl CAimbot::hkAddBullet(CEntity* pCreator, eWeaponType weaponType, CVector vecPosition, CVector vecVelocity)
 {
 	if (pCreator == (CEntity*)FindPlayerPed() && g_Config.g_Aimbot.bSilent && pAimbot->iTargetPlayer != -1 && g_Config.g_Aimbot.bAimbotEnabled[34] && rand() % 100 <= g_Config.g_Aimbot.iAimbotConfig[34][SILENT])
 	{
@@ -144,15 +143,15 @@ bool __cdecl CAimbot::Hooked_AddBullet(CEntity* pCreator, eWeaponType weaponType
 	}
 	else Memory::memcpy_safe((void*)0x736212, "\x6A\x01\x6A\x01", 4);
 
-	return pAimbot->Orginal_AddBullet(pCreator, weaponType, vecPosition, vecVelocity);
+	return pAimbot->oAddBullet(pCreator, weaponType, vecPosition, vecVelocity);
 }
 
-float __cdecl CAimbot::Hooked_TargetWeaponRangeMultiplier(CEntity* pVictim, CEntity* pOwner)
+float __cdecl CAimbot::hkTargetWeaponRangeMultiplier(CEntity* pVictim, CEntity* pOwner)
 {
 	if (pOwner == (CEntity*)FindPlayerPed() && (g_Config.g_Aimbot.bIgnoreMaxDistance || g_Config.g_Aimbot.bIgnoreEverything))
 		return 100.f;
 
-	return pAimbot->Orginal_TargetWeaponRangeMultiplier(pVictim, pOwner);
+	return pAimbot->oTargetWeaponRangeMultiplier(pVictim, pOwner);
 }
 
 void CAimbot::SmoothAimbot()
@@ -163,7 +162,7 @@ void CAimbot::SmoothAimbot()
 			return;
 
 		CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[pAimbot->iTargetPlayer]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
-		if (!pPed) 
+		if (!pPed)
 			return;
 
 		if (g_Config.g_Aimbot.bStopOnBody)
@@ -300,7 +299,6 @@ void CAimbot::Triggerbot()
 						continue;
 
 					CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
-
 					if (!pPed || pPed == FindPlayerPed())
 						continue;
 

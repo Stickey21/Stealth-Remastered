@@ -333,13 +333,13 @@ public:
 	CRakClient()
 	{
 		vTable = *(void***)pSAMP->getInfo()->pRakClientInterface;
-		Orginal_RPC = (Prototype_RPC)(pSAMP->g_dwSAMP_Addr + 0x30B30);
-		Orginal_Send = (Prototype_Send)(pSAMP->g_dwSAMP_Addr + 0x307F0);
+		oRPC = (tRPC)(pSAMP->g_dwSAMP_Addr + 0x30B30);
+		oSend = (tSend)(pSAMP->g_dwSAMP_Addr + 0x307F0);
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		pSecure->SDetourAttach(&(PVOID&)Orginal_RPC, Hooked_RPC);
-		pSecure->SDetourAttach(&(PVOID&)Orginal_Send, Hooked_Send);
+		pSecure->SDetourAttach(&(PVOID&)oRPC, hkRPC);
+		pSecure->SDetourAttach(&(PVOID&)oSend, hkSend);
 		DetourTransactionCommit();
 	};
 
@@ -348,25 +348,25 @@ public:
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourDetach(&(PVOID&)Orginal_RPC, Hooked_RPC);
-		DetourDetach(&(PVOID&)Orginal_Send, Hooked_Send);
+		DetourDetach(&(PVOID&)oRPC, hkRPC);
+		DetourDetach(&(PVOID&)oSend, hkSend);
 		DetourTransactionCommit();
 	};
 
 	void** vTable;
 
 private:
-	typedef bool(__thiscall* Prototype_RPC)(void*, int*, BitStream*, PacketPriority, PacketReliability, char, bool);
-	typedef bool(__thiscall* Prototype_Send)(void*, BitStream*, PacketPriority, PacketReliability, char);
+	typedef bool(__thiscall* tRPC)(void*, int*, BitStream*, PacketPriority, PacketReliability, char, bool);
+	typedef bool(__thiscall* tSend)(void*, BitStream*, PacketPriority, PacketReliability, char);
 
 	bool RPC(int uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp);
 	bool Send(BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel);
 
-	static bool __fastcall Hooked_RPC(void* _this, void* Unknown, int* uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp);
-	static bool __fastcall Hooked_Send(void* _this, void* Unknown, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel);
+	static bool __fastcall hkRPC(void* _this, void* Unknown, int* uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp);
+	static bool __fastcall hkSend(void* _this, void* Unknown, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel);
 
-	Prototype_RPC Orginal_RPC;
-	Prototype_Send Orginal_Send;
+	tRPC oRPC;
+	tSend oSend;
 };
 
 extern CRakClient* pRakClient;

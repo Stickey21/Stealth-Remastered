@@ -2,7 +2,7 @@
 
 CVisuals* pVisuals;
 
-float __cdecl CVisuals::Hooked_CalculateAspectRatio()
+float __cdecl CVisuals::hkCalculateAspectRatio()
 {
 	if (g_Config.g_Visuals.bAspectRatio && g_Config.g_Visuals.fAspectRatio >= 0.2f && g_Config.g_Visuals.fAspectRatio <= 2.0f && (!FrontEndMenuManager.m_bWidescreenOn || !TheCamera.m_bWideScreenOn))
 	{
@@ -10,7 +10,7 @@ float __cdecl CVisuals::Hooked_CalculateAspectRatio()
 		return g_Config.g_Visuals.fAspectRatio;
 	}
 
-	return pVisuals->Orginal_CalculateAspectRatio();
+	return pVisuals->oCalculateAspectRatio();
 }
 
 void CVisuals::Render()
