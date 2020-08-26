@@ -7,7 +7,6 @@ public:
 	{
 		iToggle = 2;
 		iCurrentTab = 0;
-		iLogoPressed = 0;
 		iCurrentCategory = 0;
 		bOpen = false;
 		fFadeAlpha = 0.f;
@@ -31,7 +30,7 @@ public:
 	void Render();
 	void Theme();
 
-	int iToggle, iCurrentTab, iLogoPressed, iCurrentCategory;
+	int iToggle, iCurrentTab, iCurrentCategory;
 	bool bOpen;
 
 	ImFont* pFont, *pIcons;

@@ -359,6 +359,7 @@ void CMenu::Render()
 					ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
 					ImGui::EndPopup();
 				}
+				ImGui::Checkbox("Auto Scroll", &g_Config.g_Combat.bAutoScroll);
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
@@ -548,10 +549,8 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Reconnect", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Reconnect"), ImGui::EndMenuBar();
 
 				ImGui::EndChild();
-
 			}
 			ImGui::BeginChild("##nush 1", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
 			{

@@ -51,6 +51,7 @@ struct stConfig
 		bool bNoRecoil{ false };
 		bool bWeaponSwitcher{ false };
 		bool bFastSwitch{ false };
+		bool bAutoScroll{ false };
 	} g_Combat;
 
 	struct stPlayer

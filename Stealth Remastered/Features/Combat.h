@@ -9,4 +9,5 @@ namespace Combat
 	void FastCrosshair();
 	void NoRecoil();
 	void WeaponSwitcher();
+	void AutoScroll();
 }

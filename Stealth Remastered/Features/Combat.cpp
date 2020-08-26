@@ -7,6 +7,7 @@ void Combat::Update()
 	RapidFire();
 	FastCrosshair();
 	NoRecoil();
+	AutoScroll();
 }
 
 void Combat::NoReload()
@@ -104,4 +105,28 @@ void Combat::WeaponSwitcher()
 		for (size_t i = 0; i < g_Config.g_Hotkeys.iWeaponSwitch.size(); i++)
 			if (isKeyPressed(g_Config.g_Hotkeys.iWeaponSwitch[i]))
 				g_Config.g_Combat.bFastSwitch ? FindPlayerPed()->SetCurrentWeapon(i + 2) : *(DWORD*)0xB7CDBC = i + 2;
+}
+
+void Combat::AutoScroll()
+{
+	if (g_Config.g_Combat.bAutoScroll)
+	{
+		static int iSlot = 0;
+		static int iState = 0;
+
+		if (pSAMP->getPlayers()->pLocalPlayer->onFootData.stSampKeys.keys_aim && FindPlayerPed()->m_nActiveWeaponSlot == 2) {
+			iState = 1;
+		}
+		else if (iState == 2)
+		{
+			FindPlayerPed()->SetCurrentWeapon(iSlot);
+			iState = 0;
+		}
+		else if (iState == 1)
+		{
+			iSlot = FindPlayerPed()->m_nActiveWeaponSlot;
+			FindPlayerPed()->m_nActiveWeaponSlot = 0;
+			iState = 2;
+		}
+	}
 }

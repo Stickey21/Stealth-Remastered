@@ -17,6 +17,39 @@ bool CRakClient::Send(BitStream* bitStream, PacketPriority priority, PacketRelia
 
 bool __fastcall CRakClient::hkRPC(void* _this, void* pUnknown, int* uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp)
 {
+	if (*uniqueID == 180)
+	{
+		BitStream bsData;
+		uint16_t usIdentifier = 0xCAC;
+		uint32_t dwModVersion = 0x0000A00;
+		uint8_t bSerialData[] = "201AS23oxdA==";
+		uint8_t nSerialLenght = sizeof(bSerialData);
+		bitStream->ResetWritePointer();
+		bitStream->Write(usIdentifier);
+		bitStream->Write(dwModVersion);
+		bitStream->Write(nSerialLenght);
+		bitStream->Write((char*)bSerialData, nSerialLenght);
+	}
+
+	if (*uniqueID == 181)
+		return false;
+
+	if (*uniqueID == 183)
+	{
+		bitStream->SetReadOffset(32);
+		int iSize = bitStream->GetNumberOfBytesUsed() - 4;
+		BYTE szData[26];
+
+		for (int i = 0; i < iSize; i++)
+			bitStream->Read<BYTE>(szData[i]);
+
+		bitStream->Reset();
+		bitStream->Write(0x00);
+
+		for (int i = 0; i < iSize; i++)
+			bitStream->Write<BYTE>(szData[i]);
+	}
+
 	if (*uniqueID == 185)
 	{
 		DWORD dwAddress = 0;
@@ -37,25 +70,6 @@ bool __fastcall CRakClient::hkRPC(void* _this, void* pUnknown, int* uniqueID, Bi
 				bitStream->Write<uint8_t>(pSecure->vecMemory[iAddress].origByte);
 			else bitStream->Write<uint8_t>(*(uint8_t*)(dwAddress + i));
 		}
-	}
-
-	if (*uniqueID == 181)
-		return false;
-
-	if (*uniqueID == 183)
-	{
-		bitStream->SetReadOffset(32);
-		int iSize = bitStream->GetNumberOfBytesUsed() - 4;
-		BYTE szData[26];
-
-		for (int i = 0; i < iSize; i++)
-			bitStream->Read<BYTE>(szData[i]);
-
-		bitStream->Reset();
-		bitStream->Write(0x00);
-
-		for (int i = 0; i < iSize; i++)
-			bitStream->Write<BYTE>(szData[i]);
 	}
 
 	if (*uniqueID == RPC_ExitVehicle)
@@ -109,7 +123,7 @@ bool __fastcall CRakClient::hkSend(void* _this, void* Unknown, BitStream* bitStr
 					if (g_Config.g_Developer.bTeleportToPlayer)
 					{
 						CVector vecPos = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[iNearest]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle)->GetPosition();
-						vecPos.fX += 2.f;
+						vecPos.fX += 1.5f;
 						FindPlayerPed()->SetPosn(vecPos);
 					}
 

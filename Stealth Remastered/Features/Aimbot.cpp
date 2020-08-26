@@ -29,8 +29,8 @@ void CAimbot::Render()
 	if (bCrosshair && g_Config.g_Aimbot.bAimbot && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
 	{
 		if (g_Config.g_Aimbot.bDrawRange)
-			g_Config.g_Aimbot.iRangeStyle ? pRender->DrawCircleFilled(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange)
-			: pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness);
+			g_Config.g_Aimbot.iRangeStyle ? pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness)		
+			: pRender->DrawCircleFilled(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange);
 
 		if (g_Config.g_Aimbot.bDrawTracer && iTargetPlayer != -1)
 			pRender->DrawLine(vecCrosshair, vecTargetBone, ImColor(0.f, 1.f, 0.f), g_Config.g_Aimbot.fOutlineThickness);
@@ -73,7 +73,7 @@ void CAimbot::GetAimingPlayer()
 			for (auto iBone : iBoneList)
 			{
 				CVector vecBone, vecBoneScreen;
-				Utils::getBonePosition(pPed, (ePedBones)iBoneList[iBone], &vecBone);
+				Utils::getBonePosition(pPed, (ePedBones)iBone, &vecBone);
 				Utils::CalcScreenCoors(&vecBone, &vecBoneScreen);
 				if (vecBoneScreen.fZ < 1.0f)
 					continue;
@@ -88,8 +88,7 @@ void CAimbot::GetAimingPlayer()
 				if (fCentreDistance <= fNearestDistance)
 				{
 					fNearestDistance = fCentreDistance;
-					iTargetPlayer = i;
-					iTargetBone = iBoneList[iBone];
+					iTargetPlayer = i; iTargetBone = iBone;
 					vecTargetBone = vecBoneScreen;
 					break;
 				}
@@ -122,7 +121,7 @@ bool __stdcall CAimbot::hkFireInstantHit(void* this_, CEntity* pFiringEntity, CV
 	else
 	{
 		Memory::memcpy_safe((void*)0x740B4E, "\x6A\x01\x6A\x01", 4);
-		*(float*)0x8D6114 = 5.f;
+		*reinterpret_cast<float*>(0x8D6114) = 5.f;
 	}
 	return pAimbot->oFireInstantHit(this_, pFiringEntity, pOrigin, pMuzzle, pTargetEntity, pTarget, pVec, bCrossHairGun, bCreateGunFx);
 }

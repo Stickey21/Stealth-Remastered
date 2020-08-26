@@ -219,22 +219,22 @@ void CVisuals::ESP_Bones(int iPlayerID, CPed* pPed)
 	{
 		switch (iBone)
 		{
-		case 6: case 4: case 22: case 32: case 23: case 33: case 24: case 34: case 25: case 26: case 35: case 36: case 3: case 2: case 52: case 42: case 53: case 43: case 54: case 44:
+		case 5: case 4: case 22: case 32: case 23: case 33: case 24: case 34: case 25: case 26: case 35: case 36: case 3: case 2: case 52: case 42: case 53: case 43: case 54: case 44:
 			Utils::getBonePosition(pPed, (ePedBones)iBone, &vecBone[iBone]);
 			break;
 		}
 	}
 
-	CVector vecHeadScreen;
-	Utils::CalcScreenCoors(&vecBone[BONE_HEAD2], &vecHeadScreen);
-	if (vecHeadScreen.fZ < 1.0f)
-		return;
+	//CVector vecHeadScreen;
+	//Utils::CalcScreenCoors(&vecBone[BONE_HEAD2], &vecHeadScreen);
+	//if (vecHeadScreen.fZ < 1.0f)
+	//	return;
 
 	ImColor colorESP = getESPColor(iPlayerID);
-	float fDistance = 1.f / (Utils::getDistanceFromCamera(vecBone[BONE_HEAD2]) + 5.f) * 110.f;
-	pRender->DrawCircleFilled(vecHeadScreen, fDistance, colorESP);
+	//float fDistance = 1.f / (Utils::getDistanceFromCamera(vecBone[BONE_HEAD2]) + 5.f) * 110.f;
+	//pRender->DrawCircleFilled(vecHeadScreen, fDistance, colorESP);
 
-	pRender->D3DLine(vecBone[BONE_HEAD2], vecBone[BONE_UPPERTORSO], colorESP, g_Config.g_Visuals.fESPThickness);
+	pRender->D3DLine(vecBone[BONE_NECK], vecBone[BONE_UPPERTORSO], colorESP, g_Config.g_Visuals.fESPThickness);
 	pRender->D3DLine(vecBone[BONE_UPPERTORSO], vecBone[BONE_RIGHTSHOULDER], colorESP, g_Config.g_Visuals.fESPThickness);
 	pRender->D3DLine(vecBone[BONE_UPPERTORSO], vecBone[BONE_LEFTSHOULDER], colorESP, g_Config.g_Visuals.fESPThickness);
 	pRender->D3DLine(vecBone[BONE_LEFTSHOULDER], vecBone[BONE_LEFTELBOW], colorESP, g_Config.g_Visuals.fESPThickness);
