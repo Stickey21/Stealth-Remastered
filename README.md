@@ -2,7 +2,7 @@
 <h4>Pasted SA:MP Cheat</h4>
 
 ## Credits	
-* ***[versace bankeru](https://www.youtube.com/user/gabriel200212)***	
+* ***[versace bankeru](https://www.youtube.com/channel/UCWfxrNb0xlVaRlk8qQ4Gx6g)***	
 * **FYP** - SAMPFUNCS & mod_s0beit_sa	
 * **CentiuS** - ASI Framework	
 * **DK22Pac** - [Plugin SDK](https://github.com/DK22Pac/plugin-sdk)	
