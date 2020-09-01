@@ -13,4 +13,4 @@
 ## Requirements	
 * **Microsoft Visual Studio 2019**	
 * **DirectX Software Development Kit**	
-* **Plugin SDK**
+* **[Plugin SDK](https://github.com/DK22Pac/plugin-sdk)**
