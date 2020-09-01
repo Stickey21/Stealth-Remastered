@@ -17,20 +17,6 @@ bool CRakClient::Send(BitStream* bitStream, PacketPriority priority, PacketRelia
 
 bool __fastcall CRakClient::hkRPC(void* _this, void* pUnknown, int* uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp)
 {
-	if (*uniqueID == 180)
-	{
-		BitStream bsData;
-		uint16_t usIdentifier = 0xCAC;
-		uint32_t dwModVersion = 0x0000A00;
-		uint8_t bSerialData[] = "201AS23oxdA==";
-		uint8_t nSerialLenght = sizeof(bSerialData);
-		bitStream->ResetWritePointer();
-		bitStream->Write(usIdentifier);
-		bitStream->Write(dwModVersion);
-		bitStream->Write(nSerialLenght);
-		bitStream->Write((char*)bSerialData, nSerialLenght);
-	}
-
 	if (*uniqueID == 181)
 		return false;
 
