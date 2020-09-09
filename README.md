@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Stealth</h1>
+<img width="300" src="https://i.imgur.com/HmHic8B.png" alt="zgui logo">
 <h4>Pasted SA:MP Cheat</h4>
 
 [![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=banner2)](https://discord.gg/JwyWRg)
