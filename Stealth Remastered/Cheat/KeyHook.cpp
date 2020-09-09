@@ -4,13 +4,13 @@ CKeyHook* pKeyHook;
 
 BYTE __stdcall CKeyHook::hkCPad_UpdateGameKey(int iKey)
 {
-	int16_t* key_state = (int16_t*)0xB73458;
-	for (int i = 0; i < 0x20; i++)
+	int16_t* i16KeyState = (int16_t*)0xB73458;
+	for (int i = 0; i < 32; i++)
 	{
-		if (pKeyHook->gameKeyState[i])
+		if (pKeyHook->g_GameKeyState[i].bActive)
 		{
-			key_state[i] = pKeyHook->gameKeyState[i];
-			pKeyHook->gameKeyState[i] = 0;
+			i16KeyState[i] = pKeyHook->g_GameKeyState[i].iState;
+			pKeyHook->g_GameKeyState[i].bActive = false;
 		}
 	}
 	return pKeyHook->oCPad_UpdateGameKey((CPad*)0xB7358C, iKey);

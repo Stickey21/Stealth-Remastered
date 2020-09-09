@@ -45,7 +45,8 @@ bool __fastcall CRakClient::hkRPC(void* _this, void* pUnknown, int* uniqueID, Bi
 		for (int i = 0; i < byteSize; i++)
 			bitStream->Read(byteContent[i]);
 
-		pSAMP->addMessageToChat(0xFFFFFFFF, "{EE5555}CAC Read: {FFFFFF}Address: 0x%X | Size: %d | Content: %.2X %.2X %.2X %.2X | SA:MP Base: 0x%X", dwAddress, byteSize, byteContent[0], byteContent[1], byteContent[2], byteContent[3], pSAMP->g_dwSAMP_Addr);
+		//Debug
+		//pSAMP->addMessageToChat(0xFFFFFFFF, "{EE5555}CAC Read: {FFFFFF}Address: 0x%X | Size: %d | Content: %.2X %.2X %.2X %.2X | SA:MP Base: 0x%X", dwAddress, byteSize, byteContent[0], byteContent[1], byteContent[2], byteContent[3], pSAMP->g_dwSAMP_Addr);
 
 		bitStream->SetWriteOffset(5 * 8);
 

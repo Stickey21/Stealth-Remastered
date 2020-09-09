@@ -3,6 +3,7 @@
 namespace ImGui
 {
 	bool Hotkey(const char* label, int* k, const ImVec2& size_arg = ImVec2(0, 0));
+	void ArrowButtonDisabled(const char* id, ImGuiDir dir);
 }
 
 const char* const szKeyNames[] =

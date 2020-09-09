@@ -97,3 +97,11 @@ bool ImGui::Hotkey(const char* label, int* k, const ImVec2& size_arg)
 
 	return value_changed;
 }
+
+void ImGui::ArrowButtonDisabled(const char* id, ImGuiDir dir)
+{
+	float sz = ImGui::GetFrameHeight();
+	ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+	ImGui::ArrowButtonEx(id, dir, { sz, sz }, ImGuiButtonFlags_Disabled);
+	ImGui::PopStyleVar();
+}

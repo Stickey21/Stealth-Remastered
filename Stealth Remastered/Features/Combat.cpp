@@ -8,6 +8,7 @@ void Combat::Update()
 	FastCrosshair();
 	NoRecoil();
 	AutoScroll();
+	AutoCBUG();
 }
 
 void Combat::NoReload()
@@ -129,4 +130,45 @@ void Combat::AutoScroll()
 			iState = 2;
 		}
 	}
+}
+
+void Combat::AutoCBUG()
+{
+	if (!g_Config.g_Combat.bAutoCBug)
+		return;
+
+	if (!pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon == 24)
+		return;
+
+	static int iStep = 0;
+	if (FindPlayerPed()->m_aWeapons[FindPlayerPed()->m_nActiveWeaponSlot].m_nAmmoInClip && GetAsyncKeyState(VK_LBUTTON) && GetAsyncKeyState(VK_RBUTTON))
+	{
+		pKeyHook->g_GameKeyState[17] = { 0, true };
+		static ULONGLONG ulWait = 0;
+		static ULONGLONG ulTick = 0;
+		if (GetTickCount64() - ulTick > ulWait)
+		{
+			ulTick = GetTickCount64();
+			switch (iStep)
+			{
+				case 0:
+				{
+					pKeyHook->g_GameKeyState[17] = { 0xFF, true };
+					ulWait = g_Config.g_Combat.iCBugDelay[1];
+					break;
+				}
+				case 1:
+				{
+					pKeyHook->g_GameKeyState[6] = { 0, true };
+					pKeyHook->g_GameKeyState[18] = { 0xFF, true };
+					ulWait = g_Config.g_Combat.iCBugDelay[0];
+					break;
+				}
+			}
+
+			if (iStep++ > 1)
+				iStep = 0;
+		}
+	}
+	else iStep = 0;
 }

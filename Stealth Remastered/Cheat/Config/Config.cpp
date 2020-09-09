@@ -93,6 +93,9 @@ static void to_json(json& j, const stConfig::stCombat& o, const stConfig::stComb
     WRITE("bNoRecoil", bNoRecoil);
     WRITE("bWeaponSwitcher", bWeaponSwitcher);
     WRITE("bFastSwitch", bFastSwitch);
+    WRITE("bAutoScroll", bAutoScroll);
+    WRITE("bAutoCBug", bAutoCBug);
+    WRITE("iCBugDelay", iCBugDelay);
 }
 
 static void to_json(json& j, const stConfig::stPlayer& o, const stConfig::stPlayer& dummy = {})
@@ -171,6 +174,8 @@ static void to_json(json& j, const stConfig::stStyle& o, const stConfig::stStyle
 {
     for (int i = 0; i < ImGuiCol_COUNT; i++)
         WRITE(ImGui::GetStyleColorName(i), vecTheme[i]);
+    WRITE("iTheme", iTheme);
+    WRITE("iCheckbox", iCheckbox);
 }
 
 static void to_json(json& j, const stConfig::stHotkeys& o, const stConfig::stHotkeys& dummy = {})
@@ -300,6 +305,9 @@ static void from_json(const json& j, stConfig::stCombat& r)
    read(j, "bNoRecoil", r.bNoRecoil);
    read(j, "bWeaponSwitcher", r.bWeaponSwitcher);
    read(j, "bFastSwitch", r.bFastSwitch);
+   read(j, "bAutoScroll", r.bAutoScroll);
+   read(j, "bAutoCBug", r.bAutoCBug);
+   read(j, "iCBugDelay", r.iCBugDelay);
 }
 
 static void from_json(const json& j, stConfig::stPlayer& r)
@@ -378,6 +386,8 @@ static void from_json(const json& j, stConfig::stStyle& r)
 {
     for (int i = 0; i < ImGuiCol_COUNT; i++)
         read(j, ImGui::GetStyleColorName(i), r.vecTheme[i]);
+    read(j, "iTheme", r.iTheme);
+    read(j, "iCheckbox", r.iCheckbox);
 }
 
 static void from_json(const json& j, stConfig::stHotkeys& r)

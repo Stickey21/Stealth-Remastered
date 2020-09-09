@@ -190,18 +190,18 @@ void Player::BikeSpam()
 {
 	if (g_Config.g_Player.bAutoBikeSpam && FindPlayerVehicle(-1, false))
 	{
-		int16_t* key_state = (int16_t*)0xB73458;
+		int16_t* i16KeyState = (int16_t*)0xB73458;
 		if (isKeyDown(g_Config.g_Hotkeys.iAutoBikeSpam) && reinterpret_cast<CVehicleModelInfo*>(CModelInfo::ms_modelInfoPtrs[FindPlayerVehicle(-1, false)->m_nModelIndex])->m_nVehicleType == VEHICLE_BMX)
 		{
-			if (key_state[BUTTON_CROSS] == 0)
-				pKeyHook->gameKeyState[BUTTON_CROSS] = 0xFF;
-			else pKeyHook->gameKeyState[BUTTON_CROSS] = 0x0;
+			if (i16KeyState[BUTTON_CROSS] == 0)
+				pKeyHook->g_GameKeyState[BUTTON_CROSS] = { 0xFF, true };
+			else pKeyHook->g_GameKeyState[BUTTON_CROSS] = { 0x0, true };
 		}
 		if (g_Config.g_Player.bMotorBikeSpam && isKeyDown(g_Config.g_Hotkeys.iMotorBikeSpam) && reinterpret_cast<CVehicleModelInfo*>(CModelInfo::ms_modelInfoPtrs[FindPlayerVehicle(-1, false)->m_nModelIndex])->m_nVehicleType == VEHICLE_BIKE)
 		{
-			if (key_state[BUTTON_LEFT_STICK_Y] == 0)
-				pKeyHook->gameKeyState[BUTTON_LEFT_STICK_Y] = -0x80;
-			else pKeyHook->gameKeyState[BUTTON_LEFT_STICK_Y] = 0x0;
+			if (i16KeyState[BUTTON_LEFT_STICK_Y] == 0)
+				pKeyHook->g_GameKeyState[BUTTON_LEFT_STICK_Y] = { -0x80, true };
+			else pKeyHook->g_GameKeyState[BUTTON_LEFT_STICK_Y] = { 0x0, true };
 		}
 	}
 }

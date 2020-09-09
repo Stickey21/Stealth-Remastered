@@ -90,7 +90,6 @@ void CAimbot::GetAimingPlayer()
 					fNearestDistance = fCentreDistance;
 					iTargetPlayer = i; iTargetBone = iBone;
 					vecTargetBone = vecBoneScreen;
-					break;
 				}
 			}
 		}
@@ -265,7 +264,7 @@ void CAimbot::Triggerbot()
 		{
 			if (g_Config.g_Aimbot.bSilent && g_Config.g_Aimbot.bAimbot && iTargetPlayer != -1)
 			{
-				pKeyHook->gameKeyState[BUTTON_CIRCLE] = 0xFF;
+				pKeyHook->g_GameKeyState[BUTTON_CIRCLE] = { 0xFF, true };
 				iTick = GetTickCount64();
 			}
 		}
@@ -320,7 +319,7 @@ void CAimbot::Triggerbot()
 							continue;
 					}
 
-					pKeyHook->gameKeyState[BUTTON_CIRCLE] = 0xFF;
+					pKeyHook->g_GameKeyState[BUTTON_CIRCLE] = { 0xFF, true };
 					iTick = GetTickCount64();
 					break;
 				}

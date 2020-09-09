@@ -53,55 +53,127 @@ void CMenu::Theme()
 	style.AntiAliasedFill = true;
 	style.CurveTessellationTol = 1.f;
 
-	g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.70f, 0.71f, 0.74f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.11f, 0.13f, 0.16f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.16f, 0.17f, 0.20f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(0.16f, 0.17f, 0.20f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.12f, 0.12f, 0.16f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(0.09f, 0.10f, 0.15f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.12f, 0.13f, 0.17f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.07f, 0.08f, 0.13f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.17f, 0.17f, 0.17f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.86f, 0.87f, 0.90f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(0.48f, 0.49f, 0.51f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.66f, 0.67f, 0.69f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.09f, 0.10f, 0.15f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.12f, 0.13f, 0.17f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.07f, 0.08f, 0.13f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.29f, 0.34f, 0.43f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.21f, 0.24f, 0.31f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.29f, 0.34f, 0.43f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Separator] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImVec4(0.20f, 0.22f, 0.27f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused] = ImVec4(0.07f, 0.10f, 0.15f, 0.97f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive] = ImVec4(0.14f, 0.26f, 0.42f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 0.25f, 0.25f, 0.50f);
-	g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-	g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-	g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
-	g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
-	g_Config.g_Style.vecTheme[ImGuiCol_Logo] = ImVec4(1.f, 1.f, 1.f, 1.f);
+	switch (g_Config.g_Style.iTheme)
+	{
+	case 0:
+	{
+		g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.70f, 0.71f, 0.74f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.11f, 0.13f, 0.16f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.16f, 0.17f, 0.20f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(0.16f, 0.17f, 0.20f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.12f, 0.12f, 0.16f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(0.09f, 0.10f, 0.15f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.12f, 0.13f, 0.17f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.07f, 0.08f, 0.13f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.17f, 0.17f, 0.17f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.86f, 0.87f, 0.90f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(0.48f, 0.49f, 0.51f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.66f, 0.67f, 0.69f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.09f, 0.10f, 0.15f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.12f, 0.13f, 0.17f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.07f, 0.08f, 0.13f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.29f, 0.34f, 0.43f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.21f, 0.24f, 0.31f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.29f, 0.34f, 0.43f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Separator] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImVec4(0.20f, 0.22f, 0.27f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused] = ImVec4(0.07f, 0.10f, 0.15f, 0.97f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive] = ImVec4(0.14f, 0.26f, 0.42f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 0.25f, 0.25f, 0.50f);
+		g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Logo] = ImVec4(1.f, 1.f, 1.f, 1.f);
+		break;
+	}
+	case 1:
+	{
+		ImGui::StyleColorsDark();
+		break;
+	}
+	case 2:
+	{
+		ImGui::StyleColorsLight();
+		break;
+	}
+	case 3:
+	{
+		ImGui::StyleColorsClassic();
+		break;
+	}
+	case 4:
+	{
+		g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.70f, 0.71f, 0.74f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.09f, 0.09f, 0.09f, 0.98f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(0.09f, 0.09f, 0.09f, 0.98f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.92f, 0.91f, 0.88f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(0.21f, 0.21f, 0.21f, 0.94f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.25f, 0.25f, 0.25f, 0.94f);
+		g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.17f, 0.17f, 0.17f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 0.98f, 0.95f, 0.75f);
+		g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.21f, 0.21f, 0.21f, 0.94f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.26f, 0.26f, 0.26f, 0.94f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Separator] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.20f, 0.71f, 0.29f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.00f, 0.51f, 0.09f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(0.10f, 0.61f, 0.19f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 1.00f, 0.00f, 0.43f);
+		g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+		g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+		g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(1.00f, 0.98f, 0.95f, 0.73f);
+		break;
+	}
+	}
 
 	for (int i = 0; i < ImGuiCol_COUNT; i++)
 		ImGui::GetStyle().Colors[i] = g_Config.g_Style.vecTheme[i];
@@ -161,7 +233,7 @@ void CMenu::Render()
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 14, -10 });
 
-	if (ImGui::Begin("STEALTH", &bOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar))
+	if (ImGui::Begin("STEALTH", &bOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar))
 	{
 		ImVec2 vecWindow = ImGui::GetWindowPos();
 		ImGui::BeginGroup();
@@ -245,11 +317,11 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Aimbot", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Aimbot"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Aimbot Range", &g_Config.g_Aimbot.bAimbot); ImGui::SameLine(202); ImGui::Button("Settings##Range", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot Range Settings"), ImGui::EndMenuBar();
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Aimbot Range Settings"), ImGui::EndMenuBar();
 					ImGui::Checkbox("Render Range", &g_Config.g_Aimbot.bDrawRange); ImGui::SameLine(150); ImGui::PushItemWidth(70);
 					ImGui::Combo("##RangeStyle", &g_Config.g_Aimbot.iRangeStyle, "Filled\0Outline\0");
 					ImGui::Checkbox("Render Tracer", &g_Config.g_Aimbot.bDrawTracer); ImGui::SameLine(150);
@@ -263,7 +335,7 @@ void CMenu::Render()
 				ImGui::Checkbox("Smooth Aimbot", &g_Config.g_Aimbot.bSmooth); ImGui::SameLine(202); ImGui::Button("Settings##Smooth", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Smooth Aimbot Settings"), ImGui::EndMenuBar();
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Smooth Aimbot Settings"), ImGui::EndMenuBar();
 					ImGui::Checkbox("Aim On Fire", &g_Config.g_Aimbot.bSmoothIsFire);
 					ImGui::Checkbox("Stop On Body", &g_Config.g_Aimbot.bStopOnBody);
 					ImGui::Checkbox("Lock Y Axis", &g_Config.g_Aimbot.bSmoothLockY);
@@ -273,7 +345,7 @@ void CMenu::Render()
 				ImGui::Checkbox("Triggerbot", &g_Config.g_Aimbot.bTriggerbot); ImGui::SameLine(202); ImGui::Button("Settings##Trigger", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Triggerbot Settings"), ImGui::EndMenuBar();
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Triggerbot Settings"), ImGui::EndMenuBar();
 					ImGui::Checkbox("Delay", &g_Config.g_Aimbot.bTriggerDelay); ImGui::SameLine(150); ImGui::PushItemWidth(70);
 					ImGui::DragInt("##TriggerDelay", &g_Config.g_Aimbot.iTriggerDelay, 1, 0, 500, "%d ms");
 					if (!g_Config.g_Aimbot.bAimbot || !g_Config.g_Aimbot.bSilent)
@@ -294,7 +366,7 @@ void CMenu::Render()
 			}
 			ImGui::BeginChild("##Filters", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Aimbot Filters"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Aimbot Filters"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Team Protect", &g_Config.g_Aimbot.bTeamProtect);
 				ImGui::Checkbox("Lock Through Objects", &g_Config.g_Aimbot.bLockThroughObjects);
 				ImGui::Checkbox("Ignore Max Distance", &g_Config.g_Aimbot.bIgnoreMaxDistance);
@@ -307,59 +379,91 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Config", { 280, 101 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text(szCategory[pMenu->iCurrentCategory]), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted(szCategory[pMenu->iCurrentCategory]), ImGui::EndMenuBar();
 				for (auto i : mapWeapons)
 				{
 					if (i.second.iCategory != pMenu->iCurrentCategory)
 						continue;
 
-					ImGui::Checkbox(i.second.szName.c_str(), &g_Config.g_Aimbot.bAimbotEnabled[i.first]); ImGui::SameLine(200);
+					ImGui::Checkbox(i.second.szName.c_str(), &g_Config.g_Aimbot.bAimbotEnabled[i.first]); ImGui::SameLine(202);
 					ImGui::Button(("Config##" + std::to_string(i.first)).c_str(), { 70, 0 });
 					if (ImGui::BeginPopupContextItem(0, 0))
 					{
 						if (ImGui::BeginMenuBar()) ImGui::Text("%s (%d) Configuration", i.second.szName.c_str(), i.first), ImGui::EndMenuBar();
-						g_Config.g_Aimbot.bAimbot ? ImGui::Text("Range") : ImGui::TextDisabled("Range"); ImGui::SameLine(120);
+						g_Config.g_Aimbot.bAimbot ? ImGui::TextUnformatted("Range") : ImGui::TextDisabled("Range"); ImGui::SameLine(120);
 						ImGui::SliderInt("##Range", &g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE], 1, 200, "%d px");
 						if (ImGui::IsItemActive())
 							g_Config.g_Aimbot.iRangeStyle ? ImGui::GetOverlayDrawList()->AddCircle({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64, g_Config.g_Aimbot.fOutlineThickness) :
 							ImGui::GetOverlayDrawList()->AddCircleFilled({ pAimbot->vecCrosshair.fX, pAimbot->vecCrosshair.fY }, g_Config.g_Aimbot.iAimbotConfig[i.first][RANGE] * 1.5f, (ImColor)g_Config.g_Aimbot.colorRange, 64);
-						g_Config.g_Aimbot.bSilent ? ImGui::Text("Hitchance") : ImGui::TextDisabled("Hitchance"); ImGui::SameLine(120);
+						g_Config.g_Aimbot.bSilent ? ImGui::TextUnformatted("Hitchance") : ImGui::TextDisabled("Hitchance"); ImGui::SameLine(120);
 						ImGui::SliderInt("##Silent", &g_Config.g_Aimbot.iAimbotConfig[i.first][SILENT], 1, 100, "%d%%");
-						g_Config.g_Aimbot.bSmooth ? ImGui::Text("Smoothness") : ImGui::TextDisabled("Smoothness"); ImGui::SameLine(120);
+						g_Config.g_Aimbot.bSmooth ? ImGui::TextUnformatted("Smoothness") : ImGui::TextDisabled("Smoothness"); ImGui::SameLine(120);
 						ImGui::SliderInt("##Smooth", &g_Config.g_Aimbot.iAimbotConfig[i.first][SMOOTH], 1, 100, "%d%%");
 						ImGui::EndPopup();
 					}
 				}
 				ImGui::EndChild();
 			}
-			ImGui::BeginChild("##Combat", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Combat", { 280, 193 }, true, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Combat Assistance"), ImGui::EndMenuBar();
-				ImGui::Checkbox("No Reload", &g_Config.g_Combat.bNoReload);
-				ImGui::Checkbox("Allow C-BUG", &g_Config.g_Combat.bAllowCBug); ImGui::SameLine(202);ImGui::Button("Settings##AllowCBUG", { 70, 0 });
-				if (ImGui::BeginPopupContextItem(0, 0))
+				static int iCombatTab{ 1 };
+				if (ImGui::BeginMenuBar())
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Allow C-BUG Settings"), ImGui::EndMenuBar();
-					ImGui::Checkbox("Disable Freeze", &g_Config.g_Combat.bCBugFreeze);
-					ImGui::Checkbox("Disable Anim", &g_Config.g_Combat.bCBugAnim);
-					ImGui::Checkbox("Disable GameText", &g_Config.g_Combat.bCBugText);
-					ImGui::Checkbox("Disable Weapon Remove", &g_Config.g_Combat.bCBugWeapon);
-					ImGui::EndPopup();
+					ImGui::TextUnformatted("Combat Assistance");
+					ImGui::SameLine(194);
+					if (iCombatTab == 1) ImGui::ArrowButtonDisabled("##CombatLeft", ImGuiDir_Left);
+					else if (ImGui::ArrowButton("##CombatLeft", ImGuiDir_Left)) iCombatTab = 1;
+					ImGui::SameLine(217); ImGui::TextUnformatted((std::to_string(iCombatTab) + "/2").c_str()); ImGui::SameLine(245);
+					if (iCombatTab == 2) ImGui::ArrowButtonDisabled("##CombatRight", ImGuiDir_Right);
+					else if (ImGui::ArrowButton("##CombatRight", ImGuiDir_Right)) iCombatTab = 2;
+					ImGui::EndMenuBar();
 				}
-				ImGui::Checkbox("Rapid Fire", &g_Config.g_Combat.bRapidFire); ImGui::SameLine(202);	ImGui::PushItemWidth(70); ImGui::SliderFloat("##RapidFire", &g_Config.g_Combat.fRapidFire, 1.0f, 10.0f, "%0.1f");	ImGui::PopItemWidth();
-				ImGui::Checkbox("No Recoil", &g_Config.g_Combat.bNoRecoil);
-				ImGui::Checkbox("Fast Crosshair", &g_Config.g_Combat.bFastCrosshair);
-				ImGui::Checkbox("Weapon Switcher", &g_Config.g_Combat.bWeaponSwitcher); ImGui::SameLine(202); ImGui::Button("Settings##WeaponSwitcher", { 70, 0 });
-				if (ImGui::BeginPopupContextItem(0, 0))
+				switch (iCombatTab)
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Weapon Switcher Settings"), ImGui::EndMenuBar();
-					static int iComboWeapon = 0;
-					ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szCategory, 5); ImGui::PopItemWidth(); ImGui::SameLine();
-					ImGui::PushItemWidth(100); ImGui::Hotkey("##WeaponHotkey", &g_Config.g_Hotkeys.iWeaponSwitch[iComboWeapon]); ImGui::PopItemWidth();
-					ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
-					ImGui::EndPopup();
+				case 1:
+				{
+					ImGui::Checkbox("No Reload", &g_Config.g_Combat.bNoReload);
+					ImGui::Checkbox("Allow C-BUG", &g_Config.g_Combat.bAllowCBug); ImGui::SameLine(202); ImGui::Button("Settings##AllowCBUG", { 70, 0 });
+					if (ImGui::BeginPopupContextItem(0, 0))
+					{
+						if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Allow C-BUG Settings"), ImGui::EndMenuBar();
+						ImGui::Checkbox("Disable Freeze", &g_Config.g_Combat.bCBugFreeze);
+						ImGui::Checkbox("Disable Anim", &g_Config.g_Combat.bCBugAnim);
+						ImGui::Checkbox("Disable GameText", &g_Config.g_Combat.bCBugText);
+						ImGui::Checkbox("Disable Weapon Remove", &g_Config.g_Combat.bCBugWeapon);
+						ImGui::EndPopup();
+					}
+					ImGui::Checkbox("Rapid Fire", &g_Config.g_Combat.bRapidFire); ImGui::SameLine(202);	ImGui::PushItemWidth(70); ImGui::SliderFloat("##RapidFire", &g_Config.g_Combat.fRapidFire, 1.0f, 10.0f, "%0.1f");	ImGui::PopItemWidth();
+					ImGui::Checkbox("No Recoil", &g_Config.g_Combat.bNoRecoil);
+					ImGui::Checkbox("Fast Crosshair", &g_Config.g_Combat.bFastCrosshair);
+					ImGui::Checkbox("Weapon Switcher", &g_Config.g_Combat.bWeaponSwitcher); ImGui::SameLine(202); ImGui::Button("Settings##WeaponSwitcher", { 70, 0 });
+					if (ImGui::BeginPopupContextItem(0, 0))
+					{
+						if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Weapon Switcher Settings"), ImGui::EndMenuBar();
+						static int iComboWeapon = 0;
+						ImGui::PushItemWidth(140); ImGui::Combo("##WeaponCombo", &iComboWeapon, szCategory, 5); ImGui::PopItemWidth(); ImGui::SameLine();
+						ImGui::PushItemWidth(100); ImGui::Hotkey("##WeaponHotkey", &g_Config.g_Hotkeys.iWeaponSwitch[iComboWeapon]); ImGui::PopItemWidth();
+						ImGui::Checkbox("Fast Switch", &g_Config.g_Combat.bFastSwitch);
+						ImGui::EndPopup();
+					}
+					ImGui::Checkbox("Auto Scroll", &g_Config.g_Combat.bAutoScroll);
+					break;
 				}
-				ImGui::Checkbox("Auto Scroll", &g_Config.g_Combat.bAutoScroll);
+				case 2:
+				{
+					ImGui::Checkbox("Auto C-Bug", &g_Config.g_Combat.bAutoCBug); ImGui::SameLine(202); ImGui::Button("Settings##AutoC-Bug", { 70, 0 });
+					if (ImGui::BeginPopupContextItem(0, 0))
+					{
+						if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Auto C-BugSettings"), ImGui::EndMenuBar();
+						ImGui::TextUnformatted("Bullet Delay"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
+						ImGui::DragInt("##BulletDelay", &g_Config.g_Combat.iCBugDelay[0], 1, 0, 100, "%d ms");
+						ImGui::TextUnformatted("C Key Press Delay"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
+						ImGui::DragInt("##CKeyPressDelay", &g_Config.g_Combat.iCBugDelay[1], 1, 0, 100, "%d ms");
+						ImGui::EndPopup();
+					}
+					break;
+				}
+				}
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
@@ -370,7 +474,7 @@ void CMenu::Render()
 			ImGui::Spacing();
 			ImGui::BeginChild("##Player", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Player Assistance"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Player Assistance"), ImGui::EndMenuBar();
 				ImGui::PushItemWidth(70);
 				ImGui::Checkbox("Anti Stun", &g_Config.g_Player.bAntiStun); ImGui::SameLine(202); ImGui::SliderInt("##AntiStun", &g_Config.g_Player.iAntiStunChance, 1, 100);
 				ImGui::Checkbox("Fast Rotation", &g_Config.g_Player.bFastRotation); ImGui::SameLine(202); ImGui::SliderInt("##FastRotation", &g_Config.g_Player.iFastRotation, 15, 100);
@@ -389,8 +493,8 @@ void CMenu::Render()
 				ImGui::Checkbox("Auto Bike Spam", &g_Config.g_Player.bAutoBikeSpam); ImGui::SameLine(202); ImGui::Button("Settings##AutoBikeSpam", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Auto Bike Spam Settings"), ImGui::EndMenuBar();
-					ImGui::Text("Hold Key"); ImGui::SameLine(120); ImGui::PushItemWidth(100); ImGui::Hotkey("##BikeHotkey", &g_Config.g_Hotkeys.iAutoBikeSpam);
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Auto Bike Spam Settings"), ImGui::EndMenuBar();
+					ImGui::TextUnformatted("Hold Key"); ImGui::SameLine(120); ImGui::PushItemWidth(100); ImGui::Hotkey("##BikeHotkey", &g_Config.g_Hotkeys.iAutoBikeSpam);
 					ImGui::Checkbox("Motorbike", &g_Config.g_Player.bMotorBikeSpam); ImGui::SameLine(120); ImGui::Hotkey("##MotorbikeHotkey", &g_Config.g_Hotkeys.iMotorBikeSpam); ImGui::PopItemWidth();
 					ImGui::EndPopup();
 				}
@@ -402,7 +506,7 @@ void CMenu::Render()
 			ImGui::SameLine();
 			ImGui::BeginChild("##Sync", { 280, 170 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Sync Modifications"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Sync Modifications"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Upside Mode", &g_Config.g_Player.bUpsideMode);
 				ImGui::Checkbox("Invert Walk", &g_Config.g_Player.bInvertWalk);
 				ImGui::Checkbox("Shake Mode", &g_Config.g_Player.bShakeMode);
@@ -421,7 +525,7 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##PlayerESP", { 280, 193 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Player ESP"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Player ESP"), ImGui::EndMenuBar();
 				ImGui::Checkbox("ESP Name", &g_Config.g_Visuals.bNameTagsESP);
 				ImGui::Checkbox("ESP Box", &g_Config.g_Visuals.bBoxESP); ImGui::SameLine(202);
 				ImGui::PushItemWidth(50.f);
@@ -439,8 +543,8 @@ void CMenu::Render()
 			}
 			ImGui::BeginChild("##ESPSettings", { 280, 155 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("ESP Settings"), ImGui::EndMenuBar();
-				ImGui::Text("ESP Thickness"); ImGui::SameLine(202); ImGui::PushItemWidth(70.f);
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("ESP Settings"), ImGui::EndMenuBar();
+				ImGui::TextUnformatted("ESP Thickness"); ImGui::SameLine(202); ImGui::PushItemWidth(70.f);
 				ImGui::SliderFloat("##Thickness", &g_Config.g_Visuals.fESPThickness, 1.0f, 3.0f, "%0.1f");
 				ImGui::PopItemWidth();
 				ImGui::Checkbox("Disable for Teammates", &g_Config.g_Visuals.bESPTeammates);
@@ -456,7 +560,7 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##VehicleESP", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Vehicle ESP"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Vehicle ESP"), ImGui::EndMenuBar();
 				ImGui::Checkbox("ESP Name ##Vehicle", &g_Config.g_Visuals.bVehicleNameTagsESP);
 				ImGui::Checkbox("ESP Health", &g_Config.g_Visuals.bVehicleHPESP);
 				ImGui::Checkbox("ESP Engine", &g_Config.g_Visuals.bVehicleEngineESP);
@@ -466,15 +570,15 @@ void CMenu::Render()
 			}
 			ImGui::BeginChild("##Visuals", { 280, 201 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Visuals"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Visuals"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Aspect Ratio", &g_Config.g_Visuals.bAspectRatio); ImGui::SameLine(202); ImGui::PushItemWidth(70); ImGui::SliderFloat("##AspectRatio", &g_Config.g_Visuals.fAspectRatio, 0.5f, 2.0f, "%0.1f"); ImGui::PopItemWidth();
 				ImGui::Checkbox("Damage Informer", &g_Config.g_Visuals.bDMGInformer); ImGui::SameLine(202); ImGui::Button("Settings##DMG", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Damage Informer Settings"), ImGui::EndMenuBar();
-					ImGui::Text("Font Size"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Damage Informer Settings"), ImGui::EndMenuBar();
+					ImGui::TextUnformatted("Font Size"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
 					ImGui::SliderInt("##DMGFont", &g_Config.g_Visuals.iFontSize, 7, 20, "%d px");
-					ImGui::Text("Time on screen"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
+					ImGui::TextUnformatted("Time on screen"); ImGui::SameLine(150); ImGui::PushItemWidth(70);
 					ImGui::DragFloat("##DMGTick", &g_Config.g_Visuals.fDMGTick, 0.1f, 0.1f, 10.0f, "%.1f s");
 					ImGui::PushItemWidth(161);
 					ImGui::ColorEdit4("Text", (float*)&g_Config.g_Visuals.colorDMG, ImGuiColorEditFlags_AlphaBar);
@@ -485,7 +589,7 @@ void CMenu::Render()
 				ImGui::Button("Settings##FPSFuncs", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("FPS Funcs Settings"), ImGui::EndMenuBar();
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("FPS Funcs Settings"), ImGui::EndMenuBar();
 					ImGui::PushItemWidth(40.f);
 					ImGui::Checkbox("FPS Unlock", &g_Config.g_Visuals.bFPSUnlock);
 					ImGui::Checkbox("FPS Boost", &g_Config.g_Visuals.bFPSBoost);
@@ -499,8 +603,8 @@ void CMenu::Render()
 				ImGui::Checkbox("Weather Changer", &g_Config.g_Visuals.bWeatherChanger); ImGui::SameLine(202); ImGui::Button("Settings##Weather", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
 				{
-					if (ImGui::BeginMenuBar()) ImGui::Text("Weather Changer"), ImGui::EndMenuBar();
-					ImGui::Text("Weather"); ImGui::SameLine(100); ImGui::SameLine(150); ImGui::PushItemWidth(70); ImGui::SliderInt("##Weather", &g_Config.g_Visuals.iWeather, 0, 20); 
+					if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Weather Changer"), ImGui::EndMenuBar();
+					ImGui::TextUnformatted("Weather"); ImGui::SameLine(100); ImGui::SameLine(150); ImGui::PushItemWidth(70); ImGui::SliderInt("##Weather", &g_Config.g_Visuals.iWeather, 0, 20);
 					ImGui::Checkbox("Time Changer", &g_Config.g_Visuals.bTimeChanger); ImGui::SameLine(150); ImGui::SliderInt("##Time", &g_Config.g_Visuals.iTime, 0, 24); ImGui::PopItemWidth();
 					ImGui::EndPopup();
 				}
@@ -516,7 +620,7 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Theme", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Theme"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Theme"), ImGui::EndMenuBar();
 				if (ImGui::Button("Set Default Theme", { 259, 23 }))
 					pMenu->Theme();
 
@@ -537,8 +641,15 @@ void CMenu::Render()
 				ImGui::EndGroup();
 			}
 			ImGui::SameLine();
-			ImGui::BeginChild("##Sizes", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Styles", { 280, 352 }, true, ImGuiWindowFlags_MenuBar);
 			{
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Styles"), ImGui::EndMenuBar();
+				ImGui::TextUnformatted("Menu Colors"); ImGui::SameLine(177); ImGui::PushItemWidth(95);
+				if (ImGui::Combo("##MenuColors", &g_Config.g_Style.iTheme, "Default\0Dark\0Light\0Classic\0Green\0"))
+					Theme();
+
+				ImGui::TextUnformatted("Checkbox Style"); ImGui::SameLine(177); ImGui::Combo("##CheckboxStyle", &g_Config.g_Style.iCheckbox, "Checkmark\0Filled\0");
+				ImGui::PopItemWidth();
 				ImGui::EndChild();
 			}
 			break;
@@ -563,7 +674,7 @@ void CMenu::Render()
 
 			ImGui::BeginChild("##Configs", { 280, 179 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Configs"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Configs"), ImGui::EndMenuBar();
 				ImGui::Columns(2, NULL, false);
 				ImGui::SetColumnOffset(1, 170);
 				ImGui::PushItemWidth(160);
@@ -654,7 +765,7 @@ void CMenu::Render()
 			ImGui::BeginGroup();
 			ImGui::BeginChild("##Damager", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Damager"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Damager"), ImGui::EndMenuBar();
 				ImGui::PushItemWidth(70.f);
 				ImGui::Checkbox("Damager", &g_Config.g_Developer.bDamager);
 				ImGui::Checkbox("Delay", &g_Config.g_Developer.bDelay); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##Delay", &g_Config.g_Developer.iDelay); ImGui::PopStyleVar();
@@ -668,7 +779,7 @@ void CMenu::Render()
 			}
 			ImGui::BeginChild("##SAMPCAC", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("SAMPCAC"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("SAMPCAC"), ImGui::EndMenuBar();
 
 				ImGui::EndChild();
 			}
@@ -676,7 +787,7 @@ void CMenu::Render()
 			ImGui::SameLine();
 			ImGui::BeginChild("##Developer", { 280, 358 }, true, ImGuiWindowFlags_MenuBar);
 			{
-				if (ImGui::BeginMenuBar()) ImGui::Text("Developer"), ImGui::EndMenuBar();
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Developer"), ImGui::EndMenuBar();
 
 				ImGui::EndChild();
 			}

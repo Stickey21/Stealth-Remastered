@@ -6,7 +6,6 @@ public:
 	CKeyHook::CKeyHook()
 	{
 		memset(bKeyTable, false, sizeof(bKeyTable));
-		memset(gameKeyState, 0, sizeof(gameKeyState));
 		oWndProc = (tWndProc)(pSAMP->g_dwSAMP_Addr + 0x5DB40);
 		oCPad_UpdateGameKey = (tCPad_UpdateGameKey)0x541C40;
 		DetourRestoreAfterWith();
@@ -20,7 +19,6 @@ public:
 	CKeyHook::~CKeyHook()
 	{
 		memset(bKeyTable, false, sizeof(bKeyTable));
-		memset(gameKeyState, 0, sizeof(gameKeyState));
 		DetourRestoreAfterWith();
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
@@ -30,7 +28,12 @@ public:
 	}
 
 	bool bKeyTable[256];
-	int16_t	gameKeyState[32];
+
+	struct stGameKeyState
+	{
+		int iState{ 0 };
+		bool bActive{ false };
+	} g_GameKeyState[32];
 
 private:
 

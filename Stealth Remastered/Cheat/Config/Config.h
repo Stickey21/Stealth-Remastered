@@ -52,6 +52,8 @@ struct stConfig
 		bool bWeaponSwitcher{ false };
 		bool bFastSwitch{ false };
 		bool bAutoScroll{ false };
+		bool bAutoCBug{ false };
+		std::array<int, 2> iCBugDelay{ 25, 55 };
 	} g_Combat;
 
 	struct stPlayer
@@ -135,6 +137,8 @@ struct stConfig
 	struct stStyle
 	{
 		ImVec4 vecTheme[ImGuiCol_COUNT];
+		int iTheme{ 0 };
+		int iCheckbox{ 0 };
 	} g_Style;
 
 	struct stHotkeys

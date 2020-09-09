@@ -10,4 +10,5 @@ namespace Combat
 	void NoRecoil();
 	void WeaponSwitcher();
 	void AutoScroll();
+	void AutoCBUG();
 }
