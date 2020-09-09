@@ -1,6 +1,6 @@
 # Stealth
 <h4>Pasted SA:MP Cheat</h4>
-<div>[![discord](hhttps://discordapp.com/api/guilds/753264654633140264/widget.png?style=shield)](https://discord.gg/gJVGg7u)</div>
+<div>[![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=shield)](https://discord.gg/gJVGg7u)</div>
 
 ## Credits	
 * ***[versace bankeru](https://www.youtube.com/channel/UCWfxrNb0xlVaRlk8qQ4Gx6g)***	
