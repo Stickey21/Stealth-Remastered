@@ -1,5 +1,5 @@
 <div align="center">
-<img width="375" src="https://i.imgur.com/tvNzZ4d.png" alt="zgui logo">
+<img width="375" src="https://i.imgur.com/tvNzZ4d.png">
 <h4>Pasted SA:MP Cheat</h4>
 
 [![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=banner2)](https://discord.gg/JwyWRg)
