@@ -1,11 +1,14 @@
-# Stealth
-<div>
+<div align="center">
+<h1>Stealth</h1>
 <h4>Pasted SA:MP Cheat</h4>
-  
+
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
-</div>
+<div>
 
 [![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=shield)](https://discord.gg/JwyWRg)
+</div>
+
+</div>
 
 ## Credits	
 * ***[versace bankeru](https://www.youtube.com/channel/UCWfxrNb0xlVaRlk8qQ4Gx6g)***	
