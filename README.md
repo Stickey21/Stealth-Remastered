@@ -2,10 +2,7 @@
 <h1>Stealth</h1>
 <h4>Pasted SA:MP Cheat</h4>
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
-<div>
-
-[![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=shield)](https://discord.gg/JwyWRg)
+[![discord](https://discordapp.com/api/guilds/753264654633140264/widget.png?style=banner2)](https://discord.gg/JwyWRg)
 </div>
 
 </div>
