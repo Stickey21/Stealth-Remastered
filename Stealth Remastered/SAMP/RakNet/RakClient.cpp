@@ -18,44 +18,37 @@ bool CRakClient::Send(BitStream* bitStream, PacketPriority priority, PacketRelia
 bool __fastcall CRakClient::hkRPC(void* _this, void* pUnknown, int* uniqueID, BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, bool shiftTimestamp)
 {
 	if (*uniqueID == 181)
-		return false;
-
-	if (*uniqueID == 183)
 	{
-		bitStream->SetReadOffset(32);
-		int iSize = bitStream->GetNumberOfBytesUsed() - 4;
-		BYTE szData[26];
+		BYTE byteCounter[4] = { 0x0 };
+		for (auto i = 0; i < 4; i++)
+			byteCounter[i] = *reinterpret_cast<BYTE*>(pSAMP->g_dwSAMPCAC_Addr + 0x94194 + i);
 
-		for (int i = 0; i < iSize; i++)
-			bitStream->Read<BYTE>(szData[i]);
+		DWORD dwCounter = ((0x1 << 24) | (byteCounter[2] << 16) | ((byteCounter[1] + (byteCounter[0] >= 0x14 ? byteCounter[3] : 0x0)) << 8) | (BYTE)(byteCounter[0] - 0x14));
+		*reinterpret_cast<int*>(dwCounter) = -1;
 
-		bitStream->Reset();
-		bitStream->Write(0x00);
-
-		for (int i = 0; i < iSize; i++)
-			bitStream->Write<BYTE>(szData[i]);
+		return false;
 	}
 
 	if (*uniqueID == 185)
 	{
-		DWORD dwAddress = 0;
-		BYTE byteSize = 0, byteContent[4] = {};
+		DWORD dwAddress = 0x0;
+		BYTE byteSize = 0, byteContent[4] = { 0x0 };
+
 		bitStream->Read(dwAddress);
 		bitStream->Read(byteSize);
 		for (int i = 0; i < byteSize; i++)
 			bitStream->Read(byteContent[i]);
 
-		//Debug
-		//pSAMP->addMessageToChat(0xFFFFFFFF, "{EE5555}CAC Read: {FFFFFF}Address: 0x%X | Size: %d | Content: %.2X %.2X %.2X %.2X | SA:MP Base: 0x%X", dwAddress, byteSize, byteContent[0], byteContent[1], byteContent[2], byteContent[3], pSAMP->g_dwSAMP_Addr);
+		bitStream->SetWriteOffset(0x28);
 
-		bitStream->SetWriteOffset(5 * 8);
+		pSAMP->addMessageToChat(0xFFFFFFFF, "{EE5555}CAC Read: {FFFFFF}Address: 0x%X | Size: %d | Content: %.2X %.2X %.2X %.2X | SA:MP Base: 0x%X", dwAddress, byteSize, byteContent[0], byteContent[1], byteContent[2], byteContent[3], pSAMP->g_dwSAMP_Addr);
 
-		for (int i = 0; i < byteSize; i++)
+		for (auto i = 0; i < byteSize; i++)
 		{
 			int iAddress = pSecure->isAddressSecured(dwAddress + i);
 			if (iAddress != -1)
-				bitStream->Write<uint8_t>(pSecure->vecMemory[iAddress].origByte);
-			else bitStream->Write<uint8_t>(*(uint8_t*)(dwAddress + i));
+				bitStream->Write<BYTE>(pSecure->vecMemory[iAddress].origByte);
+			else bitStream->Write<BYTE>(byteContent[i]);
 		}
 	}
 

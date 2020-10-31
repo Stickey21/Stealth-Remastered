@@ -11,6 +11,7 @@ HRESULT __stdcall CD3DHook::hkPresent(IDirect3DDevice9 *pDevice, CONST RECT *pSr
 	{
 		if (!pD3DHook->bInit)
 		{
+			pD3DHook->pD3DDevice = pDevice;
 			pKeyHook = new CKeyHook();
 			pTextures = new CTextures(pDevice);
 			pMenu = new CMenu(pDevice);
@@ -18,7 +19,6 @@ HRESULT __stdcall CD3DHook::hkPresent(IDirect3DDevice9 *pDevice, CONST RECT *pSr
 			pD3DHook->bInit = true;
 		}
 
-		pD3DHook->pD3DDevice = pDevice;
 		Cheat::Update();
 		Cheat::Render();	
 	}

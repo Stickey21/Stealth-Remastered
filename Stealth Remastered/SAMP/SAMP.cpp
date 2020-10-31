@@ -30,6 +30,8 @@ bool CSAMP::tryInit()
 
 	pSecure->memcpy_safe((void*)(g_dwSAMP_Addr + 0x99230), "\xC3", 1);
 
+	g_dwSAMPCAC_Addr = (DWORD)LoadLibraryA("!sampcac_client.asi");
+
 	return true;
 };
 

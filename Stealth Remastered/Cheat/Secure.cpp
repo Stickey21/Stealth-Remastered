@@ -4,7 +4,7 @@ CSecure* pSecure = new CSecure();
 
 void CSecure::Add(DWORD dwAddress, BYTE byteSize)
 {
-	for (size_t i = 0; i < byteSize; i++)
+	for (auto i = 0; i < byteSize; i++)
 	{
 		if (isAddressSecured(dwAddress + i) == -1)
 		{

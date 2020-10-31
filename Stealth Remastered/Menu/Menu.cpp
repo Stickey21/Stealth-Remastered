@@ -658,9 +658,20 @@ void CMenu::Render()
 		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##Reconnect", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Extra", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
-
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Extra"), ImGui::EndMenuBar();
+				if (ImGui::Button("Unload", { 70, 0 }))
+					ImGui::OpenPopup("Unload");
+				if (ImGui::BeginPopupModal("Unload", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize))
+				{
+					ImGui::Text("(!) Close any recording software before press Unload!");
+					ImGui::Dummy({ 0,20 });
+					if (ImGui::Button("Unload", ImVec2(160.f, 20.f))) Cheat::Unload();
+					ImGui::SameLine();
+					if (ImGui::Button("Close", ImVec2(160.5f, 20.f))) ImGui::CloseCurrentPopup();
+					ImGui::EndPopup();
+				}
 				ImGui::EndChild();
 			}
 			ImGui::BeginChild("##nush 1", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);

@@ -887,6 +887,7 @@ public:
 
 	bool isInited;
 	DWORD g_dwSAMP_Addr;
+	DWORD g_dwSAMPCAC_Addr;
 
 private:
 	struct stSAMP*			g_SAMP;
