@@ -11,7 +11,7 @@ void Utils::CalcScreenCoors(CVector* vecWorld, CVector* vecScreen)
 	vecScreen->fY = (vecWorld->fZ * m._32) + (vecWorld->fY * m._22) + (vecWorld->fX * m._12) + m._42;
 	vecScreen->fZ = (vecWorld->fZ * m._33) + (vecWorld->fY * m._23) + (vecWorld->fX * m._13) + m._43;
 
-	double	fRecip = (double)1.0 / vecScreen->fZ;
+	double fRecip = (double)1.0 / vecScreen->fZ;
 	vecScreen->fX *= (float)(fRecip * (*dwLenX));
 	vecScreen->fY *= (float)(fRecip * (*dwLenY));
 }
@@ -38,9 +38,21 @@ void Utils::CalcWorldCoors(CVector* vecScreen, CVector* vecWorld)
 	vecWorld->fZ = vecScreen->fZ * minv._33 + vecScreen->fY * minv._23 + vecScreen->fX * minv._13 + minv._43;
 }
 
-int Utils::isGTAMenuActive()
+void Utils::CalcMapToScreen(ImVec2 vecWindow, CVector* vecMap, CVector* vecScreen, float fSize)
 {
-	return (int)(*(uint8_t*)0x0BA67A4);
+	vecScreen->fX = vecWindow.x + fSize / 2.f + (vecMap->fX / (3000.f / (fSize / 2.f)));
+	vecScreen->fY = vecWindow.y + fSize / 2.f - (vecMap->fY / (3000.f / (fSize / 2.f)));
+}
+
+void Utils::CalcScreenToMap(ImVec2 vecWindow, CVector* vecScreen, CVector* vecMap, float fSize)
+{
+	if (vecScreen->fX >= fSize / 2.f)
+		vecMap->fX = vecWindow.x + (vecScreen->fX * (3000.f / (fSize / 2.f))) - 3000.f;
+	else vecMap->fX = vecWindow.x + (3000.f - (vecScreen->fX * (3000.f / (fSize / 2.f)))) * -1.f;
+
+	if (vecScreen->fY >= fSize / 2.f)
+		vecMap->fY = vecWindow.y + ((vecScreen->fY * (3000.f / (fSize / 2.f))) - 3000.f) * -1.f;
+	else vecMap->fY = vecWindow.y + 3000.f - (vecScreen->fY * (3000.f / (fSize / 2.f)));
 }
 
 float Utils::getDistance(CVector vecTarget)
@@ -128,14 +140,15 @@ void Utils::PerformAnimation(const char* szBlockName, const char* szAnimName, in
 			if (jumpTask)
 				FindPlayerPed()->m_pIntelligence->m_TaskMgr.SetTask(NULL, TASK_PRIMARY_PRIMARY, 0);
 
-			int flags = 0x10;  
+			int flags = 0x10;
 			if (bLoop) flags |= 0x2;
 			if (bUpdatePosition)
 			{
 				flags |= 0x40;
 				flags |= 0x80;
 			}
-			if (!bFreezeLastFrame) flags |= 0x08;
+			if (!bFreezeLastFrame)
+				flags |= 0x08;
 
 			CTask* pTask = new CTaskSimpleRunNamedAnim(szAnimName, pBlock->szName, flags, 4.0f, iTime, !bInterruptable, bRunInSequence, bOffsetPed, bHoldLastFrame);
 			if (pTask)
@@ -149,39 +162,14 @@ void Utils::PerformAnimation(const char* szBlockName, const char* szAnimName, in
 	}
 }
 
-bool Utils::isPlayingAnimation(CEntity* pEntity, char* szAnimName)
+bool Utils::isPlayingAnimation(CEntity* pEntity, char const* szAnimName)
 {
-	DWORD dwReturn = 0;
-	DWORD dwFunc = 0x4D6870;
-	DWORD dwThis = (DWORD)pEntity->m_pRwObject;
-
-	_asm
-	{
-		push    szAnimName
-		push    dwThis
-		call    dwFunc
-		add     esp, 8
-		mov     dwReturn, eax
-	}
-
-	if (dwReturn) return true;
-	else return false;
+	return RpAnimBlendClumpGetAssociation(pEntity->m_pRwClump, szAnimName);
 }
 
 CVector* Utils::getBonePosition(CPed* pPed, ePedBones bone, CVector* vecPosition)
 {
-	DWORD dwFunc = 0x5E4280;
-	DWORD dwThis = (DWORD)pPed;
-
-	_asm
-	{
-		push    1
-		push    bone
-		push    vecPosition
-		mov     ecx, dwThis
-		call    dwFunc
-	}
-
+	pPed->GetBonePosition(*(RwV3d*)vecPosition, bone, true);
 	return vecPosition;
 }
 

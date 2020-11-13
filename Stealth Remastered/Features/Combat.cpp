@@ -16,9 +16,9 @@ void Combat::NoReload()
 	if (!g_Config.g_Combat.bNoReload)
 		return;
 
-	int iWeaponID = FindPlayerPed()->m_aWeapons[FindPlayerPed()->m_nActiveWeaponSlot].m_nType;
-	if (iWeaponID >= 22 && iWeaponID <= 42 && FindPlayerPed()->m_aWeapons[FindPlayerPed()->m_nActiveWeaponSlot].m_nAmmoInClip == 1)
-		FindPlayerPed()->GiveWeapon(eWeaponType(iWeaponID), 0, false);
+	int iWeapon = FindPlayerPed()->m_aWeapons[FindPlayerPed()->m_nActiveWeaponSlot].m_nType;
+	if (iWeapon >= 22 && iWeapon <= 42 && FindPlayerPed()->m_aWeapons[FindPlayerPed()->m_nActiveWeaponSlot].m_nAmmoInClip == 1)
+		FindPlayerPed()->GiveWeapon((eWeaponType)iWeapon, 0, false);
 }
 
 void Combat::AllowCBUG()
@@ -137,7 +137,7 @@ void Combat::AutoCBUG()
 	if (!g_Config.g_Combat.bAutoCBug)
 		return;
 
-	if (!pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon == 24)
+	if (pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon != 24)
 		return;
 
 	static int iStep = 0;

@@ -1,69 +1,5 @@
-#define ACTOR_SELF				- 1
-#define VEHICLE_SELF			- 1
+#pragma once
 
-#define ACTOR_IS_DEAD( a )			( (a)->state == ACTOR_STATE_DYING || (a)->state == ACTOR_STATE_DEAD )
-#define ACTOR_ALIVE					0x01
-#define ACTOR_NOT_SAME_VEHICLE		0x02
-
-#define VEHICLE_ALIVE				0x01
-#define VEHICLE_EMPTY				0x02
-#define VEHICLE_OCCUPIED			0x04
-#define VEHICLE_NOTBURNING			0x08
-
-// CPed actor states
-#define ACTOR_STATE_DRIVING		50
-#define ACTOR_STATE_DYING		54
-#define ACTOR_STATE_DEAD		55
-
-#define ACTOR_MSTATE_STILL		1
-#define ACTOR_MSTATE_RUN		6
-#define ACTOR_MSTATE_RUN_FAST	7
-
-// predefined vehicle & actor invulnerability flags
-#define VEHICLE_FLAGS_INVULNERABLE	( 4 | 8 | 16 | 128 )
-#define ACTOR_FLAGS_INVULNERABLE	( 4 | 8 | 64 | 128 )
-
-// old vehicle_info vehicle types
-#define VEHICLE_TYPE_CAR	0	/* + helicopters and planes */
-#define VEHICLE_TYPE_BOAT	5
-#define VEHICLE_TYPE_TRAIN	6
-#define VEHICLE_TYPE_BIKE	9
-
-
-// new vehicle types
-enum eClientVehicleType
-{
-	CLIENTVEHICLE_NONE,
-	CLIENTVEHICLE_CAR,
-	CLIENTVEHICLE_BOAT,
-	CLIENTVEHICLE_TRAIN,
-	CLIENTVEHICLE_HELI,
-	CLIENTVEHICLE_PLANE,
-	CLIENTVEHICLE_BIKE,
-	CLIENTVEHICLE_MONSTERTRUCK,
-	CLIENTVEHICLE_QUADBIKE,
-	CLIENTVEHICLE_BMX,
-	CLIENTVEHICLE_TRAILER
-};
-
-// upgrade model ids
-#define VEHICLEUPGRADE_NITRO_5X		1008
-#define VEHICLEUPGRADE_NITRO_2X		1009
-#define VEHICLEUPGRADE_NITRO_10X	1010
-#define VEHICLEUPGRADE_HYDRAULICS	1087
-
-// maximum passengers including driver
-#define VEHICLE_MAX_PASSENGERS	9
-
-// main cheat states
-enum eCheatStates
-{
-	CHEAT_STATE_NONE,
-	CHEAT_STATE_ACTOR,
-	CHEAT_STATE_VEHICLE
-};
-
-#pragma pack(push, 1)
 typedef struct _VECTOR
 {
 	float	X, Y, Z;
@@ -562,59 +498,11 @@ struct object_info
 	uint8_t				__unknown_352[59];	/* 352 */
 };
 
-//Only for flying
-struct physicalFlyParams
-{
-	float	__itsNull;	/* 0 */
-	float	heightIncreaseRel[2];	/* 4 - Related to (Heli only?) height */
-	float	circleAround;			/* 12 - Heli/Plane */
-	float	changeDir;		/* 16 - Speed changing Direction (negative = change against the speed vector) */
-	float	changeDir_side; /* 20 */
-	float	roll_lr;		/* 24 */
-	float	__unknown_28;	/* 28 */
-	float	pitch;			/* 32 */
-	float	__unknown_36;	/* 36 */
-	float	_multPitch;		/* 40 - pitch related */
-	float	finalPitch_;	/* 44 */
-	float	_unknownMultipliers_isOne[2];	/* 48 */
-	float	_orientationMultiplier;			/* 56 - somehow orientation related */
-	float	_SpeedMultiplier_isOne;			/* 60 */
-	float	pitchMultiplier;	/* 64 - keep it >0 */
-	float	rollMultiplier;		/* 68 */
-	float	circleMultiplier;	/* 72 */
-	//following values = global for all vehs (?)
-};
-
-struct checkpoint
-{
-	uint32_t	__unknown1;		/* Dunno, but I'm guessing the type of checkpoint is stored here */
-	uint32_t	counter;		/* Some sort of counter. */
-	uint32_t	color;			/* RGBA color value */
-	uint32_t	__unknown2;		/* 1024 most of the time */
-	float		position[3];
-	float		rotation[3];	/* direction from this checkpoint to the next */
-	float		zero_point_two;
-	float		radius;			/* radius? */
-	uint32_t	__unknown3;		/* always zero */
-	uint32_t	__unknown4;		/* always zero */
-};
-
-struct vehicle_state
-{
-	float					matrix[16];
-	float					speed[3];
-	float					spin[3];
-	struct vehicle_state* trailer;
-	struct vehicle_info* trailerPtr;
-};
-
-#pragma pack(pop)
-
 static int iBoneList[]
 {
-	BONE_PELVIS1, BONE_PELVIS, BONE_SPINE1, BONE_UPPERTORSO, BONE_NECK, 
+	BONE_PELVIS1, BONE_PELVIS, BONE_SPINE1, BONE_UPPERTORSO, BONE_NECK,
 	BONE_HEAD2, BONE_HEAD1, BONE_HEAD, BONE_RIGHTUPPERTORSO, BONE_RIGHTSHOULDER,
-	BONE_RIGHTELBOW, BONE_LEFTUPPERTORSO, BONE_LEFTSHOULDER, BONE_LEFTELBOW, 
+	BONE_RIGHTELBOW, BONE_LEFTUPPERTORSO, BONE_LEFTSHOULDER, BONE_LEFTELBOW,
 	BONE_LEFTHIP, BONE_LEFTKNEE, BONE_RIGHTHIP, BONE_RIGHTKNEE,
 };
 
@@ -632,7 +520,7 @@ static std::map<int, Weapon> mapWeapons = {
 
 static const char* szCategory[5] = { "Handguns", "Sub-Machine Guns", "Shotguns", "Assault Rifles", "Rifles" };
 
-static const char* szVehicleNames[] = 
+static const char* szVehicleNames[] =
 {
 	"Landstalker", "Bravura", "Buffalo", "Linerunner", "Perrenial", "Sentinel",
 	"Dumper", "Fire Truck", "Trashmaster", "Stretch", "Manana", "Infernus",

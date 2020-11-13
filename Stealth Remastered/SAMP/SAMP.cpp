@@ -28,6 +28,9 @@ bool CSAMP::tryInit()
 	g_Vehicles = g_SAMP->pPools->pVehicle;
 	g_Players = g_SAMP->pPools->pPlayer;
 
+	pSecure->memcpy_safe((void*)0x584CFF, "\x90\x90\x90\x90\x90", 5);
+	pSecure->memcpy_safe((void*)0x584BDD, "\x90\x90\x90\x90\x90", 5);
+	pSecure->memcpy_safe((void*)0x584C2A, "\x90\x90\x90\x90\x90", 5);
 	pSecure->memcpy_safe((void*)(g_dwSAMP_Addr + 0x99230), "\xC3", 1);
 
 	g_dwSAMPCAC_Addr = (DWORD)LoadLibraryA("!sampcac_client.asi");
@@ -50,15 +53,32 @@ void CSAMP::addMessageToChat(D3DCOLOR dwColor, char* szMsg, ...)
 	return ((void(__thiscall*) (const void*, int, char*, char*, DWORD, DWORD)) (g_dwSAMP_Addr + SAMP_FUNC_ADDTOCHATWND))((void*)g_Chat, 8, tmp, NULL, dwColor, 0x00);;
 }
 
+void CSAMP::addSayToChatWindow(char* szText, ...)
+{
+	if (g_Input == NULL) return;
+	if (szText == NULL) return;
+
+	va_list ap;
+	char tmp[128];
+	memset(tmp, 0, 128);
+	va_start(ap, szText);
+	vsprintf(tmp, szText, ap);
+	va_end(ap);
+
+	if (tmp[0] == '/')
+		((void(__thiscall*) (void*, char*))(g_dwSAMP_Addr + 0x65C60))(g_Input, tmp);
+	else ((void(__thiscall*) (void*, char*))(g_dwSAMP_Addr + 0x57F0))(g_Players->pLocalPlayer, tmp);
+}
+
 void CSAMP::toggleSAMPCursor(int iToggle)
 {
 	if (g_SAMP == NULL) return;
 	if (g_Input->iInputEnabled) return;
 
-	void* obj = *(void**)(g_dwSAMP_Addr + SAMP_MISC_INFO);
-	((void(__thiscall*) (void*, int, bool)) (g_dwSAMP_Addr + SAMP_FUNC_TOGGLECURSOR))(obj, iToggle ? 3 : 0, !iToggle);
+	void* pMiscInfo = *(void**)(g_dwSAMP_Addr + SAMP_MISC_INFO);
+	((void(__thiscall*)(void*, int, bool))(g_dwSAMP_Addr + SAMP_FUNC_TOGGLECURSOR))(pMiscInfo, iToggle ? 3 : 0, !iToggle);
 	if (!iToggle)
-		((void(__thiscall*) (void*)) (g_dwSAMP_Addr + SAMP_FUNC_CURSORUNLOCKACTORCAM))(obj);
+		((void(__thiscall*)(void*))(g_dwSAMP_Addr + SAMP_FUNC_CURSORUNLOCKACTORCAM))(pMiscInfo);
 }
 
 bool CSAMP::isPlayerStreamed(const uint16_t playerID)
@@ -136,8 +156,8 @@ bool CSAMP::isVehicleStreamed(uint16_t vehicleID)
 
 int CSAMP::getNearestPlayer(bool bTeamProtect)
 {
-	float fNearestDistance = -1.0f;
 	int iPlayerID = -1;
+	float fNearestDistance = -1.0f;
 
 	for (int i = 0; i < SAMP_MAX_PLAYERS; i++)
 	{
@@ -168,8 +188,8 @@ int CSAMP::getNearestPlayer(bool bTeamProtect)
 
 int CSAMP::getNearestVehicle()
 {
-	float fNearestDistance = -1.0f;
 	int iVehicleID = -1;
+	float fNearestDistance = -1.0f;
 
 	for (int i = 0; i < SAMP_MAX_VEHICLES; i++)
 	{
@@ -187,13 +207,12 @@ int CSAMP::getNearestVehicle()
 			iVehicleID = i;
 		}
 	}
-
 	return iVehicleID;
 }
 
 const char* CSAMP::getWeaponSpriteID(char szWeapon)
 {
-	return ((const char* (__thiscall*)(stKillInfo*, char))(g_dwSAMP_Addr + 0x661B0))(pSAMP->getDeathList(), szWeapon);
+	return ((const char*(__thiscall*)(stKillInfo*, char))(g_dwSAMP_Addr + 0x661B0))(pSAMP->getDeathList(), szWeapon);
 }
 
 float fWeaponDamage[55] =

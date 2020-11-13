@@ -10,9 +10,11 @@ void mainThread()
 	while (!pSAMP->tryInit())
 		Sleep(100);
 
+	pHooks = new CHooks();
 	pD3DHook = new CD3DHook();
 	pAimbot = new CAimbot();
 	pVisuals = new CVisuals();
+	//pRainbow = new CRainbow();
 	pRakClient = new CRakClient();
 
 	pSAMP->isInited = true;

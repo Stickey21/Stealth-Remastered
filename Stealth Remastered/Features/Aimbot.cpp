@@ -29,11 +29,11 @@ void CAimbot::Render()
 	if (bCrosshair && g_Config.g_Aimbot.bAimbot && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon])
 	{
 		if (g_Config.g_Aimbot.bDrawRange)
-			g_Config.g_Aimbot.iRangeStyle ? pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness)		
+			g_Config.g_Aimbot.iRangeStyle ? pRender->DrawCircle(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange, g_Config.g_Aimbot.fOutlineThickness)
 			: pRender->DrawCircleFilled(vecCrosshair, (float)g_Config.g_Aimbot.iAimbotConfig[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon][RANGE], g_Config.g_Aimbot.colorRange);
 
 		if (g_Config.g_Aimbot.bDrawTracer && iTargetPlayer != -1)
-			pRender->DrawLine(vecCrosshair, vecTargetBone, ImColor(0.f, 1.f, 0.f), g_Config.g_Aimbot.fOutlineThickness);
+			pRender->DrawLine(vecCrosshair, vecTargetBone, { 0.f, 1.f, 0.f }, g_Config.g_Aimbot.fOutlineThickness);
 	}
 }
 
@@ -90,6 +90,7 @@ void CAimbot::GetAimingPlayer()
 					fNearestDistance = fCentreDistance;
 					iTargetPlayer = i; iTargetBone = iBone;
 					vecTargetBone = vecBoneScreen;
+					break;
 				}
 			}
 		}
@@ -127,7 +128,7 @@ bool __stdcall CAimbot::hkFireInstantHit(void* this_, CEntity* pFiringEntity, CV
 
 bool __cdecl CAimbot::hkAddBullet(CEntity* pCreator, eWeaponType weaponType, CVector vecPosition, CVector vecVelocity)
 {
-	if (pCreator == (CEntity*)FindPlayerPed() && g_Config.g_Aimbot.bSilent && pAimbot->iTargetPlayer != -1 && g_Config.g_Aimbot.bAimbotEnabled[34] && rand() % 100 <= g_Config.g_Aimbot.iAimbotConfig[34][SILENT])
+	if (pCreator == FindPlayerPed() && g_Config.g_Aimbot.bSilent && pAimbot->iTargetPlayer != -1 && g_Config.g_Aimbot.bAimbotEnabled[34] && rand() % 100 <= g_Config.g_Aimbot.iAimbotConfig[34][SILENT])
 	{
 		CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[pAimbot->iTargetPlayer]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
 		if (pPed)
@@ -146,7 +147,7 @@ bool __cdecl CAimbot::hkAddBullet(CEntity* pCreator, eWeaponType weaponType, CVe
 
 float __cdecl CAimbot::hkTargetWeaponRangeMultiplier(CEntity* pVictim, CEntity* pOwner)
 {
-	if (pOwner == (CEntity*)FindPlayerPed() && (g_Config.g_Aimbot.bIgnoreMaxDistance || g_Config.g_Aimbot.bIgnoreEverything))
+	if (pOwner == FindPlayerPed() && (g_Config.g_Aimbot.bIgnoreMaxDistance || g_Config.g_Aimbot.bIgnoreEverything))
 		return 100.f;
 
 	return pAimbot->oTargetWeaponRangeMultiplier(pVictim, pOwner);
@@ -156,7 +157,7 @@ void CAimbot::SmoothAimbot()
 {
 	if (g_Config.g_Aimbot.bSmooth && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon] && iTargetPlayer != -1 && bCrosshair)
 	{
-		if (g_Config.g_Aimbot.bSmoothIsFire && !GetAsyncKeyState(VK_LBUTTON))
+		if (g_Config.g_Aimbot.bSmoothIsFire && !isKeyDown(VK_LBUTTON))
 			return;
 
 		CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[pAimbot->iTargetPlayer]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
@@ -187,15 +188,13 @@ void CAimbot::SmoothAimbot()
 
 		CVector vecOrigin = *TheCamera.GetGameCamPosition(), vecTarget = *Utils::getBonePosition(pPed, (ePedBones)BONE_PELVIS1, &vecTarget), vecVector = vecOrigin - vecTarget;
 
-		float* fAspectRatio = (float*)0xC3EFA4;
-		float* fCrosshairOffset = (float*)0xB6EC10;
 		float fFix = 0.f, fVecX = 0.f, fZ = 0.f, fX = 0.f;
 
 		if (TheCamera.m_aCams[0].m_nMode == 53 || TheCamera.m_aCams[0].m_nMode == 55)
 		{
 			float fMult = tan(TheCamera.FindCamFOV() / 2.0f * 0.017453292f);
-			fZ = M_PI - atan2(1.0f, fMult * ((1.0f - fCrosshairOffset[0] * 2.0f) * (1.0f / *fAspectRatio)));
-			fX = M_PI - atan2(1.0f, fMult * (fCrosshairOffset[1] * 2.0f - 1.0f));
+			fZ = M_PI - atan2(1.0f, fMult * ((1.0f - CCamera::m_f3rdPersonCHairMultY * 2.0f) * (1.0f / CDraw::ms_fAspectRatio)));
+			fX = M_PI - atan2(1.0f, fMult * (CCamera::m_f3rdPersonCHairMultX * 2.0f - 1.0f));
 		}
 		else fX = fZ = M_PI / 2;
 
@@ -227,7 +226,7 @@ void CAimbot::SmoothAimbot()
 
 void CAimbot::ProAimbot()
 {
-	if (g_Config.g_Aimbot.bProAim && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon] && iTargetPlayer != -1 && bCrosshair && GetAsyncKeyState(VK_LBUTTON))
+	if (g_Config.g_Aimbot.bProAim && g_Config.g_Aimbot.bAimbotEnabled[pSAMP->getPlayers()->pLocalPlayer->byteCurrentWeapon] && iTargetPlayer != -1 && bCrosshair && isKeyDown(VK_LBUTTON))
 	{
 		CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[pAimbot->iTargetPlayer]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
 		if (!pPed)
@@ -243,7 +242,7 @@ void CAimbot::ProAimbot()
 		{
 			CVector vecFront = TheCamera.m_aCams[0].m_vecFront;
 			vecFront.Normalise();
-			vecOrigin =* TheCamera.GetGameCamPosition();
+			vecOrigin = *TheCamera.GetGameCamPosition();
 			vecOrigin += (vecFront * 2.0f);
 			vecTarget = vecOrigin + (vecFront * 1.5f);
 		}
@@ -280,15 +279,13 @@ void CAimbot::Triggerbot()
 			{
 				CVector vecFront = TheCamera.m_aCams[0].m_vecFront;
 				vecFront.Normalise();
-				vecOrigin = *TheCamera.GetGameCamPosition();
-				vecOrigin += (vecFront * 2.0f);
-				vecTarget = vecOrigin + (vecFront * 100.f);
+				vecCamera = *TheCamera.GetGameCamPosition();
+				vecCamera += (vecFront * 2.0f);
+				vecTarget = vecCamera + (vecFront * 100.f);
 			}
 
-			CColPoint pCollision;
-			CEntity* pCollisionEntity = NULL;
+			CColPoint pCollision; CEntity* pCollisionEntity = NULL;
 			bool bCollision = CWorld::ProcessLineOfSight(vecCamera, vecTarget, pCollision, pCollisionEntity, !g_Config.g_Aimbot.bLockThroughObjects, !g_Config.g_Aimbot.bLockThroughObjects, true, true, true, true, false, true);
-
 			if (bCollision && pCollisionEntity && pCollisionEntity->m_nType == ENTITY_TYPE_PED)
 			{
 				for (int i = 0; i < SAMP_MAX_PLAYERS; i++)
@@ -300,10 +297,10 @@ void CAimbot::Triggerbot()
 					if (!pPed || pPed == FindPlayerPed())
 						continue;
 
-					if (pCollisionEntity != (CEntity*)pPed)
+					if (pCollisionEntity != pPed)
 						continue;
 
-					if (pSAMP->getPlayers()->pRemotePlayer[i]->pPlayerData->pSAMP_Actor->pGTA_Ped->hitpoints <= 0.f)
+					if (!pPed->IsAlive())
 						continue;
 
 					if (g_Config.g_Aimbot.bTeamProtect && pSAMP->getPlayerColor(i) == pSAMP->getPlayerColor(pSAMP->getPlayers()->sLocalPlayerID))

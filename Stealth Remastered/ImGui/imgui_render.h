@@ -17,7 +17,8 @@ public:
 	void DrawCircleFilled(CVector vecPos, float fRadius, ImColor Color);
 	void DrawRect(CVector vecFrom, CVector vecTo, ImColor Color, float fThickness);
 	void DrawRectFilled(CVector vecFrom, CVector vecTo, ImColor Color);
-	void DrawBoundingBox(CVector vecPos, CVector vecMin, CVector vecMax, float fRotation, ImColor Color, float fThickness, bool bFilled = false, ImColor Filled = ImColor(0, 0, 0, 0));
+	void DrawBoundingBox(CVector vecCorner[8], ImColor Color, float fThickness, bool bFilled = false, ImColor Filled = ImColor(0, 0, 0, 0));
+	void DrawImageRotated(ImTextureID ImTex, ImVec2 vecCenter, ImVec2 vecSize, float fAngle);
 };
 
 extern CRender* pRender;

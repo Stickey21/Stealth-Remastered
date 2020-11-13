@@ -28,6 +28,7 @@ public:
 
 	void Update();
 	void Render();
+	void RenderMap();
 	void Theme();
 
 	int iToggle, iCurrentTab, iCurrentCategory;
@@ -36,8 +37,6 @@ public:
 	ImFont* pFont, *pIcons;
 
 private:
-	void ActiveTab();
-	void NormalTab();
 	void ActiveButton();
 	void NormalButton();
 	void Tooltip(const char* szText);

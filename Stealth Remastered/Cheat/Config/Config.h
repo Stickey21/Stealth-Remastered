@@ -33,7 +33,7 @@ struct stConfig
 		bool bDrawRange{ false };
 		bool bDrawTracer{ false };
 		float fOutlineThickness{ 2.f };
-		ImVec4 colorRange{ 0.f, 0.5f, 0.f, 0.5f };
+		ImVec4 colorRange{ 1.f, 1.f, 1.f, 0.5f };
 	} g_Aimbot;
 
 	struct stCombat
@@ -71,6 +71,8 @@ struct stConfig
 		bool bInfiniteRun{ false };
 		bool bInfiniteOxygen{ false };
 		bool bNoFall{ false };
+		bool bMegaJump{ false };
+		float fMegaJump{ 1.f };
 		bool bChangeSkin{ false };
 		int iSkinID{ -1 };
 		bool bFastRespawn{ false };
@@ -110,6 +112,7 @@ struct stConfig
 		bool bVehicleStatusESP{ false };
 		bool bVehicleEngineESP{ false };
 		bool bVehicleDistanceESP{ false };
+		bool bVehicleBoundingBoxESP{ false };
 
 		bool bDMGInformer{ false };
 		int iFontSize{ 13 };

@@ -17,6 +17,7 @@ void Player::Update()
 	InfiniteRun();
 	InfiniteOxygen();
 	NoFall();
+	MegaJump();
 	ChangeSkin();
 	FastRespawn();
 	StopOnExitVeh();
@@ -147,12 +148,26 @@ void Player::NoFall()
 	if (!g_Config.g_Player.bNoFall)
 		return;
 
-	bool bOutResult = false;
-	CEntity* pOutEntity;
+	bool bOutResult = false; CEntity* pOutEntity;
 	if (Utils::isPlayingAnimation(pPedSelf, "FALL_FALL") && pPedSelf->GetPosition().fZ - CWorld::FindGroundZFor3DCoord(pPedSelf->GetPosition().fX, pPedSelf->GetPosition().fY, pPedSelf->GetPosition().fZ, &bOutResult, &pOutEntity) < 1.5f)
 	{
 		Utils::DisembarkInstantly();
 		pPedSelf->m_vecMoveSpeed.fX = pPedSelf->m_vecMoveSpeed.fY = pPedSelf->m_vecMoveSpeed.fZ = 0.f;
+	}
+}
+
+void Player::MegaJump()
+{
+	static bool bMegaJump = false;
+	if (g_Config.g_Player.bMegaJump)
+	{
+		pSecure->Write(0x8703C0, 8.5f * g_Config.g_Player.fMegaJump);
+		bMegaJump = true;
+	}
+	else if (bMegaJump)
+	{
+		*(float*)0x8703C0 = 8.5f;
+		bMegaJump = false;
 	}
 }
 

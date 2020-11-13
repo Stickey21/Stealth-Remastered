@@ -113,6 +113,8 @@ static void to_json(json& j, const stConfig::stPlayer& o, const stConfig::stPlay
     WRITE("bInfiniteRun", bInfiniteRun);
     WRITE("bInfiniteOxygen", bInfiniteOxygen);
     WRITE("bNoFall", bNoFall);
+    WRITE("bMegaJump", bMegaJump);
+    WRITE("fMegaJump", fMegaJump);
     WRITE("bChangeSkin", bChangeSkin);
     WRITE("iSkinID", iSkinID);
     WRITE("bFastRespawn", bFastRespawn);
@@ -151,6 +153,7 @@ static void to_json(json& j, const stConfig::stVisuals& o, const stConfig::stVis
     WRITE("bVehicleStatusESP", bVehicleStatusESP);
     WRITE("bVehicleEngineESP", bVehicleEngineESP);
     WRITE("bVehicleDistanceESP", bVehicleDistanceESP);
+    WRITE("bVehicleBoundingBoxESP", bVehicleBoundingBoxESP);
     WRITE("bDMGInformer", bDMGInformer);
     WRITE("iFontSize", iFontSize);
     WRITE("fDMGTick", fDMGTick);
@@ -325,6 +328,8 @@ static void from_json(const json& j, stConfig::stPlayer& r)
     read(j, "bInfiniteRun", r.bInfiniteRun);
     read(j, "bInfiniteOxygen", r.bInfiniteOxygen);
     read(j, "bNoFall", r.bNoFall);
+    read(j, "bMegaJump", r.bMegaJump);
+    read(j, "fMegaJump", r.fMegaJump);
     read(j, "bChangeSkin", r.bChangeSkin);
     read(j, "iSkinID", r.iSkinID);
     read(j, "bFastRespawn", r.bFastRespawn);
@@ -363,6 +368,7 @@ static void from_json(const json& j, stConfig::stVisuals& r)
     read(j, "bVehicleStatusESP", r.bVehicleStatusESP);
     read(j, "bVehicleEngineESP", r.bVehicleEngineESP);
     read(j, "bVehicleDistanceESP", r.bVehicleDistanceESP);
+    read(j, "bVehicleBoundingBoxESP", r.bVehicleBoundingBoxESP);
     read(j, "bDMGInformer", r.bDMGInformer);
     read(j, "iFontSize", r.iFontSize);
     read(j, "fDMGTick", r.fDMGTick);

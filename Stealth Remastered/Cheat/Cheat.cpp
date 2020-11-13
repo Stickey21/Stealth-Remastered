@@ -2,22 +2,21 @@
 
 void Cheat::Render()
 {
-	if (!Utils::isGTAMenuActive())
-	{
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
+	if (FrontEndMenuManager.m_bMenuActive)
+		return;
 
-		pAimbot->Render();
-		pVisuals->Render();
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
 
-		if (pMenu->bOpen)
-			pMenu->Render();
+	pAimbot->Render();
+	pVisuals->Render();
+	pMenu->Render();
+	pMenu->RenderMap();
 
-		ImGui::EndFrame();
-		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-	}
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Cheat::Update()
@@ -26,7 +25,7 @@ void Cheat::Update()
 	Combat::Update();
 	Player::Update();
 	pVisuals->Update();
-	pRainbow->Update();
+	//pRainbow->Update();
 	pMenu->Update();
 }
 
@@ -45,6 +44,7 @@ void Cheat::Unload()
 	if (pMenu->bOpen)
 		pSAMP->toggleSAMPCursor(0);
 
+	delete pHooks;
 	delete pD3DHook;
 	delete pKeyHook;
 	delete pRakClient;

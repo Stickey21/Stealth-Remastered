@@ -6,7 +6,7 @@ float __cdecl CVisuals::hkCalculateAspectRatio()
 {
 	if (g_Config.g_Visuals.bAspectRatio && g_Config.g_Visuals.fAspectRatio >= 0.2f && g_Config.g_Visuals.fAspectRatio <= 2.0f && (!FrontEndMenuManager.m_bWidescreenOn || !TheCamera.m_bWideScreenOn))
 	{
-		pSecure->Write(0xC3EFA4, (float)g_Config.g_Visuals.fAspectRatio);
+		pSecure->Write(0xC3EFA4, g_Config.g_Visuals.fAspectRatio);
 		return g_Config.g_Visuals.fAspectRatio;
 	}
 
@@ -15,7 +15,7 @@ float __cdecl CVisuals::hkCalculateAspectRatio()
 
 void CVisuals::Render()
 {
-	if (g_Config.g_Visuals.bVehicleNameTagsESP || g_Config.g_Visuals.bVehicleHPESP || g_Config.g_Visuals.bVehicleStatusESP || g_Config.g_Visuals.bVehicleDistanceESP || g_Config.g_Visuals.bVehicleEngineESP)
+	if (g_Config.g_Visuals.bVehicleNameTagsESP || g_Config.g_Visuals.bVehicleHPESP || g_Config.g_Visuals.bVehicleStatusESP || g_Config.g_Visuals.bVehicleDistanceESP || g_Config.g_Visuals.bVehicleEngineESP || g_Config.g_Visuals.bVehicleBoundingBoxESP)
 		ESP_Vehicle();
 
 	if (g_Config.g_Visuals.bNameTagsESP || g_Config.g_Visuals.bWeaponESP || g_Config.g_Visuals.bSnipelineESP || g_Config.g_Visuals.bBoxESP || g_Config.g_Visuals.bBoneESP || g_Config.g_Visuals.bChamsESP || g_Config.g_Visuals.bDistanceESP)
@@ -46,7 +46,7 @@ void CVisuals::Render()
 
 	if (g_Config.g_Visuals.bDMGInformer)
 	{
-		for (int i = 0; i < _countof(g_DMGInformer); i++)
+		for (auto i = 0; i < _countof(g_DMGInformer); i++)
 		{
 			if (g_DMGInformer[i].dwTick >= GetTickCount64())
 			{
@@ -54,7 +54,6 @@ void CVisuals::Render()
 				g_DMGInformer[i].vecPos.fZ += 0.007f;
 
 				Utils::CalcScreenCoors(&g_DMGInformer[i].vecPos, &vecScreen);
-
 				if (vecScreen.fZ < 1.f)
 					continue;
 
@@ -65,15 +64,15 @@ void CVisuals::Render()
 			else g_DMGInformer[i] = { };
 		}
 
-		//ImColor colorHitmarker = ImColor(255, 255, 255, (int)(pVisuals->fHitmarkerAlpha * 255));
+		//ImColor colorHitmarker = { 255, 255, 255, (int)(pVisuals->fHitmarkerAlpha * 255) };
 
-		//if (pVisuals->fHitmarkerAlpha >= 0.02f)
+		//if (pVisuals->fHitmarkerAlpha >= 0.01f)
 		//{
-		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX - 10, pAimbot->vecCrosshair.fY - 10, 0), CVector(pAimbot->vecCrosshair.fX - 5, pAimbot->vecCrosshair.fY - 5, 0), colorHitmarker, 1.1f);
-		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX - 10, pAimbot->vecCrosshair.fY + 10, 0), CVector(pAimbot->vecCrosshair.fX - 5, pAimbot->vecCrosshair.fY + 5, 0), colorHitmarker, 1.1f);
-		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX + 10, pAimbot->vecCrosshair.fY - 10, 0), CVector(pAimbot->vecCrosshair.fX + 5, pAimbot->vecCrosshair.fY - 5, 0), colorHitmarker, 1.1f);
-		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX + 10, pAimbot->vecCrosshair.fY + 10, 0), CVector(pAimbot->vecCrosshair.fX + 5, pAimbot->vecCrosshair.fY + 5, 0), colorHitmarker, 1.1f);
-		//	pVisuals->fHitmarkerAlpha -= 0.02f;
+		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX - 10, pAimbot->vecCrosshair.fY - 10, 0), CVector(pAimbot->vecCrosshair.fX - 2.5f, pAimbot->vecCrosshair.fY - 2.5f, 0), colorHitmarker, 1.1f);
+		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX - 10, pAimbot->vecCrosshair.fY + 10, 0), CVector(pAimbot->vecCrosshair.fX - 2.5f, pAimbot->vecCrosshair.fY + 2.5f, 0), colorHitmarker, 1.1f);
+		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX + 10, pAimbot->vecCrosshair.fY - 10, 0), CVector(pAimbot->vecCrosshair.fX + 2.5f, pAimbot->vecCrosshair.fY - 2.5f, 0), colorHitmarker, 1.1f);
+		//	pRender->DrawLine(CVector(pAimbot->vecCrosshair.fX + 10, pAimbot->vecCrosshair.fY + 10, 0), CVector(pAimbot->vecCrosshair.fX + 2.5f, pAimbot->vecCrosshair.fY + 2.5f, 0), colorHitmarker, 1.1f);
+		//	pVisuals->fHitmarkerAlpha -= 0.01f;
 		//}
 	}
 }
@@ -89,20 +88,17 @@ bool CVisuals::isPlayerVisible(int iPlayerID, bool bDistance)
 {
 	CPed* pPed = CPools::GetPed(pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->pSAMP_Actor->ulGTAEntityHandle);
 	CMatrix matEnt = *pPed->GetMatrix();
-	CVector vecTarget = *Utils::getBonePosition(pPed, BONE_HEAD, &vecTarget);
-	if (!CWorld::GetIsLineOfSightClear(*TheCamera.GetGameCamPosition(), vecTarget, true, false, false, true, true, false, false) || bDistance && Utils::getDistanceFromCamera(matEnt.pos) > pSAMP->getInfo()->pSettings->fNameTagsDistance)
+	CVector vecBone = *Utils::getBonePosition(pPed, BONE_HEAD, &vecBone);
+	if (!CWorld::GetIsLineOfSightClear(*TheCamera.GetGameCamPosition(), vecBone, true, false, false, true, true, false, false) || bDistance && Utils::getDistanceFromCamera(matEnt.pos) > pSAMP->getInfo()->pSettings->fNameTagsDistance)
 		return false;
 	return true;
 }
 
 ImColor CVisuals::getESPColor(int iPlayerID)
 {
-	ImColor colorESP;
 	if (g_Config.g_Visuals.bESPCustomColors)
-		colorESP = isPlayerVisible(iPlayerID, false) ? ImColor(g_Config.g_Visuals.colorVisible) : ImColor(g_Config.g_Visuals.colorNotVisible);
-	else colorESP = pSAMP->getPlayerColor(iPlayerID);
-
-	return colorESP;
+		return isPlayerVisible(iPlayerID, false) ? ImColor(g_Config.g_Visuals.colorVisible) : ImColor(g_Config.g_Visuals.colorNotVisible);
+	else return pSAMP->getPlayerColor(iPlayerID);
 }
 
 void CVisuals::ESP_NameTags(int iPlayerID, CPed* pPed)
@@ -111,20 +107,20 @@ void CVisuals::ESP_NameTags(int iPlayerID, CPed* pPed)
 		return;
 
 	CVector vecHead, vecHeadScreen;
-	Utils::getBonePosition(pPed, BONE_HEAD2, &vecHead);
-	vecHead.fZ += 0.25f;
+	Utils::getBonePosition(pPed, BONE_HEAD, &vecHead);
+	vecHead.fZ += 0.2f + (Utils::getDistanceFromCamera(pPed->GetMatrix()->pos) * 0.0475f);
 	Utils::CalcScreenCoors(&vecHead, &vecHeadScreen);
 	if (vecHeadScreen.fZ < 1.f)
 		return;
 
 	if (g_Config.g_Visuals.bNameTagsESP)
 	{
-		if(pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->iAFKState == 2)
-			pRender->DrawString(pRender->pESPFont, "AFK", CVector(vecHeadScreen.fX - 40, vecHeadScreen.fY - 16.f, 0), 12.f, 0xFF808080, true);
+		if (pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->iAFKState == 2)
+			pRender->DrawString(pRender->pESPFont, "AFK", { vecHeadScreen.fX - 37.f, vecHeadScreen.fY + 16.f, 0 }, 12.f, 0xFF808080, true);
 
-		char szName[32];
+		char szName[64];
 		sprintf(szName, "%s (%d)", pSAMP->getPlayerName(iPlayerID), iPlayerID);
-		pRender->DrawString(pRender->pESPFont, szName, CVector(vecHeadScreen.fX, vecHeadScreen.fY - 30.0f, 0), 15.f, pSAMP->getPlayerColor(iPlayerID), true);
+		pRender->DrawString(pRender->pESPFont, szName, vecHeadScreen, 15.f, pSAMP->getPlayerColor(iPlayerID), true);
 
 		float fHealth = pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->fActorHealth;
 		float fArmor = pSAMP->getPlayers()->pRemotePlayer[iPlayerID]->pPlayerData->fActorArmor;
@@ -137,9 +133,9 @@ void CVisuals::ESP_NameTags(int iPlayerID, CPed* pPed)
 
 		ImColor colorHealthBar = *(ImU32*)(pSAMP->g_dwSAMP_Addr + 0x68B0C), colorHealthBarBG = *(ImU32*)(pSAMP->g_dwSAMP_Addr + 0x68B33);
 
-		ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 21.f, (fArmor > 0.0f) ? vecHeadScreen.fY - 6.f : vecHeadScreen.fY - 14.f), ImVec2(vecHeadScreen.fX + 21.f, (fArmor > 0.0f) ? vecHeadScreen.fY : vecHeadScreen.fY - 8.f), 0xFF000000);
-		ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY - 5.f : vecHeadScreen.fY - 13.f), ImVec2(vecHeadScreen.fX + 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY - 1.f : vecHeadScreen.fY - 9.f), ImColor(colorHealthBarBG.Value.z, colorHealthBarBG.Value.y, colorHealthBarBG.Value.x, colorHealthBarBG.Value.w));
-		ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY - 5.f : vecHeadScreen.fY - 13.f), ImVec2(vecHeadScreen.fX + fHealth, (fArmor > 0.0f) ? vecHeadScreen.fY - 1.f : vecHeadScreen.fY - 9.f), ImColor(colorHealthBar.Value.z, colorHealthBar.Value.y, colorHealthBar.Value.x, colorHealthBar.Value.w));
+		pRender->DrawRectFilled({ vecHeadScreen.fX - 21.f, (fArmor > 0.0f) ? vecHeadScreen.fY + 25.f : vecHeadScreen.fY + 17.f, 0 }, { vecHeadScreen.fX + 21.f, (fArmor > 0.0f) ? vecHeadScreen.fY + 31.f : vecHeadScreen.fY + 23.f, 0 }, 0xFF000000);
+		pRender->DrawRectFilled({ vecHeadScreen.fX - 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY + 26.f : vecHeadScreen.fY + 18.f, 0 }, { vecHeadScreen.fX + 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY + 30.f : vecHeadScreen.fY + 22.f, 0 }, ImColor(colorHealthBarBG.Value.z, colorHealthBarBG.Value.y, colorHealthBarBG.Value.x, colorHealthBarBG.Value.w));
+		pRender->DrawRectFilled({ vecHeadScreen.fX - 20.f, (fArmor > 0.0f) ? vecHeadScreen.fY + 26.f : vecHeadScreen.fY + 18.f, 0 }, { vecHeadScreen.fX + fHealth, (fArmor > 0.0f) ? vecHeadScreen.fY + 30.f : vecHeadScreen.fY + 22.f, 0 }, ImColor(colorHealthBar.Value.z, colorHealthBar.Value.y, colorHealthBar.Value.x, colorHealthBar.Value.w));
 
 		if (fArmor > 0.0f)
 		{
@@ -150,22 +146,22 @@ void CVisuals::ESP_NameTags(int iPlayerID, CPed* pPed)
 
 			fArmor *= 40.f / 100.0f;
 			fArmor -= (40.f / 2);
-			ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 21.f, vecHeadScreen.fY - 14.f), ImVec2(vecHeadScreen.fX + 21.f, vecHeadScreen.fY - 8.f), 0xFF000000);
-			ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 20.f, vecHeadScreen.fY - 13.f), ImVec2(vecHeadScreen.fX + 20.f, vecHeadScreen.fY - 9.f), ImColor(colorArmorBarBG.Value.z, colorArmorBarBG.Value.y, colorArmorBarBG.Value.x, colorArmorBarBG.Value.w));
-			ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(vecHeadScreen.fX - 20.f, vecHeadScreen.fY - 13.f), ImVec2(vecHeadScreen.fX + fArmor, vecHeadScreen.fY - 9.f), ImColor(colorArmorBar.Value.z, colorArmorBar.Value.y, colorArmorBar.Value.x, colorArmorBar.Value.w));
+
+			pRender->DrawRectFilled({ vecHeadScreen.fX - 21.f, vecHeadScreen.fY + 17.f, 0 }, { vecHeadScreen.fX + 21.f, vecHeadScreen.fY + 23.f, 0 }, 0xFF000000);
+			pRender->DrawRectFilled({ vecHeadScreen.fX - 20.f, vecHeadScreen.fY + 18.f, 0 }, { vecHeadScreen.fX + 20.f, vecHeadScreen.fY + 22.f, 0 }, ImColor(colorArmorBarBG.Value.z, colorArmorBarBG.Value.y, colorArmorBarBG.Value.x, colorArmorBarBG.Value.w));
+			pRender->DrawRectFilled({ vecHeadScreen.fX - 20.f, vecHeadScreen.fY + 18.f, 0 }, { vecHeadScreen.fX + fArmor, vecHeadScreen.fY + 22.f, 0 }, ImColor(colorArmorBar.Value.z, colorArmorBar.Value.y, colorArmorBar.Value.x, colorArmorBar.Value.w));
 		}
 	}
 
 	if (g_Config.g_Visuals.bWeaponESP)
 	{
-		void* dwDeathWindow = (void*)(*(DWORD*)(pSAMP->g_dwSAMP_Addr + 0x21A0EC));
-		ID3DXSprite* pSprite = (ID3DXSprite*)(*(DWORD*)((DWORD)dwDeathWindow + 0x143));
-		ID3DXFont* m_pWeaponFont = (ID3DXFont*)(*(DWORD*)((DWORD)dwDeathWindow + 0x13B));
-		RECT rect = { (LONG)vecHeadScreen.fX + 25, (LONG)vecHeadScreen.fY - 16, (LONG)vecHeadScreen.fX + 1, (LONG)vecHeadScreen.fY + 1 };
+		ID3DXSprite* pSprite = pSAMP->getDeathList()->pSprite;
+		ID3DXFont* pWeaponFont = pSAMP->getDeathList()->pWeaponFont1;
+		RECT rect = { (LONG)vecHeadScreen.fX + 20, (LONG)vecHeadScreen.fY + 16, (LONG)vecHeadScreen.fX + 1, (LONG)vecHeadScreen.fY + 1 };
 
 		pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
-		m_pWeaponFont->DrawText(pSprite, "G", -1, &rect, DT_NOCLIP | DT_LEFT, 0xFF000000);
-		m_pWeaponFont->DrawText(pSprite, pSAMP->getWeaponSpriteID(pPed->m_aWeapons[pPed->m_nActiveWeaponSlot].m_nType), -1, &rect, DT_NOCLIP | DT_LEFT, 0xFFFFFFFF);
+		pWeaponFont->DrawText(pSprite, "G", -1, &rect, DT_NOCLIP | DT_LEFT, 0xFF000000);
+		pWeaponFont->DrawText(pSprite, pSAMP->getWeaponSpriteID(pPed->m_aWeapons[pPed->m_nActiveWeaponSlot].m_nType), -1, &rect, DT_NOCLIP | DT_LEFT, 0xFFFFFFFF);
 		pSprite->End();
 	}
 }
@@ -178,7 +174,7 @@ void CVisuals::ESP_Snipeline(int iPlayerID, CPed* pPed)
 	if (vecTargetScreen.fZ < 1.f)
 		return;
 
-	pRender->DrawLine(vecTargetScreen, CVector(ImGui::GetIO().DisplaySize.x / 2.f, g_Config.g_Visuals.iSnipelineStyle ? ImGui::GetIO().DisplaySize.y : 0, 0), getESPColor(iPlayerID), g_Config.g_Visuals.fESPThickness);
+	pRender->DrawLine(vecTargetScreen, { ImGui::GetIO().DisplaySize.x / 2.f, g_Config.g_Visuals.iSnipelineStyle ? ImGui::GetIO().DisplaySize.y : 0, 0 }, getESPColor(iPlayerID), g_Config.g_Visuals.fESPThickness);
 }
 
 void CVisuals::ESP_Box(int iPlayerID, CPed* pPed)
@@ -191,7 +187,6 @@ void CVisuals::ESP_Box(int iPlayerID, CPed* pPed)
 
 	Utils::CalcScreenCoors(&vecHead, &vecHeadScreen);
 	Utils::CalcScreenCoors(&vecFoot, &vecFootScreen);
-
 	if (vecTargetScreen.fZ < 1.f || vecHeadScreen.fZ < 1.f || vecFootScreen.fZ < 1.f)
 		return;
 
@@ -202,13 +197,29 @@ void CVisuals::ESP_Box(int iPlayerID, CPed* pPed)
 		float fWidth = abs((vecFootScreen.fY - vecHeadScreen.fY) / 4.f);
 		ImColor colorVisible = isPlayerVisible(iPlayerID, false) ? ImColor(g_Config.g_Visuals.colorVisible) : ImColor(g_Config.g_Visuals.colorNotVisible);
 		if (g_Config.g_Visuals.bFilledBox)
-			pRender->DrawRectFilled(CVector(vecHeadScreen.fX - fWidth, vecHeadScreen.fY, 0), CVector(vecFootScreen.fX + fWidth, vecFootScreen.fY, 0), ImColor(colorVisible.Value.x, colorVisible.Value.y, colorVisible.Value.z, 0.35f));
-		pRender->DrawRect(CVector(vecHeadScreen.fX - fWidth, vecHeadScreen.fY, 0), CVector(vecFootScreen.fX + fWidth, vecFootScreen.fY, 0), colorESP, g_Config.g_Visuals.fESPThickness);
+			pRender->DrawRectFilled({ vecHeadScreen.fX - fWidth, vecHeadScreen.fY, 0 }, { vecFootScreen.fX + fWidth, vecFootScreen.fY, 0 }, ImColor(colorVisible.Value.x, colorVisible.Value.y, colorVisible.Value.z, 0.35f));
+		pRender->DrawRect({ vecHeadScreen.fX - fWidth, vecHeadScreen.fY, 0 }, { vecFootScreen.fX + fWidth, vecFootScreen.fY, 0 }, colorESP, g_Config.g_Visuals.fESPThickness);
 	}
 	else
 	{
-		CVector vecMin = { -0.35f, -0.35f, -1.1f }, vecMax = { 0.35f, 0.35f, 1.0f };
-		pRender->DrawBoundingBox(vecTarget, vecMin, vecMax, pPed->m_fCurrentRotation, colorESP, g_Config.g_Visuals.fESPThickness, g_Config.g_Visuals.bFilledBox, isPlayerVisible(iPlayerID, false) ? ImColor(g_Config.g_Visuals.colorVisible) : ImColor(g_Config.g_Visuals.colorNotVisible));
+		CVector vecMin = pPed->GetColModel()->m_boundBox.m_vecMin, vecMax = pPed->GetColModel()->m_boundBox.m_vecMax;
+
+		CVector vecCorner[8] =
+		{
+			{ vecMin.fX, vecMin.fY, vecMin.fZ },
+			{ vecMin.fX, vecMin.fY * -1.f, vecMin.fZ },
+			{ vecMin.fX * -1.f, vecMin.fY * -1.f, vecMin.fZ },
+			{ vecMin.fX * -1.f, vecMin.fY, vecMin.fZ },
+			{ vecMax.fX * -1.f, vecMax.fY * -1.f, vecMax.fZ },
+			{ vecMax.fX * -1.f, vecMax.fY, vecMax.fZ },
+			{ vecMax.fX, vecMax.fY, vecMax.fZ },
+			{ vecMax.fX, vecMax.fY * -1.f, vecMax.fZ }
+		};
+
+		for (auto i = 0; i < 8; i++)
+			plugin::Command<plugin::Commands::GET_OFFSET_FROM_CHAR_IN_WORLD_COORDS>(pPed, vecCorner[i].fX, vecCorner[i].fY, vecCorner[i].fZ, &vecCorner[i].fX, &vecCorner[i].fY, &vecCorner[i].fZ);
+
+		pRender->DrawBoundingBox(vecCorner, colorESP, g_Config.g_Visuals.fESPThickness, g_Config.g_Visuals.bFilledBox, isPlayerVisible(iPlayerID, false) ? ImColor(g_Config.g_Visuals.colorVisible) : ImColor(g_Config.g_Visuals.colorNotVisible));
 	}
 }
 
@@ -260,24 +271,20 @@ void CVisuals::ESP_Chams(int iPlayerID, CPed* pPed)
 	if (!pPed->GetIsOnScreen())
 		return;
 
-	DWORD dwCONSTANT, dwARG0, dwARG1, dwARG2;
-	ImColor colorESP = getESPColor(iPlayerID);
+	DWORD dwCONSTANT, dwARG2, dwCULL;
 
+	pD3DHook->pD3DDevice->GetRenderState(D3DRS_CULLMODE, &dwCULL);
 	pD3DHook->pD3DDevice->GetTextureStageState(0, D3DTSS_CONSTANT, &dwCONSTANT);
-	pD3DHook->pD3DDevice->GetTextureStageState(0, D3DTSS_COLORARG0, &dwARG0);
-	pD3DHook->pD3DDevice->GetTextureStageState(0, D3DTSS_COLORARG1, &dwARG1);
 	pD3DHook->pD3DDevice->GetTextureStageState(0, D3DTSS_COLORARG2, &dwARG2);
 
-	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_CONSTANT, ImColor(colorESP.Value.z, colorESP.Value.y, colorESP.Value.x, colorESP.Value.w));
-	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG0, D3DTA_CONSTANT);
-	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_CONSTANT);
+	pD3DHook->pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_CONSTANT, 0xFFFFFFFF);
 	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_CONSTANT);
 
 	pPed->Render();
 
+	pD3DHook->pD3DDevice->SetRenderState(D3DRS_CULLMODE, dwCULL);
 	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_CONSTANT, dwCONSTANT);
-	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG0, dwARG0);
-	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG1, dwARG1);
 	pD3DHook->pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG2, dwARG2);
 }
 
@@ -291,9 +298,10 @@ void CVisuals::ESP_Distance(int iPlayerID, CPed* pPed)
 		return;
 
 	char szDistance[32];
-	sprintf(szDistance, "Distance: %.2f m", Utils::getDistance(pPed->GetPosition()));
+	sprintf(szDistance, "%.2f m", Utils::getDistance(pPed->GetPosition()));
 	pRender->DrawString(pRender->pESPFont, szDistance, vecFootScreen, 14.f, 0xFFFFFFFF, true);
 }
+
 
 void CVisuals::ESP_Vehicle()
 {
@@ -342,6 +350,28 @@ void CVisuals::ESP_Vehicle()
 			char szDistance[64];
 			sprintf(szDistance, "Distance: %.2f m", Utils::getDistance(vecVehicle));
 			vecVehicleScreen.fY = pRender->DrawString(pRender->pESPFont, szDistance, vecVehicleScreen, 14.f, 0xFFFFFFFF, true);
+		}
+
+		if (g_Config.g_Visuals.bVehicleBoundingBoxESP)
+		{
+			CVector vecMin = pVehicle->GetColModel()->m_boundBox.m_vecMin, vecMax = pVehicle->GetColModel()->m_boundBox.m_vecMax;
+
+			CVector vecCorner[8] =
+			{
+				{ vecMin.fX, vecMin.fY, vecMin.fZ },
+				{ vecMin.fX, vecMin.fY * -1.f, vecMin.fZ },
+				{ vecMin.fX * -1.f, vecMin.fY * -1.f, vecMin.fZ },
+				{ vecMin.fX * -1.f, vecMin.fY, vecMin.fZ },
+				{ vecMax.fX * -1.f, vecMax.fY * -1.f, vecMax.fZ },
+				{ vecMax.fX * -1.f, vecMax.fY, vecMax.fZ },
+				{ vecMax.fX, vecMax.fY, vecMax.fZ },
+				{ vecMax.fX, vecMax.fY * -1.f, vecMax.fZ }
+			};
+
+			for (auto i = 0; i < 8; i++)
+				plugin::Command<plugin::Commands::GET_OFFSET_FROM_CAR_IN_WORLD_COORDS>(pVehicle, vecCorner[i].fX, vecCorner[i].fY, vecCorner[i].fZ, &vecCorner[i].fX, &vecCorner[i].fY, &vecCorner[i].fZ);
+
+			pRender->DrawBoundingBox(vecCorner, 0xFFFFFFFF, g_Config.g_Visuals.fESPThickness, false, 0xFFFFFFFF);
 		}
 	}
 }

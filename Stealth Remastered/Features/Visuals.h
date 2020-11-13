@@ -44,7 +44,7 @@ public:
 
 	struct stDMGInformer
 	{
-		CVector vecPos = CVector(0, 0, 0);
+		CVector vecPos = { 0, 0, 0 };
 		int iWeapon = 0;
 		ULONGLONG dwTick = 0;
 	} g_DMGInformer[10];

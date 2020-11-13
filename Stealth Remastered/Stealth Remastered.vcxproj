@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClCompile Include="Cheat\Cheat.cpp" />
     <ClCompile Include="Cheat\Config\Config.cpp" />
+    <ClCompile Include="Cheat\Hooks.cpp" />
     <ClCompile Include="Cheat\KeyHook.cpp" />
     <ClCompile Include="Cheat\Memory.cpp" />
     <ClCompile Include="Cheat\Secure.cpp" />
@@ -131,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Cheat\Cheat.h" />
     <ClInclude Include="Cheat\Config\Config.h" />
+    <ClInclude Include="Cheat\Hooks.h" />
     <ClInclude Include="Cheat\Structs.h" />
     <ClInclude Include="Cheat\json\json.hpp" />
     <ClInclude Include="Cheat\KeyHook.h" />

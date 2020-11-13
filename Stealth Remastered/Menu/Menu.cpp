@@ -1,10 +1,11 @@
 ﻿#include "main.h"
+#include "ImGui/imgui_internal.h"
 
 CMenu* pMenu;
 
 void CMenu::Update()
 {
-	if (!Utils::isGTAMenuActive())
+	if (!FrontEndMenuManager.m_bMenuActive)
 	{
 		if (bOpen)
 		{
@@ -179,24 +180,6 @@ void CMenu::Theme()
 		ImGui::GetStyle().Colors[i] = g_Config.g_Style.vecTheme[i];
 }
 
-void CMenu::ActiveTab()
-{
-	ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_TabActive));
-	ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(27 / 255.f, 30 / 255.f, 35 / 255.f, 0.f));
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_TabActive));
-	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImGui::GetStyleColorVec4(ImGuiCol_TabActive));
-	ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_Text));
-}
-
-void CMenu::NormalTab()
-{
-	ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_Tab));
-	ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(27 / 255.f, 30 / 255.f, 35 / 255.f, 0.f));
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_Tab));
-	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImGui::GetStyleColorVec4(ImGuiCol_Tab));
-	ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled));
-}
-
 void CMenu::ActiveButton()
 {
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
@@ -223,10 +206,81 @@ void CMenu::Tooltip(const char* szText)
 	}
 }
 
+void CMenu::RenderMap()
+{
+	if (isKeyDown('Z'))
+	{
+		ImVec2 vecWindow((ImGui::GetIO().DisplaySize.x - ImGui::GetIO().DisplaySize.y) / 2, 0);
+		int iMapX = 0, iMapY = 0;
+
+		for (auto i = 0; i < 144; i++)
+		{
+			if (i != 0 && i % 12 == 0)
+			{
+				iMapX = 0;
+				iMapY++;
+			}
+			ImVec2 vecMapMin(vecWindow.x + vecWindow.y + ImGui::GetIO().DisplaySize.y / 12.f * iMapX, vecWindow.y + ImGui::GetIO().DisplaySize.y / 12.f * iMapY);
+			ImVec2 vecMapMax(vecWindow.x + vecWindow.y + ImGui::GetIO().DisplaySize.y / 12.f * (iMapX + 1), vecWindow.y + ImGui::GetIO().DisplaySize.y / 12.f * (iMapY + 1));
+			if (pTextures->tMap[i]->raster)
+				ImGui::GetBackgroundDrawList()->AddImage(pTextures->tMap[i]->raster->RwD3D9Raster.texture, vecMapMin, vecMapMax, { 0, 0 }, { 1, 1 }, ImColor(255, 255, 255, 150));
+			iMapX++;
+		}
+
+		for (auto i = 0; i < SAMP_MAX_GANGZONES; i++)
+		{
+			if (!pSAMP->getInfo()->pPools->pGangzone->iIsListed[i])
+				continue;
+
+			float* fTurfPos = pSAMP->getInfo()->pPools->pGangzone->pGangzone[i]->fPosition;
+			CVector vecTurfMin(fTurfPos[0], fTurfPos[1], 0), vecTurfMax(fTurfPos[2], fTurfPos[3], 0), vecTurfMinScreen, vecTurfMaxScreen;
+			Utils::CalcMapToScreen(vecWindow, &vecTurfMin, &vecTurfMinScreen, ImGui::GetIO().DisplaySize.y);
+			Utils::CalcMapToScreen(vecWindow, &vecTurfMax, &vecTurfMaxScreen, ImGui::GetIO().DisplaySize.y);
+
+			bool bAltColor = false;
+			ULONGLONG ulTick = GetTickCount64();
+			if (GetTickCount64() - ulTick >= 500)
+			{
+				bAltColor = !bAltColor;
+				ulTick = GetTickCount64();
+			}
+			pRender->DrawRectFilled({ vecTurfMinScreen.fX, vecTurfMinScreen.fY, 0 }, { vecTurfMaxScreen.fX, vecTurfMaxScreen.fY, 0 }, bAltColor ? pSAMP->getInfo()->pPools->pGangzone->pGangzone[i]->dwColor : pSAMP->getInfo()->pPools->pGangzone->pGangzone[i]->dwAltColor);
+		}
+
+		for (size_t i = 0; i < MAX_RADAR_TRACES; i++)
+		{
+			auto pBlip = CRadar::ms_RadarTrace[i];
+
+			switch (pBlip.m_nBlipType)
+			{
+			case BLIP_COORD:
+			case BLIP_CONTACTPOINT:
+			{
+				if (pBlip.m_nBlipSprite < 5)
+					break;
+
+				CVector vecBlipScreen;
+				Utils::CalcMapToScreen(vecWindow, &pBlip.m_vPosition, &vecBlipScreen, ImGui::GetIO().DisplaySize.y);
+				ImGui::GetBackgroundDrawList()->AddImage(((CSprite2d*)(4 * pBlip.m_nBlipSprite + 0xBAA250))->m_pTexture->raster->RwD3D9Raster.texture, { vecBlipScreen.fX - 10, vecBlipScreen.fY - 10 }, { vecBlipScreen.fX + 10, vecBlipScreen.fY + 10 });
+				break;
+			}
+			}
+		}
+
+		CVector vecCentreScreen;
+		Utils::CalcMapToScreen(vecWindow, &FindPlayerPed()->GetPosition(), &vecCentreScreen, ImGui::GetIO().DisplaySize.y);
+		pRender->DrawImageRotated(((CSprite2d*)(4 * RADAR_SPRITE_CENTRE + 0xBAA250))->m_pTexture->raster->RwD3D9Raster.texture, { vecCentreScreen.fX,vecCentreScreen.fY }, { 10, 10 }, -FindPlayerPed()->m_fCurrentRotation);
+	}
+}
+
 void CMenu::Render()
 {
+	if (!pMenu->bOpen)
+		return;
+
 	ImGui::SetNextWindowSize({ 600, 424 });
 	ImGui::SetNextWindowPos({ ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f }, ImGuiCond_Once, { 0.5f, 0.5f });
+
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 16, 16 });
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 1, 0 });
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 3.0f);
@@ -235,44 +289,43 @@ void CMenu::Render()
 
 	if (ImGui::Begin("STEALTH", &bOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar))
 	{
-		ImVec2 vecWindow = ImGui::GetWindowPos();
 		ImGui::BeginGroup();
 		ImGui::Dummy({ 0, 2 });
 		ImGui::Image(pTextures->tLogo, { 109, 21 }, { 0, 0 }, { 1, 1 }, ImGui::GetStyle().Colors[ImGuiCol_Logo]);
 		ImGui::EndGroup();
-		ImGui::GetWindowDrawList()->AddRectFilled({ vecWindow.x + 142, vecWindow.y + 16 }, { vecWindow.x + 143, vecWindow.y + 41 }, ImColor(48, 54, 64, 255));
-		ImGui::SameLine(160);
+		ImVec2 vecWindow = ImGui::GetWindowPos();
+		ImGui::GetWindowDrawList()->AddRectFilled({ vecWindow.x + 147, vecWindow.y + 16 }, { vecWindow.x + 148, vecWindow.y + 41 }, ImColor(48, 54, 64, 255));
+		ImGui::SameLine(170);
 
-		if (iCurrentTab == 0) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Weapon", { 0, 25 })) iCurrentTab = 0;
-		ImGui::PopStyleColor(5);
-		ImGui::SameLine();
-
-		if (iCurrentTab == 1) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Player", { 0, 25 })) iCurrentTab = 1;
-		ImGui::PopStyleColor(5);
-		ImGui::SameLine();
-
-		if (iCurrentTab == 2) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Visual", { 0, 25 })) iCurrentTab = 2;
-		ImGui::PopStyleColor(5);
-		ImGui::SameLine();
-
-		if (iCurrentTab == 3) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Style", { 0, 25 })) iCurrentTab = 3;
-		ImGui::PopStyleColor(5);
-		ImGui::SameLine();
-
-		if (iCurrentTab == 4) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Extra", { 0, 25 })) iCurrentTab = 4;
-		ImGui::PopStyleColor(5);
-		ImGui::SameLine();
-
-		if (iCurrentTab == 5) ActiveTab(); else NormalTab();
-		if (ImGui::Button("Developer", { 0, 25 })) iCurrentTab = 5;
-		ImGui::PopStyleColor(5);
+		ImGui::TabButton("Weapon", &iCurrentTab, 0, { 0, 25 }); ImGui::SameLine();
+		ImGui::TabButton("Player", &iCurrentTab, 1, { 0, 25 }); ImGui::SameLine();
+		ImGui::TabButton("Visual", &iCurrentTab, 2, { 0, 25 }); ImGui::SameLine();
+		ImGui::TabButton("Style", &iCurrentTab, 3, { 0, 25 }); ImGui::SameLine();
+		ImGui::TabButton("Extra", &iCurrentTab, 4, { 0, 25 }); ImGui::SameLine();
+		if (ImGui::TabButton("Settings", &iCurrentTab, 5, { 0, 25 }))
+			ImGui::OpenPopup("Settings");
 
 		ImGui::PopStyleVar(5);
+
+		if (ImGui::BeginPopupModal("Settings", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize))
+		{
+			if (ImGui::BeginTabBar("##Tabs", ImGuiTabBarFlags_NoTooltip))
+			{
+				if (ImGui::BeginTabItem("Unload"))
+				{
+					ImGui::Text("(!) Close any recording software before press Unload!");
+					ImGui::Dummy({ 0,20 });
+					if (ImGui::Button("Unload", { 160.f, 20.f })) Cheat::Unload();
+					ImGui::SameLine();
+					if (ImGui::Button("Close", { 160.5f, 20.f })) ImGui::CloseCurrentPopup();
+
+					ImGui::EndTabItem();
+				}
+				ImGui::EndTabBar();
+			}
+			ImGui::EndPopup();
+		}
+
 		ImGui::Dummy({ 0, 7 });
 
 		switch (iCurrentTab)
@@ -489,6 +542,7 @@ void CMenu::Render()
 				ImGui::Checkbox("Infinite Oxygen", &g_Config.g_Player.bInfiniteOxygen);
 				ImGui::Checkbox("Fast Respawn", &g_Config.g_Player.bFastRespawn);
 				ImGui::Checkbox("No Fall", &g_Config.g_Player.bNoFall);
+				ImGui::Checkbox("Mega Jump", &g_Config.g_Player.bMegaJump); ImGui::SameLine(202); ImGui::SliderFloat("##MegaJump", &g_Config.g_Player.fMegaJump, 1.0f, 5.0f, "%0.1f");
 				ImGui::Checkbox("Stop On Exit Veh", &g_Config.g_Player.bStopOnExitVehicle); ImGui::SameLine(202); ImGui::DragInt("##StopOnExit", &g_Config.g_Player.iStopOnExitVehicle, 1, 500, 1500, "%d ms");
 				ImGui::Checkbox("Auto Bike Spam", &g_Config.g_Player.bAutoBikeSpam); ImGui::SameLine(202); ImGui::Button("Settings##AutoBikeSpam", { 70, 0 });
 				if (ImGui::BeginPopupContextItem(0, 0))
@@ -498,7 +552,7 @@ void CMenu::Render()
 					ImGui::Checkbox("Motorbike", &g_Config.g_Player.bMotorBikeSpam); ImGui::SameLine(120); ImGui::Hotkey("##MotorbikeHotkey", &g_Config.g_Hotkeys.iMotorBikeSpam); ImGui::PopItemWidth();
 					ImGui::EndPopup();
 				}
-				ImGui::Checkbox("Change Skin", &g_Config.g_Player.bChangeSkin); ImGui::SameLine(202); 
+				ImGui::Checkbox("Change Skin", &g_Config.g_Player.bChangeSkin); ImGui::SameLine(202);
 				ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##SkinID", &g_Config.g_Player.iSkinID); ImGui::PopStyleVar();
 				ImGui::PopItemWidth();
 				ImGui::EndChild();
@@ -558,7 +612,7 @@ void CMenu::Render()
 			ImGui::EndGroup();
 			ImGui::SameLine();
 			ImGui::BeginGroup();
-			ImGui::BeginChild("##VehicleESP", { 280, 147 }, true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##VehicleESP", { 280, 170 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Vehicle ESP"), ImGui::EndMenuBar();
 				ImGui::Checkbox("ESP Name ##Vehicle", &g_Config.g_Visuals.bVehicleNameTagsESP);
@@ -566,9 +620,10 @@ void CMenu::Render()
 				ImGui::Checkbox("ESP Engine", &g_Config.g_Visuals.bVehicleEngineESP);
 				ImGui::Checkbox("ESP Status", &g_Config.g_Visuals.bVehicleStatusESP);
 				ImGui::Checkbox("ESP Distance", &g_Config.g_Visuals.bVehicleDistanceESP);
+				ImGui::Checkbox("ESP Bounding Box", &g_Config.g_Visuals.bVehicleBoundingBoxESP);
 				ImGui::EndChild();
 			}
-			ImGui::BeginChild("##Visuals", { 280, 201 }, true, ImGuiWindowFlags_MenuBar);
+			ImGui::BeginChild("##Visuals", { 280, 178 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Visuals"), ImGui::EndMenuBar();
 				ImGui::Checkbox("Aspect Ratio", &g_Config.g_Visuals.bAspectRatio); ImGui::SameLine(202); ImGui::PushItemWidth(70); ImGui::SliderFloat("##AspectRatio", &g_Config.g_Visuals.fAspectRatio, 0.5f, 2.0f, "%0.1f"); ImGui::PopItemWidth();
@@ -593,7 +648,7 @@ void CMenu::Render()
 					ImGui::PushItemWidth(40.f);
 					ImGui::Checkbox("FPS Unlock", &g_Config.g_Visuals.bFPSUnlock);
 					ImGui::Checkbox("FPS Boost", &g_Config.g_Visuals.bFPSBoost);
-					ImGui::Checkbox("Fake FPS", &g_Config.g_Visuals.bFakeFPS); ImGui::SameLine(135); 
+					ImGui::Checkbox("Fake FPS", &g_Config.g_Visuals.bFakeFPS); ImGui::SameLine(135);
 					ImGui::InputInt("##MinFPS", &g_Config.g_Visuals.iMinFPS, 0); Tooltip("Min FPS"); ImGui::SameLine(177); ImGui::InputInt("##MaxFPS", &g_Config.g_Visuals.iMaxFPS, 0); Tooltip("Max FPS");
 					if (g_Config.g_Visuals.iMinFPS > g_Config.g_Visuals.iMaxFPS)
 						g_Config.g_Visuals.iMaxFPS = g_Config.g_Visuals.iMinFPS;
@@ -658,25 +713,25 @@ void CMenu::Render()
 		{
 			ImGui::Spacing();
 			ImGui::BeginGroup();
+			ImGui::BeginChild("##Damager", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
+			{
+				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Damager"), ImGui::EndMenuBar();
+				ImGui::PushItemWidth(70.f);
+				ImGui::Checkbox("Damager", &g_Config.g_Developer.bDamager);
+				ImGui::Checkbox("Delay", &g_Config.g_Developer.bDelay); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##Delay", &g_Config.g_Developer.iDelay); ImGui::PopStyleVar();
+				ImGui::Checkbox("Team Protect", &g_Config.g_Developer.bTeamProtect);
+				ImGui::Checkbox("Send Bullet Data", &g_Config.g_Developer.bSendBulletData);
+				ImGui::Checkbox("Teleport To Player", &g_Config.g_Developer.bTeleportToPlayer);
+				ImGui::Checkbox("Custom Weapon", &g_Config.g_Developer.bCustomWeapon); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##WeaponID", &g_Config.g_Developer.iWeaponID); ImGui::PopStyleVar();
+				ImGui::Checkbox("Custom Damage", &g_Config.g_Developer.bCustomDamage); ImGui::SameLine(202); ImGui::InputFloat("##Damage", &g_Config.g_Developer.fDamage);
+				ImGui::PopItemWidth();
+				ImGui::EndChild();
+			}
+
 			ImGui::BeginChild("##Extra", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
 			{
 				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Extra"), ImGui::EndMenuBar();
-				if (ImGui::Button("Unload", { 70, 0 }))
-					ImGui::OpenPopup("Unload");
-				if (ImGui::BeginPopupModal("Unload", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize))
-				{
-					ImGui::Text("(!) Close any recording software before press Unload!");
-					ImGui::Dummy({ 0,20 });
-					if (ImGui::Button("Unload", ImVec2(160.f, 20.f))) Cheat::Unload();
-					ImGui::SameLine();
-					if (ImGui::Button("Close", ImVec2(160.5f, 20.f))) ImGui::CloseCurrentPopup();
-					ImGui::EndPopup();
-				}
-				ImGui::EndChild();
-			}
-			ImGui::BeginChild("##nush 1", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
-			{
-				
+
 				ImGui::EndChild();
 			}
 			ImGui::EndGroup();
@@ -770,41 +825,9 @@ void CMenu::Render()
 			}
 			break;
 		}
-		case 5:
-		{
-			ImGui::Spacing();
-			ImGui::BeginGroup();
-			ImGui::BeginChild("##Damager", { 280, 194 }, true, ImGuiWindowFlags_MenuBar);
-			{
-				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Damager"), ImGui::EndMenuBar();
-				ImGui::PushItemWidth(70.f);
-				ImGui::Checkbox("Damager", &g_Config.g_Developer.bDamager);
-				ImGui::Checkbox("Delay", &g_Config.g_Developer.bDelay); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##Delay", &g_Config.g_Developer.iDelay); ImGui::PopStyleVar();
-				ImGui::Checkbox("Team Protect", &g_Config.g_Developer.bTeamProtect);
-				ImGui::Checkbox("Send Bullet Data", &g_Config.g_Developer.bSendBulletData);
-				ImGui::Checkbox("Teleport To Player", &g_Config.g_Developer.bTeleportToPlayer);
-				ImGui::Checkbox("Custom Weapon", &g_Config.g_Developer.bCustomWeapon); ImGui::SameLine(202); ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 1, 0 }); ImGui::InputInt("##WeaponID", &g_Config.g_Developer.iWeaponID); ImGui::PopStyleVar();
-				ImGui::Checkbox("Custom Damage", &g_Config.g_Developer.bCustomDamage); ImGui::SameLine(202); ImGui::InputFloat("##Damage", &g_Config.g_Developer.fDamage);
-				ImGui::PopItemWidth();
-				ImGui::EndChild();
-			}
-			ImGui::BeginChild("##SAMPCAC", { 280, 160 }, true, ImGuiWindowFlags_MenuBar);
-			{
-				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("SAMPCAC"), ImGui::EndMenuBar();
-
-				ImGui::EndChild();
-			}
-			ImGui::EndGroup();
-			ImGui::SameLine();
-			ImGui::BeginChild("##Developer", { 280, 358 }, true, ImGuiWindowFlags_MenuBar);
-			{
-				if (ImGui::BeginMenuBar()) ImGui::TextUnformatted("Developer"), ImGui::EndMenuBar();
-
-				ImGui::EndChild();
-			}
-			break;
 		}
-		}
+
 		ImGui::End();
 	}
+
 }

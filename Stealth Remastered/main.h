@@ -11,6 +11,8 @@
 #include <ShlObj.h>
 #include <filesystem>
 #include <map>
+#include <random>
+#include <algorithm>
 
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
@@ -28,6 +30,8 @@
 #include "CMenuManager.h"
 #include "CClock.h"
 #include "CWeather.h"
+#include "CRadar.h"
+#include "CTxdStore.h"
 #include "CTaskSimpleRunNamedAnim.h"
 #include "ePedBones.h"
 #include "extensions/ScriptCommands.h"
@@ -49,6 +53,8 @@
 #include "Cheat/Icons.h"
 
 #include "SAMP/SAMP.h"
+
+#include "Cheat/Hooks.h"
 
 #include "Cheat/KeyHook.h"
 #include "Cheat/MathStuff.h"

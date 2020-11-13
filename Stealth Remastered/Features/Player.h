@@ -5,6 +5,7 @@ namespace Player
 	extern CPed* pPedSelf;
 	extern bool bExitVehicle;
 	extern ULONGLONG dwExitTick;
+
 	void Update();
 	void AirBreak();
 	void AntiStun();
@@ -13,6 +14,7 @@ namespace Player
 	void InfiniteRun();
 	void InfiniteOxygen();
 	void NoFall();
+	void MegaJump();
 	void ChangeSkin();
 	void FastRespawn();
 	void StopOnExitVeh();

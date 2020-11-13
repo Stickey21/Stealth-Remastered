@@ -74,6 +74,12 @@
     <ClCompile Include="Cheat\Config\Config.cpp">
       <Filter>Cheat\Config</Filter>
     </ClCompile>
+    <ClCompile Include="Cheat\Hooks.cpp">
+      <Filter>Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
@@ -165,6 +171,9 @@
       <Filter>Cheat</Filter>
     </ClInclude>
     <ClInclude Include="Cheat\Structs.h">
+      <Filter>Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat\Hooks.h">
       <Filter>Cheat</Filter>
     </ClInclude>
   </ItemGroup>

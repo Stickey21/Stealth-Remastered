@@ -785,10 +785,14 @@ struct stKillInfo
 	struct stKillEntry	killEntry[5];
 	int					iXOffset[2];
 	int					iYSpacing;
-	ID3DXFont		    *pD3DFont;
-	ID3DXFont			*pWeaponFont;
-	ID3DXSprite			*pSprite;
-	IDirect3DDevice9	*pD3DDevice;
+	ID3DXFont*			pFont;
+	ID3DXFont*			pWeaponFont1;
+	ID3DXFont*			pWeaponFont2;
+	ID3DXSprite*		pSprite;
+	IDirect3DDevice9*	pDevice;
+	BOOL				bAuxFontInited;
+	ID3DXFont*			pAuxFont1;
+	ID3DXFont*			pAuxFont2;
 };
 
 struct stChatPlayer
@@ -866,6 +870,8 @@ public:
 	bool tryInit();
 
 	void addMessageToChat(D3DCOLOR dwColor, char* szMsg, ...);
+	void addSayToChatWindow(char* szText, ...);
+
 	void toggleSAMPCursor(int iToggle);
 
 	bool isPlayerStreamed(const uint16_t playerID);

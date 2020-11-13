@@ -1,4 +1,4 @@
-// dear imgui, v1.78
+// dear imgui, v1.79
 // (drawing and font code)
 
 /*
@@ -172,166 +172,166 @@ using namespace IMGUI_STB_NAMESPACE;
 
 void ImGui::StyleColorsDark(ImGuiStyle* dst)
 {
-    g_Config.g_Style.vecTheme[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg]               = ImVec4(0.06f, 0.06f, 0.06f, 0.94f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg]                = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg]                = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Border]                 = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg]                = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered]         = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive]          = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg]                = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive]          = ImVec4(0.16f, 0.29f, 0.48f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed]       = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
-    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg]              = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg]            = ImVec4(0.02f, 0.02f, 0.02f, 0.53f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab]          = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered]   = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive]    = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark]              = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab]             = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive]       = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Button]                 = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered]          = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive]           = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Header]                 = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered]          = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive]           = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Separator]              = g_Config.g_Style.vecTheme[ImGuiCol_Border];
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered]       = ImVec4(0.10f, 0.40f, 0.75f, 0.78f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive]        = ImVec4(0.10f, 0.40f, 0.75f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip]             = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered]      = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive]       = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Tab]                    = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header],       g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered]             = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
-    g_Config.g_Style.vecTheme[ImGuiCol_TabActive]              = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused]           = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab],          g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive]     = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive],    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines]              = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered]       = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram]          = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered]   = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg]         = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget]         = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight]           = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight]  = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Logo]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.06f, 0.94f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.16f, 0.29f, 0.48f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
+    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.02f, 0.02f, 0.02f, 0.53f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Separator] = g_Config.g_Style.vecTheme[ImGuiCol_Border];
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.10f, 0.40f, 0.75f, 0.78f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.10f, 0.40f, 0.75f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
+    g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Logo] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 }
 
 void ImGui::StyleColorsClassic(ImGuiStyle* dst)
 {
-    g_Config.g_Style.vecTheme[ImGuiCol_Text]                   = ImVec4(0.90f, 0.90f, 0.90f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled]           = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg]               = ImVec4(0.00f, 0.00f, 0.00f, 0.70f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg]                = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg]                = ImVec4(0.11f, 0.11f, 0.14f, 0.92f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Border]                 = ImVec4(0.50f, 0.50f, 0.50f, 0.50f);
-    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg]                = ImVec4(0.43f, 0.43f, 0.43f, 0.39f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered]         = ImVec4(0.47f, 0.47f, 0.69f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive]          = ImVec4(0.42f, 0.41f, 0.64f, 0.69f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg]                = ImVec4(0.27f, 0.27f, 0.54f, 0.83f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive]          = ImVec4(0.32f, 0.32f, 0.63f, 0.87f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed]       = ImVec4(0.40f, 0.40f, 0.80f, 0.20f);
-    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg]              = ImVec4(0.40f, 0.40f, 0.55f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg]            = ImVec4(0.20f, 0.25f, 0.30f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab]          = ImVec4(0.40f, 0.40f, 0.80f, 0.30f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered]   = ImVec4(0.40f, 0.40f, 0.80f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive]    = ImVec4(0.41f, 0.39f, 0.80f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark]              = ImVec4(0.90f, 0.90f, 0.90f, 0.50f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab]             = ImVec4(1.00f, 1.00f, 1.00f, 0.30f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive]       = ImVec4(0.41f, 0.39f, 0.80f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Button]                 = ImVec4(0.35f, 0.40f, 0.61f, 0.62f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered]          = ImVec4(0.40f, 0.48f, 0.71f, 0.79f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive]           = ImVec4(0.46f, 0.54f, 0.80f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Header]                 = ImVec4(0.40f, 0.40f, 0.90f, 0.45f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered]          = ImVec4(0.45f, 0.45f, 0.90f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive]           = ImVec4(0.53f, 0.53f, 0.87f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Separator]              = ImVec4(0.50f, 0.50f, 0.50f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered]       = ImVec4(0.60f, 0.60f, 0.70f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive]        = ImVec4(0.70f, 0.70f, 0.90f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip]             = ImVec4(1.00f, 1.00f, 1.00f, 0.16f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered]      = ImVec4(0.78f, 0.82f, 1.00f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive]       = ImVec4(0.78f, 0.82f, 1.00f, 0.90f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Tab]                    = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header],       g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered]             = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
-    g_Config.g_Style.vecTheme[ImGuiCol_TabActive]              = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused]           = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab],          g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive]     = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive],    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines]              = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered]       = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram]          = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered]   = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg]         = ImVec4(0.00f, 0.00f, 1.00f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget]         = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight]           = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight]  = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Logo]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(0.90f, 0.90f, 0.90f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.70f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(0.11f, 0.11f, 0.14f, 0.92f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.50f, 0.50f, 0.50f, 0.50f);
+    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(0.43f, 0.43f, 0.43f, 0.39f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.47f, 0.47f, 0.69f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.42f, 0.41f, 0.64f, 0.69f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.27f, 0.27f, 0.54f, 0.83f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.32f, 0.32f, 0.63f, 0.87f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(0.40f, 0.40f, 0.80f, 0.20f);
+    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.40f, 0.40f, 0.55f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.20f, 0.25f, 0.30f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.40f, 0.40f, 0.80f, 0.30f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.40f, 0.40f, 0.80f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.41f, 0.39f, 0.80f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.90f, 0.90f, 0.90f, 0.50f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(1.00f, 1.00f, 1.00f, 0.30f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.41f, 0.39f, 0.80f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.35f, 0.40f, 0.61f, 0.62f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.40f, 0.48f, 0.71f, 0.79f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.46f, 0.54f, 0.80f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.40f, 0.40f, 0.90f, 0.45f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.45f, 0.45f, 0.90f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.53f, 0.53f, 0.87f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Separator] = ImVec4(0.50f, 0.50f, 0.50f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.60f, 0.60f, 0.70f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.70f, 0.70f, 0.90f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.16f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.78f, 0.82f, 1.00f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.78f, 0.82f, 1.00f, 0.90f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
+    g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.00f, 0.00f, 1.00f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Logo] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 }
 
 // Those light colors are better suited with a thicker font than the default one + FrameBorder
 void ImGui::StyleColorsLight(ImGuiStyle* dst)
 {
-    g_Config.g_Style.vecTheme[ImGuiCol_Text]                   = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled]           = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg]               = ImVec4(0.94f, 0.94f, 0.94f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg]                = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg]                = ImVec4(1.00f, 1.00f, 1.00f, 0.98f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Border]                 = ImVec4(0.00f, 0.00f, 0.00f, 0.30f);
-    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg]                = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered]         = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive]          = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg]                = ImVec4(0.96f, 0.96f, 0.96f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive]          = ImVec4(0.82f, 0.82f, 0.82f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed]       = ImVec4(1.00f, 1.00f, 1.00f, 0.51f);
-    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg]              = ImVec4(0.86f, 0.86f, 0.86f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg]            = ImVec4(0.98f, 0.98f, 0.98f, 0.53f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab]          = ImVec4(0.69f, 0.69f, 0.69f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered]   = ImVec4(0.49f, 0.49f, 0.49f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive]    = ImVec4(0.49f, 0.49f, 0.49f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark]              = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab]             = ImVec4(0.26f, 0.59f, 0.98f, 0.78f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive]       = ImVec4(0.46f, 0.54f, 0.80f, 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Button]                 = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered]          = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive]           = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Header]                 = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered]          = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive]           = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Separator]              = ImVec4(0.39f, 0.39f, 0.39f, 0.62f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered]       = ImVec4(0.14f, 0.44f, 0.80f, 0.78f);
-    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive]        = ImVec4(0.14f, 0.44f, 0.80f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip]             = ImVec4(0.80f, 0.80f, 0.80f, 0.56f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered]      = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive]       = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Tab]                    = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header],       g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.90f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered]             = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
-    g_Config.g_Style.vecTheme[ImGuiCol_TabActive]              = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused]           = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab],          g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive]     = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive],    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines]              = ImVec4(0.39f, 0.39f, 0.39f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered]       = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram]          = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered]   = ImVec4(1.00f, 0.45f, 0.00f, 1.00f);
-    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg]         = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget]         = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight]           = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight]  = ImVec4(0.70f, 0.70f, 0.70f, 0.70f);
-    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.20f, 0.20f, 0.20f, 0.20f);
-    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
-    g_Config.g_Style.vecTheme[ImGuiCol_Logo]                   = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_WindowBg] = ImVec4(0.94f, 0.94f, 0.94f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PopupBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.98f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Border] = ImVec4(0.00f, 0.00f, 0.00f, 0.30f);
+    g_Config.g_Style.vecTheme[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBg] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBg] = ImVec4(0.96f, 0.96f, 0.96f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive] = ImVec4(0.82f, 0.82f, 0.82f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 1.00f, 1.00f, 0.51f);
+    g_Config.g_Style.vecTheme[ImGuiCol_MenuBarBg] = ImVec4(0.86f, 0.86f, 0.86f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarBg] = ImVec4(0.98f, 0.98f, 0.98f, 0.53f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrab] = ImVec4(0.69f, 0.69f, 0.69f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.49f, 0.49f, 0.49f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.49f, 0.49f, 0.49f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrab] = ImVec4(0.26f, 0.59f, 0.98f, 0.78f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SliderGrabActive] = ImVec4(0.46f, 0.54f, 0.80f, 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Header] = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Separator] = ImVec4(0.39f, 0.39f, 0.39f, 0.62f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorHovered] = ImVec4(0.14f, 0.44f, 0.80f, 0.78f);
+    g_Config.g_Style.vecTheme[ImGuiCol_SeparatorActive] = ImVec4(0.14f, 0.44f, 0.80f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGrip] = ImVec4(0.80f, 0.80f, 0.80f, 0.56f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Tab] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Header], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.90f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabHovered] = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
+    g_Config.g_Style.vecTheme[ImGuiCol_TabActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_HeaderActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBgActive], 0.60f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocused] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_Tab], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.80f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TabUnfocusedActive] = ImLerp(g_Config.g_Style.vecTheme[ImGuiCol_TabActive], g_Config.g_Style.vecTheme[ImGuiCol_TitleBg], 0.40f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLines] = ImVec4(0.39f, 0.39f, 0.39f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.45f, 0.00f, 1.00f);
+    g_Config.g_Style.vecTheme[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_DragDropTarget] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavHighlight] = g_Config.g_Style.vecTheme[ImGuiCol_HeaderHovered];
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingHighlight] = ImVec4(0.70f, 0.70f, 0.70f, 0.70f);
+    g_Config.g_Style.vecTheme[ImGuiCol_NavWindowingDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.20f);
+    g_Config.g_Style.vecTheme[ImGuiCol_ModalWindowDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
+    g_Config.g_Style.vecTheme[ImGuiCol_Logo] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
 }
 
 //-----------------------------------------------------------------------------
-// ImDrawList
+// [SECTION] ImDrawList
 //-----------------------------------------------------------------------------
 
 ImDrawListSharedData::ImDrawListSharedData()
@@ -1397,7 +1397,7 @@ void ImDrawList::AddImageRounded(ImTextureID user_texture_id, const ImVec2& p_mi
 
 
 //-----------------------------------------------------------------------------
-// ImDrawListSplitter
+// [SECTION] ImDrawListSplitter
 //-----------------------------------------------------------------------------
 // FIXME: This may be a little confusing, trying to be a little too low-level/optimal instead of just doing vector swap..
 //-----------------------------------------------------------------------------
@@ -1591,13 +1591,19 @@ void ImGui::ShadeVertsLinearColorGradientKeepAlpha(ImDrawList* draw_list, int ve
     float gradient_inv_length2 = 1.0f / ImLengthSqr(gradient_extent);
     ImDrawVert* vert_start = draw_list->VtxBuffer.Data + vert_start_idx;
     ImDrawVert* vert_end = draw_list->VtxBuffer.Data + vert_end_idx;
+    const int col0_r = (int)(col0 >> IM_COL32_R_SHIFT) & 0xFF;
+    const int col0_g = (int)(col0 >> IM_COL32_G_SHIFT) & 0xFF;
+    const int col0_b = (int)(col0 >> IM_COL32_B_SHIFT) & 0xFF;
+    const int col_delta_r = ((int)(col1 >> IM_COL32_R_SHIFT) & 0xFF) - col0_r;
+    const int col_delta_g = ((int)(col1 >> IM_COL32_G_SHIFT) & 0xFF) - col0_g;
+    const int col_delta_b = ((int)(col1 >> IM_COL32_B_SHIFT) & 0xFF) - col0_b;
     for (ImDrawVert* vert = vert_start; vert < vert_end; vert++)
     {
         float d = ImDot(vert->pos - gradient_p0, gradient_extent);
         float t = ImClamp(d * gradient_inv_length2, 0.0f, 1.0f);
-        int r = ImLerp((int)(col0 >> IM_COL32_R_SHIFT) & 0xFF, (int)(col1 >> IM_COL32_R_SHIFT) & 0xFF, t);
-        int g = ImLerp((int)(col0 >> IM_COL32_G_SHIFT) & 0xFF, (int)(col1 >> IM_COL32_G_SHIFT) & 0xFF, t);
-        int b = ImLerp((int)(col0 >> IM_COL32_B_SHIFT) & 0xFF, (int)(col1 >> IM_COL32_B_SHIFT) & 0xFF, t);
+        int r = (int)(col0_r + col_delta_r * t);
+        int g = (int)(col0_g + col_delta_g * t);
+        int b = (int)(col0_b + col_delta_b * t);
         vert->col = (r << IM_COL32_R_SHIFT) | (g << IM_COL32_G_SHIFT) | (b << IM_COL32_B_SHIFT) | (vert->col & IM_COL32_A_MASK);
     }
 }
@@ -1877,11 +1883,11 @@ ImFont* ImFontAtlas::AddFontDefault(const ImFontConfig* font_cfg_template)
     if (font_cfg.Name[0] == '\0')
         ImFormatString(font_cfg.Name, IM_ARRAYSIZE(font_cfg.Name), "ProggyClean.ttf, %dpx", (int)font_cfg.SizePixels);
     font_cfg.EllipsisChar = (ImWchar)0x0085;
+    font_cfg.GlyphOffset.y = 1.0f * IM_FLOOR(font_cfg.SizePixels / 13.0f);  // Add +1 offset per 13 units
 
     const char* ttf_compressed_base85 = GetDefaultCompressedFontDataTTFBase85();
     const ImWchar* glyph_ranges = font_cfg.GlyphRanges != NULL ? font_cfg.GlyphRanges : GetGlyphRangesDefault();
     ImFont* font = AddFontFromMemoryCompressedBase85TTF(ttf_compressed_base85, font_cfg.SizePixels, &font_cfg, glyph_ranges);
-    font->DisplayOffset.y = 1.0f;
     return font;
 }
 
@@ -2754,7 +2760,6 @@ ImFont::ImFont()
     FallbackAdvanceX = 0.0f;
     FallbackChar = (ImWchar)'?';
     EllipsisChar = (ImWchar)-1;
-    DisplayOffset = ImVec2(0.0f, 0.0f);
     FallbackGlyph = NULL;
     ContainerAtlas = NULL;
     ConfigData = NULL;
@@ -2872,7 +2877,7 @@ void ImFont::GrowIndex(int new_size)
 // x0/y0/x1/y1 are offset from the character upper-left layout position, in pixels. Therefore x0/y0 are often fairly close to zero.
 // Not to be mistaken with texture coordinates, which are held by u0/v0/u1/v1 in normalized format (0.0..1.0 on each texture axis).
 // 'cfg' is not necessarily == 'this->ConfigData' because multiple source fonts+configs can be used to build one target font.
-void ImFont::AddGlyph(ImFontConfig* cfg, ImWchar codepoint, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
+void ImFont::AddGlyph(const ImFontConfig* cfg, ImWchar codepoint, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
 {
     if (cfg != NULL)
     {
@@ -3149,8 +3154,8 @@ void ImFont::RenderChar(ImDrawList* draw_list, float size, ImVec2 pos, ImU32 col
     if (!glyph || !glyph->Visible)
         return;
     float scale = (size >= 0.0f) ? (size / FontSize) : 1.0f;
-    pos.x = IM_FLOOR(pos.x + DisplayOffset.x);
-    pos.y = IM_FLOOR(pos.y + DisplayOffset.y);
+    pos.x = IM_FLOOR(pos.x);
+    pos.y = IM_FLOOR(pos.y);
     draw_list->PrimReserve(6, 4);
     draw_list->PrimRectUV(ImVec2(pos.x + glyph->X0 * scale, pos.y + glyph->Y0 * scale), ImVec2(pos.x + glyph->X1 * scale, pos.y + glyph->Y1 * scale), ImVec2(glyph->U0, glyph->V0), ImVec2(glyph->U1, glyph->V1), col);
 }
@@ -3161,8 +3166,8 @@ void ImFont::RenderText(ImDrawList* draw_list, float size, ImVec2 pos, ImU32 col
         text_end = text_begin + strlen(text_begin); // ImGui:: functions generally already provides a valid text_end, so this is merely to handle direct calls.
 
     // Align to be pixel perfect
-    pos.x = IM_FLOOR(pos.x + DisplayOffset.x);
-    pos.y = IM_FLOOR(pos.y + DisplayOffset.y);
+    pos.x = IM_FLOOR(pos.x);
+    pos.y = IM_FLOOR(pos.y);
     float x = pos.x;
     float y = pos.y;
     if (y > clip_rect.w)

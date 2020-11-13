@@ -2,6 +2,7 @@
 
 namespace ImGui
 {
+	bool TabButton(const char* label, int* tab, int index, const ImVec2& size_arg, ImGuiButtonFlags flags = ImGuiButtonFlags_None);
 	bool Hotkey(const char* label, int* k, const ImVec2& size_arg = ImVec2(0, 0));
 	void ArrowButtonDisabled(const char* id, ImGuiDir dir);
 }

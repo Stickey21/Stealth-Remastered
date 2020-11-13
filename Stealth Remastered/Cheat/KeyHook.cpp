@@ -19,7 +19,7 @@ BYTE __stdcall CKeyHook::hkCPad_UpdateGameKey(int iKey)
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND wnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 LRESULT APIENTRY CKeyHook::hkWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	if (Utils::isGTAMenuActive())
+	if (FrontEndMenuManager.m_bMenuActive)
 		return pKeyHook->oWndProc(hWnd, msg, wParam, lParam);
 
 	switch (msg)
@@ -80,7 +80,7 @@ LRESULT APIENTRY CKeyHook::hkWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM 
 		pMenu->iToggle = 0;
 	}
 
-	if (!Utils::isGTAMenuActive() && !pSAMP->getInput()->iInputEnabled)
+	if (!FrontEndMenuManager.m_bMenuActive && !pSAMP->getInput()->iInputEnabled)
 	{
 		Combat::WeaponSwitcher();
 		Player::BikeSpam();
