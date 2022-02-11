@@ -1,8 +1,6 @@
 <div align="center">
 <img width="375" src="https://i.imgur.com/tvNzZ4d.png">
 <h4>Pasted SA:MP Cheat</h4>
-
-[![discord](http://discordapp.com/api/guilds/753264654633140264/widget.png?style=banner2)](https://discord.gg/qt6h6p8)
 </div>
 
 </div>
