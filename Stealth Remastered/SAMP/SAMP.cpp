@@ -38,7 +38,7 @@ bool CSAMP::tryInit()
 	return true;
 };
 
-void CSAMP::addMessageToChat(D3DCOLOR dwColor, char* szMsg, ...)
+void CSAMP::addMessageToChat(D3DCOLOR dwColor, const char* szMsg, ...)
 {
 	if (g_Chat == nullptr) return;
 	if (szMsg == NULL) return;

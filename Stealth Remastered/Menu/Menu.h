@@ -3,7 +3,7 @@
 class CMenu
 {
 public:
-	CMenu::CMenu(IDirect3DDevice9* pDevice)
+	CMenu(IDirect3DDevice9* pDevice)
 	{
 		iToggle = 2;
 		iCurrentTab = 0;
@@ -19,7 +19,7 @@ public:
 		Theme();
 	};
 
-	CMenu::~CMenu()
+	~CMenu()
 	{
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();

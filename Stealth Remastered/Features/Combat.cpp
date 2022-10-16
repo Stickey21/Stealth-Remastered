@@ -86,7 +86,7 @@ void Combat::FastCrosshair()
 		pSecure->memcpy_safe((void*)0x0058E1D9, "\xEB", 1);
 		bFastCrosshair = true;
 	}
-	else if (bFastCrosshair) 
+	else if (bFastCrosshair)
 	{
 		Memory::memcpy_safe((void*)0x0058E1D9, "\x74", 1);
 		bFastCrosshair = false;
@@ -103,9 +103,17 @@ void Combat::NoRecoil()
 void Combat::WeaponSwitcher()
 {
 	if (g_Config.g_Combat.bWeaponSwitcher && !FindPlayerVehicle(-1, false))
+	{
 		for (size_t i = 0; i < g_Config.g_Hotkeys.iWeaponSwitch.size(); i++)
+		{
 			if (isKeyPressed(g_Config.g_Hotkeys.iWeaponSwitch[i]))
-				g_Config.g_Combat.bFastSwitch ? FindPlayerPed()->SetCurrentWeapon(i + 2) : *(DWORD*)0xB7CDBC = i + 2;
+			{
+				if (g_Config.g_Combat.bFastSwitch)
+					FindPlayerPed()->SetCurrentWeapon(i + 2);
+				else *(DWORD*)0xB7CDBC = i + 2;
+			}
+		}
+	}
 }
 
 void Combat::AutoScroll()
@@ -151,19 +159,19 @@ void Combat::AutoCBUG()
 			ulTick = GetTickCount64();
 			switch (iStep)
 			{
-				case 0:
-				{
-					pKeyHook->g_GameKeyState[17] = { 0xFF, true };
-					ulWait = g_Config.g_Combat.iCBugDelay[1];
-					break;
-				}
-				case 1:
-				{
-					pKeyHook->g_GameKeyState[6] = { 0, true };
-					pKeyHook->g_GameKeyState[18] = { 0xFF, true };
-					ulWait = g_Config.g_Combat.iCBugDelay[0];
-					break;
-				}
+			case 0:
+			{
+				pKeyHook->g_GameKeyState[17] = { 0xFF, true };
+				ulWait = g_Config.g_Combat.iCBugDelay[1];
+				break;
+			}
+			case 1:
+			{
+				pKeyHook->g_GameKeyState[6] = { 0, true };
+				pKeyHook->g_GameKeyState[18] = { 0xFF, true };
+				ulWait = g_Config.g_Combat.iCBugDelay[0];
+				break;
+			}
 			}
 
 			if (iStep++ > 1)

@@ -869,7 +869,7 @@ public:
 
 	bool tryInit();
 
-	void addMessageToChat(D3DCOLOR dwColor, char* szMsg, ...);
+	void addMessageToChat(D3DCOLOR dwColor, const char* szMsg, ...);
 	void addSayToChatWindow(char* szText, ...);
 
 	void toggleSAMPCursor(int iToggle);

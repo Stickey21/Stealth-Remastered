@@ -77,9 +77,6 @@
     <ClCompile Include="Cheat\Hooks.cpp">
       <Filter>Cheat</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />

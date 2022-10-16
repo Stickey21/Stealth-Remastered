@@ -3,7 +3,7 @@
 class CKeyHook
 {
 public:
-	CKeyHook::CKeyHook()
+	CKeyHook()
 	{
 		memset(bKeyTable, false, sizeof(bKeyTable));
 		oWndProc = (tWndProc)(pSAMP->g_dwSAMP_Addr + 0x5DB40);
@@ -16,7 +16,7 @@ public:
 		pSecure->HookInstallCall((DWORD)0x541E17, (DWORD)hkCPad_UpdateGameKey);
 	}
 
-	CKeyHook::~CKeyHook()
+	~CKeyHook()
 	{
 		memset(bKeyTable, false, sizeof(bKeyTable));
 		DetourRestoreAfterWith();
